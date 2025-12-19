@@ -41,14 +41,22 @@
       );
     }
 
-    /* Logo glow */
+    /* Navbar logo breathing glow */
     @keyframes breathe {
-      0%, 100% { box-shadow: 0 0 18px rgba(45, 212, 191, 0.35); }
-      50% { box-shadow: 0 0 28px rgba(45, 212, 191, 0.55); }
+      0%, 100% {
+        box-shadow: 0 0 18px rgba(45, 212, 191, 0.35);
+      }
+      50% {
+        box-shadow: 0 0 28px rgba(45, 212, 191, 0.55);
+      }
     }
 
     .logo-glow {
-      background: radial-gradient(circle, rgba(45,212,191,.35), transparent 70%);
+      background: radial-gradient(
+        circle,
+        rgba(45, 212, 191, 0.35),
+        transparent 70%
+      );
       border-radius: 9999px;
       padding: 10px;
       animation: breathe 6s ease-in-out infinite;
@@ -56,164 +64,364 @@
 
     /* Buttons */
     .btn {
-      transition: transform .25s ease, box-shadow .25s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
+
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(45,212,191,.25);
+      box-shadow: 0 10px 25px rgba(45, 212, 191, 0.25);
     }
 
-    /* Cards */
-    .service-card {
-      transition: transform .35s ease, box-shadow .35s ease;
+    .btn:focus-visible {
+      outline: 2px solid #2dd4bf;
+      outline-offset: 4px;
     }
+
+    /* Service cards */
+    .service-card {
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
     .service-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(45,212,191,.15);
+      box-shadow: 0 20px 50px rgba(45, 212, 191, 0.15);
     }
 
-    /* ===== SAFE REVEAL (NO INVISIBLE CONTENT) ===== */
-    .reveal { opacity: 1; transform: none; }
-
-    .js .reveal {
+    /* Scroll reveal */
+    .reveal {
       opacity: 0;
       transform: translateY(24px);
-      transition: opacity .8s ease, transform .8s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    .js .reveal.active {
+    .reveal.active {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Socials */
-    .socials { display:flex; gap:14px; }
-    .social-pill {
-      width:44px;height:44px;
-      display:flex;align-items:center;justify-content:center;
-      border-radius:9999px;
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(15,23,42,.35);
-      transition:transform .25s ease, box-shadow .25s ease;
+    /* Mission logo background */
+    .logo-stage {
+      background: radial-gradient(
+        circle,
+        rgba(45, 212, 191, 0.18),
+        transparent 60%
+      );
+      border-radius: 2rem;
+      padding: 3rem;
     }
-    .social-pill:hover { transform: translateY(-2px); }
 
-    .glow-discord:hover   { box-shadow:0 0 26px rgba(88,101,242,.55); }
-    .glow-youtube:hover   { box-shadow:0 0 26px rgba(255,0,0,.55); }
-    .glow-x:hover         { box-shadow:0 0 26px rgba(255,255,255,.35); }
-    .glow-instagram:hover { box-shadow:0 0 26px rgba(193,53,132,.55); }
-    .glow-rep:hover       { box-shadow:0 0 26px rgba(45,212,191,.55); }
+    /* ============================
+       SOCIALS (Footer, right side)
+       ============================ */
 
-    .social-icon { width:20px;height:20px; }
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+
+    .social-pill {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(15, 23, 42, 0.35);
+      backdrop-filter: blur(10px);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      text-decoration: none;
+    }
+
+    .social-pill:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .social-icon {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    /* Per-network glow colors */
+    .glow-discord:hover   { box-shadow: 0 0 0 6px rgba(88, 101, 242, 0.15), 0 0 26px rgba(88, 101, 242, 0.55); }
+    .glow-youtube:hover   { box-shadow: 0 0 0 6px rgba(255, 0, 0, 0.14),    0 0 26px rgba(255, 0, 0, 0.55); }
+    .glow-x:hover         { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.10), 0 0 26px rgba(255, 255, 255, 0.35); }
+    .glow-instagram:hover { box-shadow: 0 0 0 6px rgba(228, 64, 95, 0.14),    0 0 26px rgba(193, 53, 132, 0.55); }
+    .glow-rep:hover       { box-shadow: 0 0 0 6px rgba(45, 212, 191, 0.14),   0 0 26px rgba(45, 212, 191, 0.55); }
+
+    /* Better keyboard accessibility */
+    .social-pill:focus-visible {
+      outline: 2px solid #2dd4bf;
+      outline-offset: 4px;
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
   </style>
 </head>
 
 <body id="top">
-<script>document.documentElement.classList.add('js');</script>
 
-<!-- NAVBAR -->
-<nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
-  <a href="#top" class="flex items-center gap-4">
-    <div class="logo-glow">
-      <img src="images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX"/>
-    </div>
-    <span class="mono text-sm">CYDEREYESX</span>
-  </a>
-</nav>
-
-<!-- HERO -->
-<section class="min-h-screen flex items-center justify-center hero-glow pt-32 px-6 text-center reveal">
-  <div class="max-w-5xl space-y-10">
-    <img src="images/cyx-logo-full.png" class="mx-auto h-28 md:h-36" alt="CyderEyesX"/>
-    <div class="mono text-teal-400 text-xs">SECURITY • INFRASTRUCTURE • EDUCATION</div>
-    <h1 class="text-5xl md:text-7xl font-bold">
-      Secure Digital Education for the
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-sky-400">
-        Next Generation
-      </span>
-    </h1>
-    <p class="max-w-2xl mx-auto text-slate-400 text-lg">
-      High-integrity digital education focused on cybersecurity, ethics, and safety.
-    </p>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="py-28 px-6 reveal">
-  <div class="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
-    <div class="glass p-10 rounded-2xl text-center service-card">
-      <img src="images/cyx-service-dto.png" class="mx-auto h-14 mb-6" alt="DTO"/>
-      <h3 class="font-bold mb-2">Digital Tools Onboarding</h3>
-      <p class="text-slate-400 text-sm">Secure workflows and foundations.</p>
-    </div>
-    <div class="glass p-10 rounded-2xl text-center service-card">
-      <img src="images/cyx-service-adt.png" class="mx-auto h-14 mb-6" alt="ADT"/>
-      <h3 class="font-bold mb-2">Advanced Digital Tools</h3>
-      <p class="text-slate-400 text-sm">Privacy and system hardening.</p>
-    </div>
-    <div class="glass p-10 rounded-2xl text-center service-card">
-      <img src="images/cyx-service-dlgw.png" class="mx-auto h-14 mb-6" alt="DLGW"/>
-      <h3 class="font-bold mb-2">Literacy Workshops</h3>
-      <p class="text-slate-400 text-sm">Community-based education.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="py-24 px-8 border-t border-white/5">
-  <div class="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-6">
-    <div class="flex items-center gap-4">
+  <!-- NAVBAR -->
+  <nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
+    <a href="#top" class="flex items-center gap-4" aria-label="CyderEyesX Home">
       <div class="logo-glow">
-        <img src="images/cyx-lion-mark.png" class="h-12" alt="CyderEyesX"/>
+        <img
+          src="images/cyx-lion-mark.png"
+          alt="CyderEyesX Home"
+          class="h-10 w-10"
+        />
       </div>
+      <span class="mono text-sm">CYDEREYESX</span>
+    </a>
+
+    <div class="hidden md:flex gap-10 mono text-xs opacity-70">
+      <a href="#mission" class="hover:text-teal-400">Mission</a>
+      <a href="#services" class="hover:text-teal-400">Services</a>
+      <a href="#language" class="hover:text-teal-400">Language Access</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex items-center justify-center hero-glow pt-32 px-6 text-center reveal">
+    <div class="max-w-5xl space-y-10">
+      <img
+        src="images/cyx-logo-full.png"
+        alt="CyderEyesX LLC Logo"
+        class="mx-auto h-28 md:h-36"
+      />
+
+      <div class="mono text-teal-400 text-xs">
+        SECURITY • INFRASTRUCTURE • EDUCATION
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+        Secure Digital Education for the
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-sky-400">
+          Next Generation
+        </span>
+      </h1>
+
+      <p class="max-w-2xl mx-auto text-slate-400 text-lg">
+        High-integrity digital education focused on cybersecurity awareness,
+        ethical technology use, and long-term digital safety.
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-6 justify-center pt-6">
+        <a class="btn px-10 py-4 bg-white text-black font-semibold rounded-full" href="#services">
+          Explore in English
+        </a>
+        <a class="btn px-10 py-4 border border-white/20 rounded-full" href="#services">
+          Explorar en Español
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section id="mission" class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
       <div>
-        <div class="mono text-sm">CYDEREYESX LLC</div>
-        <p class="text-xs text-slate-500">Technology • Education • Security</p>
+        <div class="mono text-teal-400 text-xs mb-4">Our Philosophy</div>
+        <h2 class="text-4xl font-bold mb-6">Education Before Everything.</h2>
+
+        <p class="text-slate-400 leading-relaxed mb-6">
+          CyderEyesX LLC is a strictly educational organization.
+          We do not provide financial, legal, or investment advice.
+        </p>
+
+        <ul class="space-y-3 text-slate-300">
+          <li>✔ Digital literacy &amp; security awareness</li>
+          <li>✔ Ethical blockchain education</li>
+          <li>✔ No hype. No speculation.</li>
+        </ul>
+      </div>
+
+      <div class="logo-stage text-center">
+        <img
+          src="images/cyx-lion-mark.png"
+          class="mx-auto h-48"
+          alt="CyderEyesX Lion"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-28 px-6 reveal">
+    <div class="max-w-7xl mx-auto text-center mb-24">
+      <div class="mono text-teal-400 text-xs mb-4">Core Educational Tracks</div>
+      <h2 class="text-5xl font-bold">Educational Programs</h2>
+      <p class="mt-6 text-slate-400 max-w-2xl mx-auto">
+        Structured learning paths designed to build confidence, safety,
+        and long-term digital competence.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+
+      <!-- DTO -->
+      <div class="glass p-10 rounded-2xl text-center service-card">
+        <div class="mx-auto mb-8 w-28 h-28 flex items-center justify-center rounded-full"
+             style="background: radial-gradient(circle, rgba(148,163,184,0.4), transparent 70%);">
+          <img
+            src="images/cyx-service-dto.png"
+            class="h-14 w-14"
+            alt="DTO"
+          />
+        </div>
+        <h3 class="text-xl font-bold mb-4">Digital Tools Onboarding</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Secure digital workflows, essential tools, and safe online foundations.
+        </p>
+      </div>
+
+      <!-- ADT -->
+      <div class="glass p-10 rounded-2xl text-center service-card">
+        <div class="mx-auto mb-8 w-28 h-28 flex items-center justify-center rounded-full"
+             style="background: radial-gradient(circle, rgba(148,163,184,0.4), transparent 70%);">
+          <img
+            src="images/cyx-service-adt.png"
+            class="h-14 w-14"
+            alt="ADT"
+          />
+        </div>
+        <h3 class="text-xl font-bold mb-4">Advanced Digital Tools</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Privacy configuration, system hardening, and responsible infrastructure use.
+        </p>
+      </div>
+
+      <!-- DLGW -->
+      <div class="glass p-10 rounded-2xl text-center service-card">
+        <div class="mx-auto mb-8 w-28 h-28 flex items-center justify-center rounded-full"
+             style="background: radial-gradient(circle, rgba(148,163,184,0.4), transparent 70%);">
+          <img
+            src="images/cyx-service-dlgw.png"
+            class="h-14 w-14"
+            alt="DLGW"
+          />
+        </div>
+        <h3 class="text-xl font-bold mb-4">Literacy Workshops</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Community-based education focused on access, inclusion, and confidence.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-16 px-8 border-t border-white/5" id="language">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+
+      <!-- LEFT: Brand -->
+      <div class="flex items-center gap-4">
+        <div class="logo-glow">
+          <img
+            src="images/cyx-lion-mark.png"
+            class="h-12"
+            alt="CyderEyesX"
+          />
+        </div>
+        <div>
+          <div class="mono text-sm">CYDEREYESX LLC</div>
+          <p class="text-xs text-slate-500">Technology • Education • Security</p>
+
+          <!-- Legal links -->
+          <div class="mt-3 text-xs text-slate-400">
+            <a href="terms.html" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400">Terms of Service</a>
+            <span class="opacity-50"> · </span>
+            <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER: Disclaimer -->
+      <p class="text-xs text-slate-500 text-center max-w-md mx-auto">
+        Educational entity only. No financial, legal, or investment advice provided.
+      </p>
+
+      <!-- RIGHT: Social Icons -->
+      <div class="flex justify-center md:justify-end">
+        <div class="socials" aria-label="CyderEyesX social links">
+
+          <!-- Discord -->
+          <a class="social-pill glow-discord"
+             href="https://discord.com/invite/AafCaCSRFA"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Discord" title="Discord">
+            <img class="social-icon" alt="Discord"
+                 src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg"
+                 style="filter: invert(1);" />
+          </a>
+
+          <!-- YouTube -->
+          <a class="social-pill glow-youtube"
+             href="https://www.youtube.com/cydereyesx"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="YouTube" title="YouTube">
+            <img class="social-icon" alt="YouTube"
+                 src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg"
+                 style="filter: invert(1);" />
+          </a>
+
+          <!-- X -->
+          <a class="social-pill glow-x"
+             href="https://x.com/cydereyes"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="X" title="X">
+            <img class="social-icon" alt="X"
+                 src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg"
+                 style="filter: invert(1);" />
+          </a>
+
+          <!-- Instagram -->
+          <a class="social-pill glow-instagram"
+             href="https://www.instagram.com/cyder_eyes/"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Instagram" title="Instagram">
+            <img class="social-icon" alt="Instagram"
+                 src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg"
+                 style="filter: invert(1);" />
+          </a>
+
+          <!-- REP -->
+          <a class="social-pill glow-rep"
+             href="https://rep.run/rep/account/cydereyes"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="REP" title="REP">
+            <img class="social-icon" alt="REP"
+                 src="images/REP.png"
+                 style="object-fit: contain;" />
+          </a>
+
+        </div>
       </div>
     </div>
 
-    <div class="socials">
-      <a class="social-pill glow-discord" href="https://discord.com/invite/AafCaCSRFA" target="_blank">
-        <img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg" style="filter:invert(1)">
-      </a>
-      <a class="social-pill glow-youtube" href="https://www.youtube.com/cydereyesx" target="_blank">
-        <img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" style="filter:invert(1)">
-      </a>
-      <a class="social-pill glow-x" href="https://x.com/cydereyes" target="_blank">
-        <img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" style="filter:invert(1)">
-      </a>
-      <a class="social-pill glow-instagram" href="https://www.instagram.com/cyder_eyes/" target="_blank">
-        <img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" style="filter:invert(1)">
-      </a>
-      <a class="social-pill glow-rep" href="https://rep.run/rep/account/cydereyes" target="_blank">
-        <img class="social-icon" src="images/REP.png">
-      </a>
+    <div class="mt-10 text-center mono text-[10px] opacity-40">
+      © 2025 CyderEyesX LLC. All rights reserved.
     </div>
-  </div>
+  </footer>
 
-  <div class="mt-16 text-center mono text-[10px] opacity-40">
-    © 2025 CyderEyesX LLC. All rights reserved.
-  </div>
-</footer>
+  <!-- Scroll Reveal Script -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.15 });
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const reveals = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    reveals.forEach(r => r.classList.add('active'));
-    return;
-  }
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('active');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: .15 });
-  reveals.forEach(r => observer.observe(r));
-});
-</script>
+    reveals.forEach(r => observer.observe(r));
+  </script>
 
 </body>
 </html>
