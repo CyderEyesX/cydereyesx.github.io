@@ -4,49 +4,143 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Terms of Service | CyderEyesX LLC</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #020617;
+      color: #f8fafc;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @keyframes breathe {
+      0%, 100% { box-shadow: 0 0 18px rgba(45, 212, 191, 0.35); }
+      50% { box-shadow: 0 0 28px rgba(45, 212, 191, 0.55); }
+    }
+
+    .logo-glow {
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.35), transparent 70%);
+      border-radius: 9999px;
+      padding: 10px;
+      animation: breathe 6s ease-in-out infinite;
+    }
+  </style>
 </head>
 
-<body class="bg-[#020617] text-slate-100 font-['Inter'] px-6 py-20">
-  <div class="max-w-3xl mx-auto space-y-8">
-    <h1 class="text-4xl font-bold">Terms of Service</h1>
+<body>
 
-    <p class="text-slate-400">
-      <strong>CyderEyesX LLC</strong><br>
-      Effective Date: May 30, 2023<br>
-      Last Updated for Payment Compliance: 2025
+<!-- HEADER (MISMO QUE INDEX) -->
+<nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
+  <a href="index.html" class="flex items-center gap-4" aria-label="CyderEyesX Home">
+    <div class="logo-glow">
+      <img src="images/cyx-lion-mark.png" alt="CyderEyesX Home" class="h-10 w-10" />
+    </div>
+    <span class="mono text-sm">CYDEREYESX</span>
+  </a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="pt-40 px-6 max-w-5xl mx-auto pb-24">
+
+  <h1 class="text-5xl font-bold mb-6">Terms of Service</h1>
+
+  <p class="text-slate-400 mb-8">
+    <strong>CyderEyesX LLC</strong><br />
+    Effective Date: May 30, 2023<br />
+    Last Updated for Payment Compliance: 2025
+  </p>
+
+  <p class="text-slate-300 leading-relaxed mb-10">
+    CyderEyesX LLC provides educational services and informational content related to
+    cybersecurity awareness, blockchain technology, digital assets, and emerging technologies.
+    All content is strictly educational in nature.
+  </p>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">Payments</h2>
+  <p class="text-slate-300 leading-relaxed">
+    All payments must be completed in full at the time of purchase using approved payment methods.
+    Access to services or materials is granted only after payment confirmation.
+  </p>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">Cancellation &amp; Refunds</h2>
+  <p class="text-slate-300 leading-relaxed">
+    Educational services canceled at least fourteen (14) days before the scheduled start date
+    may be eligible for a refund. Digital products, downloadable materials, and hardware sales
+    are final unless otherwise required by applicable law.
+  </p>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">Intellectual Property</h2>
+  <p class="text-slate-300 leading-relaxed">
+    All materials, content, designs, logos, and educational resources are the intellectual
+    property of CyderEyesX LLC and may not be copied, redistributed, or reused without
+    explicit written permission.
+  </p>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">Limitation of Liability</h2>
+  <p class="text-slate-300 leading-relaxed">
+    All educational content is provided “as is” and for informational purposes only.
+    CyderEyesX LLC makes no guarantees regarding outcomes, accuracy, or applicability
+    of the information provided.
+  </p>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">Contact</h2>
+  <p class="text-slate-300">
+    If you have any questions regarding these Terms of Service, please contact:<br />
+    <a href="mailto:admin@cydereyesx.com" class="text-teal-400 hover:underline">
+      admin@cydereyesx.com
+    </a>
+  </p>
+
+</main>
+
+<!-- FOOTER (MISMO QUE INDEX) -->
+<footer class="py-16 px-8 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+
+    <div class="flex items-center gap-4">
+      <div class="logo-glow">
+        <img src="images/cyx-lion-mark.png" class="h-12" alt="CyderEyesX" />
+      </div>
+      <div>
+        <div class="mono text-sm">CYDEREYESX LLC</div>
+        <p class="text-xs text-slate-500">Technology • Education • Security</p>
+      </div>
+    </div>
+
+    <p class="text-xs text-slate-500 text-center max-w-md mx-auto">
+      Educational entity only. No financial, legal, or investment advice provided.
     </p>
 
-    <p>
-      CyderEyesX LLC provides educational services and informational content related to
-      cryptocurrency, blockchain technology, digital assets, and emerging technologies.
-    </p>
+    <div class="text-center md:text-right text-xs text-slate-400">
+      <a href="privacy.html" class="hover:text-teal-400">Privacy Policy</a>
+    </div>
 
-    <h2 class="text-xl font-semibold mt-6">Payments</h2>
-    <p>
-      All payments must be completed in full at the time of purchase using approved payment methods.
-    </p>
-
-    <h2 class="text-xl font-semibold mt-6">Cancellation & Refunds</h2>
-    <p>
-      Educational services canceled at least fourteen (14) days before the start date are refundable.
-      Digital products and hardware sales are final unless required by law.
-    </p>
-
-    <h2 class="text-xl font-semibold mt-6">Intellectual Property</h2>
-    <p>
-      All materials are the intellectual property of CyderEyesX LLC and may not be reused without permission.
-    </p>
-
-    <h2 class="text-xl font-semibold mt-6">Limitation of Liability</h2>
-    <p>
-      All educational content is provided “as is” and for informational purposes only.
-    </p>
-
-    <p class="mt-10 text-sm text-slate-500">
-      Contact: <a href="mailto:admin@cydereyesx.com" class="text-teal-400">admin@cydereyesx.com</a>
-    </p>
   </div>
+
+  <div class="mt-10 text-center mono text-[10px] opacity-40">
+    © 2025 CyderEyesX LLC. All rights reserved.
+  </div>
+</footer>
+
 </body>
 </html>
