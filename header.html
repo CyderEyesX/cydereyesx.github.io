@@ -1,102 +1,89 @@
-<style>
-  /* ===== Header self-contained styles ===== */
-
-  .glass {
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .mono {
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-  }
-
-  /* Logo glow breathing animation */
-  @keyframes breathe {
-    0%, 100% {
-      box-shadow: 0 0 18px rgba(45, 212, 191, 0.35);
-    }
-    50% {
-      box-shadow: 0 0 28px rgba(45, 212, 191, 0.55);
-    }
-  }
-
-  .logo-glow {
-    background: radial-gradient(
-      circle,
-      rgba(45, 212, 191, 0.35),
-      transparent 70%
-    );
-    border-radius: 9999px;
-    padding: 10px;
-    animation: breathe 6s ease-in-out infinite;
-    flex-shrink: 0;
-  }
-
-  /* Accessibility */
-  nav a:focus-visible {
-    outline: 2px solid #2dd4bf;
-    outline-offset: 4px;
-  }
-</style>
-
 <nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
+
+  <!-- LOGO -->
   <a href="/" class="flex items-center gap-4" aria-label="CyderEyesX Home">
     <div class="logo-glow">
-      <img
-        src="/images/cyx-lion-mark.png"
-        class="h-10 w-10"
-        alt="CyderEyesX"
-      />
+      <img src="/images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX" />
     </div>
     <span class="mono text-sm">CYDEREYESX</span>
   </a>
 
-<div class="hidden md:flex gap-10 mono text-xs opacity-70">
+  <!-- DESKTOP NAV -->
+  <div class="hidden md:flex gap-10 mono text-xs opacity-70 items-center">
 
-  <a href="/#mission"
-     data-nav="home"
-     class="nav-link hover:text-teal-400">
-     Mission
-  </a>
+    <a href="/#mission" class="nav-link hover:text-teal-400" data-nav="home">Mission</a>
+    <a href="/#services" class="nav-link hover:text-teal-400" data-nav="home">Services</a>
+    <a href="/trainings-workshops.html" class="nav-link hover:text-teal-400" data-nav="trainings">Trainings</a>
 
-  <a href="/#services"
-     data-nav="home"
-     class="nav-link hover:text-teal-400">
-     Services
-  </a>
+    <!-- RESOURCES DROPDOWN -->
+    <div class="relative group">
+      <button class="hover:text-teal-400 flex items-center gap-1">
+        Resources ▾
+      </button>
 
-  <a href="/trainings-workshops.html"
-     data-nav="trainings"
-     class="nav-link hover:text-teal-400">
-     Trainings
-  </a>
+      <div class="absolute right-0 mt-3 w-56 glass rounded-xl opacity-0 invisible
+                  group-hover:opacity-100 group-hover:visible transition-all duration-200">
 
-  <a href="/crypto-projects.html"
-     data-nav="crypto-projects"
-     class="nav-link hover:text-teal-400">
-     Crypto Projects
-  </a>
+        <a href="/crypto-projects.html" class="nav-link block px-5 py-3 hover:bg-white/5" data-nav="crypto-projects">
+          Crypto Projects
+        </a>
 
-  <a href="/donations.html"
-     data-nav="donations"
-     class="nav-link hover:text-teal-400">
-     Donations
-  </a>
+        <a href="/new-nft-collection.html" class="nav-link block px-5 py-3 hover:bg-white/5" data-nav="nft">
+          NFT Collection
+        </a>
 
-  <a href="/new-nft-collection.html"
-     data-nav="nft"
-     class="nav-link hover:text-teal-400">
-     NFT Collection
-  </a>
+        <a href="/#language-access" class="block px-5 py-3 hover:bg-white/5">
+          Language Access
+        </a>
 
-  <a href="/#why-we-teach"
-     data-nav="home"
-     class="nav-link hover:text-teal-400">
-     Why We Teach
-  </a>
+        <a href="/donations.html" class="nav-link block px-5 py-3 hover:bg-white/5" data-nav="donations">
+          Donations
+        </a>
+      </div>
+    </div>
 
-</div>
+    <a href="/#why-we-teach" class="nav-link hover:text-teal-400" data-nav="home">
+      Why We Teach
+    </a>
+  </div>
+
+  <!-- MOBILE HAMBURGER -->
+  <button id="menu-btn" class="md:hidden focus:outline-none">
+    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu"
+       class="hidden absolute top-full left-0 w-full glass px-8 py-6 flex flex-col gap-4 mono text-xs">
+
+    <a href="/#mission" class="hover:text-teal-400">Mission</a>
+    <a href="/#services" class="hover:text-teal-400">Services</a>
+    <a href="/trainings-workshops.html" class="hover:text-teal-400">Trainings</a>
+
+    <div class="border-t border-white/10 pt-4 opacity-80">Resources</div>
+
+    <a href="/crypto-projects.html" class="hover:text-teal-400">Crypto Projects</a>
+    <a href="/new-nft-collection.html" class="hover:text-teal-400">NFT Collection</a>
+    <a href="/#language-access" class="hover:text-teal-400">Language Access</a>
+    <a href="/donations.html" class="hover:text-teal-400">Donations</a>
+
+    <a href="/#why-we-teach" class="hover:text-teal-400 border-t border-white/10 pt-4">
+      Why We Teach
+    </a>
+  </div>
+
 </nav>
+
+<!-- MOBILE MENU SCRIPT -->
+<script>
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+</script>
