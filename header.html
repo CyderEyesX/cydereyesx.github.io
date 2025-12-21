@@ -1,7 +1,55 @@
+<style>
+  /* ===== Header self-contained styles ===== */
+
+  .glass {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  /* Logo glow breathing animation */
+  @keyframes breathe {
+    0%, 100% {
+      box-shadow: 0 0 18px rgba(45, 212, 191, 0.35);
+    }
+    50% {
+      box-shadow: 0 0 28px rgba(45, 212, 191, 0.55);
+    }
+  }
+
+  .logo-glow {
+    background: radial-gradient(
+      circle,
+      rgba(45, 212, 191, 0.35),
+      transparent 70%
+    );
+    border-radius: 9999px;
+    padding: 10px;
+    animation: breathe 6s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  /* Accessibility */
+  nav a:focus-visible {
+    outline: 2px solid #2dd4bf;
+    outline-offset: 4px;
+  }
+</style>
+
 <nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
   <a href="/" class="flex items-center gap-4" aria-label="CyderEyesX Home">
     <div class="logo-glow">
-      <img src="/images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX" />
+      <img
+        src="/images/cyx-lion-mark.png"
+        class="h-10 w-10"
+        alt="CyderEyesX"
+      />
     </div>
     <span class="mono text-sm">CYDEREYESX</span>
   </a>
