@@ -156,10 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Load both fragments, then init UX
-  (async () => {
-    await loadFragment("#site-header", "/header.html");
-    await loadFragment("#site-footer", "/footer.html");
-    initHeaderUX();
+// Load both fragments, then init UX
+(async () => {
+  await loadFragment("#site-header", "header.html");
+  await loadFragment("#site-footer", "footer.html");
+  initHeaderUX();
   })();
 });
