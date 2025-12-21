@@ -6,28 +6,13 @@
   <title>Política de Privacidad | CyderEyesX LLC</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #020617;
-      color: #f8fafc;
-    }
-    .mono {
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-    }
-    .glass {
-      background: rgba(15,23,42,.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,.08);
-    }
+    body{font-family:'Inter',sans-serif;background:#020617;color:#f8fafc}
+    .mono{font-family:'JetBrains Mono',monospace;letter-spacing:.25em;text-transform:uppercase}
+    .glass{background:rgba(15,23,42,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08)}
+    .logo-glow{background:radial-gradient(circle,rgba(45,212,191,.35),transparent 70%);border-radius:9999px;padding:10px}
   </style>
 </head>
 
@@ -36,56 +21,94 @@
 <!-- HEADER -->
 <nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
   <a href="index.html" class="flex items-center gap-4">
-    <img src="../images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX" />
+    <div class="logo-glow">
+      <img src="../images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX">
+    </div>
     <span class="mono text-sm">CYDEREYESX</span>
   </a>
+
+  <a href="../index.html" class="mono text-xs text-teal-400">EN</a>
 </nav>
 
 <!-- CONTENT -->
-<section class="pt-40 pb-28 px-6">
-  <div class="max-w-4xl mx-auto">
-    <h1 class="text-4xl font-bold mb-8">Política de Privacidad</h1>
+<section class="pt-40 pb-24 px-6">
+  <div class="max-w-4xl mx-auto space-y-10">
 
-    <p class="text-slate-400 mb-6">
-      CyderEyesX LLC respeta su privacidad y se compromete a proteger la
-      información personal que usted pueda proporcionar al utilizar este sitio.
-    </p>
+    <h1 class="text-4xl font-bold">Política de Privacidad</h1>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-4">1. Información Recopilada</h2>
     <p class="text-slate-400">
-      Podemos recopilar información básica como nombre, correo electrónico o
-      datos de contacto cuando usted decide proporcionarlos voluntariamente.
+      CyderEyesX LLC se compromete a proteger su privacidad y manejar la información personal
+      de manera responsable.
     </p>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-4">2. Uso de la Información</h2>
+    <h2 class="text-2xl font-semibold">1. Información que Recopilamos</h2>
     <p class="text-slate-400">
-      La información recopilada se utiliza únicamente con fines educativos,
-      de comunicación y mejora de nuestros servicios.
+      Recopilamos información solo cuando el usuario la proporciona voluntariamente, como nombre,
+      correo electrónico o información relacionada con pagos.
     </p>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-4">3. Protección de Datos</h2>
+    <h2 class="text-2xl font-semibold">2. Uso de la Información</h2>
     <p class="text-slate-400">
-      Implementamos medidas razonables de seguridad para proteger su información
-      contra accesos no autorizados.
+      La información se utiliza únicamente para procesar servicios, brindar soporte,
+      mejorar la experiencia del sitio y comunicaciones relacionadas.
     </p>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-4">4. Compartición de Información</h2>
+    <h2 class="text-2xl font-semibold">3. Procesamiento de Pagos</h2>
     <p class="text-slate-400">
-      No vendemos, intercambiamos ni compartimos información personal con
-      terceros, excepto cuando sea requerido por ley.
+      Los pagos se procesan mediante proveedores externos seguros. No almacenamos credenciales
+      completas de pago.
     </p>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-4">5. Cambios a esta Política</h2>
+    <h2 class="text-2xl font-semibold">4. Seguridad</h2>
     <p class="text-slate-400">
-      Esta política puede actualizarse periódicamente. Los cambios serán
-      publicados en esta página.
+      Implementamos medidas de seguridad estándar para proteger los datos personales.
     </p>
+
+    <h2 class="text-2xl font-semibold">5. Cookies</h2>
+    <p class="text-slate-400">
+      Podemos utilizar cookies para mejorar la funcionalidad del sitio. Puede desactivarlas
+      desde su navegador.
+    </p>
+
+    <h2 class="text-2xl font-semibold">6. Enlaces Externos</h2>
+    <p class="text-slate-400">
+      No somos responsables por políticas de privacidad de sitios externos enlazados.
+    </p>
+
+    <h2 class="text-2xl font-semibold">7. Contacto</h2>
+    <p class="text-slate-400">
+      admin@cydereyesx.com
+    </p>
+
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="py-10 text-center text-xs text-slate-500 border-t border-white/5">
-  © 2025 CyderEyesX LLC. Todos los derechos reservados.
+<footer class="py-16 px-8 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 items-center">
+
+    <div class="flex items-center gap-4">
+      <div class="logo-glow">
+        <img src="../images/cyx-lion-mark.png" class="h-12">
+      </div>
+      <div>
+        <div class="mono text-sm">CYDEREYESX LLC</div>
+        <p class="text-xs text-slate-500">Educación • Seguridad • Tecnología</p>
+      </div>
+    </div>
+
+    <p class="text-xs text-slate-500 text-center">
+      Protección de datos y privacidad.
+    </p>
+
+    <div class="flex justify-end gap-4">
+      <img src="../images/REP.png" class="h-6">
+    </div>
+  </div>
+
+  <div class="mt-10 text-center mono text-[10px] opacity-40">
+    © 2025 CyderEyesX LLC
+  </div>
 </footer>
 
 </body>
