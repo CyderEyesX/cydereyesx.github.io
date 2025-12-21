@@ -110,10 +110,7 @@
       padding: 3rem;
     }
 
-    /* ============================
-       SOCIALS (Footer, right side)
-       ============================ */
-
+    /* SOCIALS */
     .socials {
       display: flex;
       align-items: center;
@@ -146,22 +143,28 @@
       display: block;
     }
 
-    /* Per-network glow colors */
     .glow-discord:hover   { box-shadow: 0 0 0 6px rgba(88, 101, 242, 0.15), 0 0 26px rgba(88, 101, 242, 0.55); }
     .glow-youtube:hover   { box-shadow: 0 0 0 6px rgba(255, 0, 0, 0.14),    0 0 26px rgba(255, 0, 0, 0.55); }
     .glow-x:hover         { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.10), 0 0 26px rgba(255, 255, 255, 0.35); }
     .glow-instagram:hover { box-shadow: 0 0 0 6px rgba(228, 64, 95, 0.14),    0 0 26px rgba(193, 53, 132, 0.55); }
     .glow-rep:hover       { box-shadow: 0 0 0 6px rgba(45, 212, 191, 0.14),   0 0 26px rgba(45, 212, 191, 0.55); }
 
-    /* Better keyboard accessibility */
     .social-pill:focus-visible {
       outline: 2px solid #2dd4bf;
       outline-offset: 4px;
     }
 
-    /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Scroll Spy active link */
+    .nav-link.active-link {
+      color: #2dd4bf;
+      opacity: 1;
     }
   </style>
 </head>
@@ -170,37 +173,26 @@
 
   <!-- GLOBAL HEADER -->
   <div id="site-header"></div>
-  
+
   <!-- HERO -->
   <section class="min-h-screen flex items-center justify-center hero-glow pt-32 px-6 text-center reveal">
     <div class="max-w-5xl space-y-10">
-      <img
-        src="images/cyx-logo-full.png"
-        alt="CyderEyesX LLC Logo"
-        class="mx-auto h-28 md:h-36"
-      />
-
-      <div class="mono text-teal-400 text-xs">
-        SECURITY • INFRASTRUCTURE • EDUCATION
-      </div>
-
-      <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+      <img src="images/cyx-logo-full.png" alt="CyderEyesX LLC Logo" class="mx-auto h-28 md:h-36" />
+      <div class="mono text-teal-400 text-xs">SECURITY • INFRASTRUCTURE • EDUCATION</div>
+      <h1 class="text-5xl md:text-7xl font-bold">
         Secure Digital Education for the
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-sky-400">
           Next Generation
         </span>
       </h1>
-
       <p class="max-w-2xl mx-auto text-slate-400 text-lg">
         High-integrity digital education focused on cybersecurity awareness,
         ethical technology use, and long-term digital safety.
       </p>
-
       <div class="flex flex-col md:flex-row gap-6 justify-center pt-6">
         <a class="btn px-10 py-4 bg-white text-black font-semibold rounded-full" href="#services">
           Explore in English
         </a>
-
         <a class="btn px-10 py-4 border border-white/20 rounded-full" href="/es/">
           ¡Explorar en Español!
         </a>
@@ -377,22 +369,47 @@
   </section>
 
 <!-- GLOBAL FOOTER -->
-<div id="site-footer"></div>
-  
-  <!-- Scroll Reveal Script -->
+  <div id="site-footer"></div>
+
+  <!-- Scroll Reveal -->
   <script>
     const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
+    const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('active');
       });
     }, { threshold: 0.15 });
 
-    reveals.forEach(r => observer.observe(r));
+    reveals.forEach(r => revealObserver.observe(r));
   </script>
 
-    <!-- Inject global header & footer -->
+  <!-- Inject global header & footer -->
   <script src="layout.js"></script>
+
+  <!-- Scroll Spy (index only) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sections = document.querySelectorAll("#mission, #services, #why-we-teach");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      if (!sections.length || !navLinks.length) return;
+
+      const spyObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            link.classList.toggle(
+              "active-link",
+              link.getAttribute("href")?.includes(`#${id}`)
+            );
+          });
+        });
+      }, { threshold: 0.55 });
+
+      sections.forEach(section => spyObserver.observe(section));
+    });
+  </script>
 
 </body>
 </html>
