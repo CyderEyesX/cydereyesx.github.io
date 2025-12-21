@@ -1,10 +1,15 @@
-// js/layout.js
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("header.html")
-    .then(res => res.text())
-    .then(html => document.getElementById("site-header").innerHTML = html);
+  const loadFragment = async (selector, file) => {
+    try {
+      const res = await fetch(file);
+      if (!res.ok) throw new Error(`Failed to load ${file}`);
+      const html = await res.text();
+      document.querySelector(selector).innerHTML = html;
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-  fetch("footer.html")
-    .then(res => res.text())
-    .then(html => document.getElementById("site-footer").innerHTML = html);
+  loadFragment("#site-header", "/header.html");
+  loadFragment("#site-footer", "/footer.html");
 });
