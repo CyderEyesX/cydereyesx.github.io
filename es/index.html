@@ -5,130 +5,500 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CyderEyesX LLC | Educación Digital Segura</title>
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
-    body { font-family: 'Inter', sans-serif; background:#020617; color:#f8fafc; }
-    .mono { font-family:'JetBrains Mono', monospace; letter-spacing:.25em; text-transform:uppercase; }
-    .glass { background:rgba(15,23,42,.6); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.08); }
-    .hero-glow { background:radial-gradient(circle,rgba(45,212,191,.14),transparent 65%); }
-    @keyframes breathe { 0%,100%{box-shadow:0 0 18px rgba(45,212,191,.35)}50%{box-shadow:0 0 28px rgba(45,212,191,.55)} }
-    .logo-glow { background:radial-gradient(circle,rgba(45,212,191,.35),transparent 70%); border-radius:9999px; padding:10px; animation:breathe 6s ease-in-out infinite; }
-    .btn{transition:.25s}
-    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(45,212,191,.25)}
-    .reveal{opacity:0;transform:translateY(24px);transition:.8s}
-    .reveal.active{opacity:1;transform:none}
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #020617;
+      color: #f8fafc;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-glow {
+      background: radial-gradient(
+        circle at center,
+        rgba(45, 212, 191, 0.14),
+        transparent 65%
+      );
+    }
+
+    /* Navbar logo breathing glow */
+    @keyframes breathe {
+      0%, 100% {
+        box-shadow: 0 0 18px rgba(45, 212, 191, 0.35);
+      }
+      50% {
+        box-shadow: 0 0 28px rgba(45, 212, 191, 0.55);
+      }
+    }
+
+    .logo-glow {
+      background: radial-gradient(
+        circle,
+        rgba(45, 212, 191, 0.35),
+        transparent 70%
+      );
+      border-radius: 9999px;
+      padding: 10px;
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    /* Buttons */
+    .btn {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(45, 212, 191, 0.25);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid #2dd4bf;
+      outline-offset: 4px;
+    }
+
+    /* Service cards */
+    .service-card {
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(45, 212, 191, 0.15);
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mission logo background */
+    .logo-stage {
+      background: radial-gradient(
+        circle,
+        rgba(45, 212, 191, 0.18),
+        transparent 60%
+      );
+      border-radius: 2rem;
+      padding: 3rem;
+    }
+
+    /* ============================
+       SOCIALS (Footer, right side)
+       ============================ */
+
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+
+    .social-pill {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(15, 23, 42, 0.35);
+      backdrop-filter: blur(10px);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      text-decoration: none;
+    }
+
+    .social-pill:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .social-icon {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    /* Per-network glow colors */
+    .glow-discord:hover   { box-shadow: 0 0 0 6px rgba(88, 101, 242, 0.15), 0 0 26px rgba(88, 101, 242, 0.55); }
+    .glow-youtube:hover   { box-shadow: 0 0 0 6px rgba(255, 0, 0, 0.14),    0 0 26px rgba(255, 0, 0, 0.55); }
+    .glow-x:hover         { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.10), 0 0 26px rgba(255, 255, 255, 0.35); }
+    .glow-instagram:hover { box-shadow: 0 0 0 6px rgba(228, 64, 95, 0.14),    0 0 26px rgba(193, 53, 132, 0.55); }
+    .glow-rep:hover       { box-shadow: 0 0 0 6px rgba(45, 212, 191, 0.14),   0 0 26px rgba(45, 212, 191, 0.55); }
+
+    /* Better keyboard accessibility */
+    .social-pill:focus-visible {
+      outline: 2px solid #2dd4bf;
+      outline-offset: 4px;
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
   </style>
 </head>
 
 <body id="top">
 
-<!-- NAVBAR -->
-<nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
-  <a href="index.html" class="flex items-center gap-4">
-    <div class="logo-glow">
-      <img src="../images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX">
-    </div>
-    <span class="mono text-sm">CYDEREYESX</span>
-  </a>
-
-  <div class="hidden md:flex gap-8 mono text-xs opacity-70">
-    <a href="#mission">Misión</a>
-    <a href="#services">Servicios</a>
-    <a href="#language-access">Acceso Lingüístico</a>
-    <a href="#why-we-teach">Por Qué Enseñamos</a>
-    <a href="../index.html" class="text-teal-400">EN</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="min-h-screen hero-glow flex items-center justify-center pt-32 text-center reveal">
-  <div class="max-w-5xl space-y-10 px-6">
-    <img src="../images/cyx-logo-full.png" class="mx-auto h-32" alt="CyderEyesX Logo">
-
-    <div class="mono text-teal-400 text-xs">
-      SEGURIDAD • INFRAESTRUCTURA • EDUCACIÓN
-    </div>
-
-    <h1 class="text-5xl md:text-7xl font-bold">
-      Educación Digital Segura para la
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-sky-400">
-        Próxima Generación
-      </span>
-    </h1>
-
-    <p class="text-slate-400 max-w-2xl mx-auto">
-      Educación tecnológica con enfoque ético, seguridad digital y comprensión real.
-    </p>
-
-    <div class="flex flex-col md:flex-row gap-6 justify-center">
-      <a href="#services" class="btn px-10 py-4 bg-white text-black rounded-full font-semibold">
-        ¡Explorar en Español!
-      </a>
-      <a href="../index.html" class="btn px-10 py-4 border border-white/20 rounded-full">
-        Explore in English
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- MISSION -->
-<section id="mission" class="py-28 px-6 bg-[#010413] reveal">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-    <div>
-      <div class="mono text-teal-400 text-xs mb-4">Nuestra Filosofía</div>
-      <h2 class="text-4xl font-bold mb-6">La educación es lo primero.</h2>
-      <p class="text-slate-400 mb-6">
-        CyderEyesX es una organización educativa. No ofrecemos asesoría financiera,
-        legal ni de inversión.
-      </p>
-      <ul class="space-y-3 text-slate-300">
-        <li>✔ Alfabetización digital</li>
-        <li>✔ Educación tecnológica ética</li>
-        <li>✔ Sin promesas irreales</li>
-      </ul>
-    </div>
-
-    <img src="../images/cyx-lion-mark.png" class="mx-auto h-48" alt="CyderEyesX">
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="py-16 px-8 border-t border-white/5">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 items-center">
-
-    <div class="flex items-center gap-4">
+  <!-- NAVBAR -->
+  <nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
+    <a href="#top" class="flex items-center gap-4" aria-label="CyderEyesX Inicio">
       <div class="logo-glow">
-        <img src="../images/cyx-lion-mark.png" class="h-12">
+        <img
+          src="../images/cyx-lion-mark.png"
+          alt="CyderEyesX Inicio"
+          class="h-10 w-10"
+        />
       </div>
+      <span class="mono text-sm">CYDEREYESX</span>
+    </a>
+
+    <div class="hidden md:flex gap-10 mono text-xs opacity-70">
+      <a href="#mission" class="hover:text-teal-400">Misión</a>
+      <a href="#services" class="hover:text-teal-400">Servicios</a>
+      <a href="#language-access" class="hover:text-teal-400">Acceso de Idioma</a>
+      <a href="#why-we-teach" class="hover:text-teal-400">Por Qué Enseñamos</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex items-center justify-center hero-glow pt-32 px-6 text-center reveal">
+    <div class="max-w-5xl space-y-10">
+      <img
+        src="../images/cyx-logo-full.png"
+        alt="CyderEyesX LLC Logo"
+        class="mx-auto h-28 md:h-36"
+      />
+
+      <div class="mono text-teal-400 text-xs">
+        SEGURIDAD • INFRAESTRUCTURA • EDUCACIÓN
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+        Educación digital segura para la
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-sky-400">
+          próxima generación
+        </span>
+      </h1>
+
+      <p class="max-w-2xl mx-auto text-slate-400 text-lg">
+        Educación de alta integridad enfocada en conciencia de ciberseguridad,
+        uso ético de la tecnología y seguridad digital a largo plazo.
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-6 justify-center pt-6">
+        <a class="btn px-10 py-4 bg-white text-black font-semibold rounded-full" href="../index.html">
+          Explore in English
+        </a>
+        <a class="btn px-10 py-4 border border-white/20 rounded-full" href="#services">
+          ¡Explorar en Español!
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section id="mission" class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
       <div>
-        <div class="mono text-sm">CYDEREYESX LLC</div>
-        <div class="text-xs text-slate-500 mt-2">
-          <a href="terms.html">Términos</a> · <a href="privacy.html">Privacidad</a>
+        <div class="mono text-teal-400 text-xs mb-4">Nuestra filosofía</div>
+        <h2 class="text-4xl font-bold mb-6">La educación va primero.</h2>
+
+        <p class="text-slate-400 leading-relaxed mb-6">
+          CyderEyesX LLC es una organización estrictamente educativa.
+          No brindamos asesoría financiera, legal ni de inversión.
+        </p>
+
+        <ul class="space-y-3 text-slate-300">
+          <li>✔ Alfabetización digital y conciencia de seguridad</li>
+          <li>✔ Educación ética sobre blockchain</li>
+          <li>✔ Sin hype. Sin especulación.</li>
+        </ul>
+      </div>
+
+      <div class="logo-stage text-center">
+        <img
+          src="../images/cyx-lion-mark.png"
+          class="mx-auto h-48"
+          alt="CyderEyesX Lion"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGE ACCESS -->
+  <section id="language-access" class="py-24 px-6 reveal">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14">
+        <div class="mono text-teal-400 text-xs mb-4">Acceso de idioma</div>
+        <h2 class="text-4xl md:text-5xl font-bold">Accesible por diseño</h2>
+        <p class="mt-6 text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          CyderEyesX ofrece contenido educativo en inglés y español para reducir barreras de idioma
+          en ciberseguridad y alfabetización digital. Si necesitas una sesión bilingüe o materiales,
+          ajustamos formato y ritmo para apoyar comprensión y confianza.
+        </p>
+      </div>
+
+      <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-10">
+        <div class="glass p-8 rounded-2xl text-center service-card">
+          <div class="mono text-[11px] text-teal-300 mb-3">Entrega bilingüe</div>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Explicaciones claras en inglés y español, con terminología adaptada para principiantes.
+          </p>
+        </div>
+
+        <div class="glass p-8 rounded-2xl text-center service-card">
+          <div class="mono text-[11px] text-teal-300 mb-3">Primero lenguaje claro</div>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Conceptos paso a paso, evitando jerga técnica cuando sea posible.
+          </p>
+        </div>
+
+        <div class="glass p-8 rounded-2xl text-center service-card">
+          <div class="mono text-[11px] text-teal-300 mb-3">Aprendizaje inclusivo</div>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Instrucción diseñada para distintos estilos de aprendizaje y casos de uso reales.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY WE TEACH -->
+  <section id="why-we-teach" class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="mono text-teal-400 text-xs mb-4">Por qué enseñamos</div>
+        <h2 class="text-4xl font-bold mb-6">Porque la claridad es protección.</h2>
+
+        <p class="text-slate-400 leading-relaxed mb-6">
+          CyderEyesX nació al notar un patrón: muchas personas intentaban aprender sobre activos digitales
+          y tecnologías emergentes usando fuentes dispersas—en español, a veces desactualizadas, y con frecuencia
+          presentadas de una forma que aumentaba el riesgo en lugar del entendimiento.
+        </p>
+
+        <p class="text-slate-400 leading-relaxed mb-6">
+          Nuestro objetivo es enseñar fundamentos que te hagan más seguro y más confiado: cómo evaluar información,
+          evitar estafas comunes, proteger cuentas y dispositivos, y construir hábitos digitales responsables
+          que se mantengan en el tiempo.
+        </p>
+
+        <div class="glass p-6 rounded-2xl">
+          <div class="mono text-teal-300 text-[11px] mb-3">Recordatorio de seguridad</div>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Nunca compartas llaves privadas, seed phrases o credenciales. En cripto y en muchos sistemas digitales,
+            las transacciones son irreversibles—por eso la prevención y la verificación importan.
+          </p>
+        </div>
+      </div>
+
+      <div class="logo-stage text-center">
+        <img
+          src="../images/cyx-logo-full.png"
+          class="mx-auto h-28 md:h-36"
+          alt="CyderEyesX LLC"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-28 px-6 reveal">
+    <div class="max-w-7xl mx-auto text-center mb-24">
+      <div class="mono text-teal-400 text-xs mb-4">Rutas educativas</div>
+      <h2 class="text-5xl font-bold">Programas educativos</h2>
+      <p class="mt-6 text-slate-400 max-w-2xl mx-auto">
+        Rutas estructuradas para construir confianza, seguridad
+        y competencia digital a largo plazo.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+
+      <!-- DTO -->
+      <div class="glass p-10 rounded-2xl text-center service-card">
+        <div class="mx-auto mb-8 w-28 h-28 flex items-center justify-center rounded-full"
+             style="background: radial-gradient(circle, rgba(148,163,184,0.4), transparent 70%);">
+          <img
+            src="../images/cyx-service-dto.png"
+            class="h-14 w-14"
+            alt="DTO"
+          />
+        </div>
+        <h3 class="text-xl font-bold mb-4">Onboarding de herramientas digitales</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Flujos seguros, herramientas esenciales y fundamentos para navegar en línea con seguridad.
+        </p>
+      </div>
+
+      <!-- ADT -->
+      <div class="glass p-10 rounded-2xl text-center service-card">
+        <div class="mx-auto mb-8 w-28 h-28 flex items-center justify-center rounded-full"
+             style="background: radial-gradient(circle, rgba(148,163,184,0.4), transparent 70%);">
+          <img
+            src="../images/cyx-service-adt.png"
+            class="h-14 w-14"
+            alt="ADT"
+          />
+        </div>
+        <h3 class="text-xl font-bold mb-4">Herramientas digitales avanzadas</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Configuración de privacidad, hardening básico y uso responsable de infraestructura.
+        </p>
+      </div>
+
+      <!-- DLGW -->
+      <div class="glass p-10 rounded-2xl text-center service-card">
+        <div class="mx-auto mb-8 w-28 h-28 flex items-center justify-center rounded-full"
+             style="background: radial-gradient(circle, rgba(148,163,184,0.4), transparent 70%);">
+          <img
+            src="../images/cyx-service-dlgw.png"
+            class="h-14 w-14"
+            alt="DLGW"
+          />
+        </div>
+        <h3 class="text-xl font-bold mb-4">Talleres de alfabetización</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Educación comunitaria enfocada en acceso, inclusión y confianza tecnológica.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-16 px-8 border-t border-white/5" id="language">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+
+      <!-- LEFT: Brand -->
+      <div class="flex items-center gap-4">
+        <div class="logo-glow">
+          <img
+            src="../images/cyx-lion-mark.png"
+            class="h-12"
+            alt="CyderEyesX"
+          />
+        </div>
+        <div>
+          <div class="mono text-sm">CYDEREYESX LLC</div>
+          <p class="text-xs text-slate-500">Tecnología • Educación • Seguridad</p>
+
+          <!-- Legal links -->
+          <div class="mt-3 text-xs text-slate-400">
+            <a href="terms.html" class="hover:text-teal-400">Términos de Servicio</a>
+            <span class="opacity-50"> · </span>
+            <a href="privacy.html" class="hover:text-teal-400">Política de Privacidad</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER: Disclaimer -->
+      <p class="text-xs text-slate-500 text-center max-w-md mx-auto">
+        Entidad educativa únicamente. No se brinda asesoría financiera, legal ni de inversión.
+      </p>
+
+      <!-- RIGHT: Social Icons -->
+      <div class="flex justify-center md:justify-end">
+        <div class="socials" aria-label="CyderEyesX enlaces sociales">
+
+          <!-- Discord -->
+          <a class="social-pill glow-discord"
+             href="https://discord.com/invite/AafCaCSRFA"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Discord" title="Discord">
+            <img class="social-icon" alt="Discord"
+                 src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg"
+                 style="filter: invert(1);" />
+          </a>
+
+          <!-- YouTube -->
+          <a class="social-pill glow-youtube"
+             href="https://www.youtube.com/cydereyesx"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="YouTube" title="YouTube">
+            <img class="social-icon" alt="YouTube"
+                 src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg"
+                 style="filter: invert(1);" />
+          </a>
+
+          <!-- X -->
+          <a class="social-pill glow-x"
+             href="https://x.com/cydereyes"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="X" title="X">
+            <img class="social-icon" alt="X"
+                 src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg"
+                 style="filter: invert(1);" />
+          </a>
+
+          <!-- Instagram -->
+          <a class="social-pill glow-instagram"
+             href="https://www.instagram.com/cyder_eyes/"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Instagram" title="Instagram">
+            <img class="social-icon" alt="Instagram"
+                 src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg"
+                 style="filter: invert(1);" />
+          </a>
+
+          <!-- REP -->
+          <a class="social-pill glow-rep"
+             href="https://rep.run/rep/account/cydereyes"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="REP" title="REP">
+            <img class="social-icon" alt="REP"
+                 src="../images/REP.png"
+                 style="object-fit: contain;" />
+          </a>
+
         </div>
       </div>
     </div>
 
-    <p class="text-xs text-slate-500 text-center">
-      Entidad educativa. No se ofrece asesoría financiera.
-    </p>
-
-    <div class="flex justify-end gap-4">
-      <img src="../images/REP.png" class="h-6">
+    <div class="mt-10 text-center mono text-[10px] opacity-40">
+      © 2025 CyderEyesX LLC. Todos los derechos reservados.
     </div>
-  </div>
+  </footer>
 
-  <div class="mt-10 text-center mono text-[10px] opacity-40">
-    © 2025 CyderEyesX LLC
-  </div>
-</footer>
+  <!-- Scroll Reveal Script -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.15 });
 
-<script>
-  const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('active')),{threshold:.15});
-  document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
-</script>
+    reveals.forEach(r => observer.observe(r));
+  </script>
 
 </body>
 </html>
