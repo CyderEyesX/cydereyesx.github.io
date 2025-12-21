@@ -1,6 +1,4 @@
-<nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
-
-  <!-- LOGO -->
+<nav id="cyx-nav" class="fixed w-full z-50 px-6 md:px-8 py-4 glass flex justify-between items-center">
   <a href="/" class="flex items-center gap-4" aria-label="CyderEyesX Home">
     <div class="logo-glow">
       <img src="/images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX" />
@@ -8,82 +6,100 @@
     <span class="mono text-sm">CYDEREYESX</span>
   </a>
 
-  <!-- DESKTOP NAV -->
-  <div class="hidden md:flex gap-10 mono text-xs opacity-70 items-center">
+  <!-- Desktop Nav -->
+  <div class="hidden md:flex items-center gap-8 mono text-xs opacity-70">
+    <a class="nav-link hover:text-teal-400" href="/#mission">Mission</a>
+    <a class="nav-link hover:text-teal-400" href="/#services">Services</a>
+    <a class="nav-link hover:text-teal-400" href="/trainings-workshops.html">Trainings</a>
+    <a class="nav-link hover:text-teal-400" href="/crypto-projects.html">Crypto Projects</a>
+    <a class="nav-link hover:text-teal-400" href="/donations.html">Donations</a>
+    <a class="nav-link hover:text-teal-400" href="/new-nft-collection.html">NFT Collection</a>
 
-    <a href="/#mission" class="nav-link hover:text-teal-400" data-nav="home">Mission</a>
-    <a href="/#services" class="nav-link hover:text-teal-400" data-nav="home">Services</a>
-    <a href="/trainings-workshops.html" class="nav-link hover:text-teal-400" data-nav="trainings">Trainings</a>
-
-    <!-- RESOURCES DROPDOWN -->
-    <div class="relative group">
-      <button class="hover:text-teal-400 flex items-center gap-1">
-        Resources ▾
+    <!-- Resources Dropdown (Desktop) -->
+    <div class="relative">
+      <button
+        id="resourcesBtn"
+        class="nav-link hover:text-teal-400 inline-flex items-center gap-2"
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded="false"
+      >
+        Resources
+        <span aria-hidden="true" class="opacity-70">▾</span>
       </button>
 
-      <div class="absolute right-0 mt-3 w-56 glass rounded-xl opacity-0 invisible
-                  group-hover:opacity-100 group-hover:visible transition-all duration-200">
-
-        <a href="/crypto-projects.html" class="nav-link block px-5 py-3 hover:bg-white/5" data-nav="crypto-projects">
-          Crypto Projects
-        </a>
-
-        <a href="/new-nft-collection.html" class="nav-link block px-5 py-3 hover:bg-white/5" data-nav="nft">
-          NFT Collection
-        </a>
-
-        <a href="/#language-access" class="block px-5 py-3 hover:bg-white/5">
-          Language Access
-        </a>
-
-        <a href="/donations.html" class="nav-link block px-5 py-3 hover:bg-white/5" data-nav="donations">
-          Donations
-        </a>
+      <div
+        id="resourcesMenu"
+        class="absolute right-0 mt-3 w-60 rounded-2xl glass border border-white/10 overflow-hidden hidden"
+        role="menu"
+        aria-label="Resources menu"
+      >
+        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/cyx-learning-token.html">CYX Learning Token</a>
+        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/privacy.html">Privacy Policy</a>
+        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/terms.html">Terms of Service</a>
       </div>
     </div>
 
-    <a href="/#why-we-teach" class="nav-link hover:text-teal-400" data-nav="home">
-      Why We Teach
-    </a>
+    <a class="nav-link hover:text-teal-400" href="/#why-we-teach">Why We Teach</a>
   </div>
 
-  <!-- MOBILE HAMBURGER -->
-  <button id="menu-btn" class="md:hidden focus:outline-none">
-    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2"
-         viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round"
-            d="M4 6h16M4 12h16M4 18h16"/>
-    </svg>
+  <!-- Mobile button -->
+  <button
+    id="mobileMenuBtn"
+    class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
+    type="button"
+    aria-label="Open menu"
+    aria-controls="mobileMenu"
+    aria-expanded="false"
+  >
+    <span aria-hidden="true" class="text-lg">☰</span>
   </button>
 
-  <!-- MOBILE MENU -->
-  <div id="mobile-menu"
-       class="hidden absolute top-full left-0 w-full glass px-8 py-6 flex flex-col gap-4 mono text-xs">
+  <!-- Mobile Panel -->
+  <div
+    id="mobileMenu"
+    class="md:hidden fixed inset-x-0 top-[76px] mx-4 rounded-2xl glass border border-white/10 overflow-hidden hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+  >
+    <div class="p-4">
+      <div class="grid gap-2 text-sm">
+        <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/#mission">Mission</a>
+        <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/#services">Services</a>
+        <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/trainings-workshops.html">Trainings</a>
+        <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/crypto-projects.html">Crypto Projects</a>
+        <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/donations.html">Donations</a>
+        <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/new-nft-collection.html">NFT Collection</a>
+        <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/#why-we-teach">Why We Teach</a>
 
-    <a href="/#mission" class="hover:text-teal-400">Mission</a>
-    <a href="/#services" class="hover:text-teal-400">Services</a>
-    <a href="/trainings-workshops.html" class="hover:text-teal-400">Trainings</a>
+        <div class="mt-2 border-t border-white/10 pt-2">
+          <button
+            id="mobileResourcesBtn"
+            class="w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 flex items-center justify-between"
+            type="button"
+            aria-haspopup="menu"
+            aria-expanded="false"
+          >
+            Resources
+            <span aria-hidden="true" class="opacity-70">▾</span>
+          </button>
 
-    <div class="border-t border-white/10 pt-4 opacity-80">Resources</div>
+          <div id="mobileResourcesMenu" class="hidden pl-2" role="menu" aria-label="Mobile resources menu">
+            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/cyx-learning-token.html">CYX Learning Token</a>
+            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/privacy.html">Privacy Policy</a>
+            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/terms.html">Terms of Service</a>
+          </div>
+        </div>
+      </div>
 
-    <a href="/crypto-projects.html" class="hover:text-teal-400">Crypto Projects</a>
-    <a href="/new-nft-collection.html" class="hover:text-teal-400">NFT Collection</a>
-    <a href="/#language-access" class="hover:text-teal-400">Language Access</a>
-    <a href="/donations.html" class="hover:text-teal-400">Donations</a>
-
-    <a href="/#why-we-teach" class="hover:text-teal-400 border-t border-white/10 pt-4">
-      Why We Teach
-    </a>
+      <button
+        id="mobileMenuCloseBtn"
+        class="mt-4 w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+        type="button"
+      >
+        Close
+      </button>
+    </div>
   </div>
-
 </nav>
-
-<!-- MOBILE MENU SCRIPT -->
-<script>
-  const menuBtn = document.getElementById("menu-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-  });
-</script>
