@@ -1,4 +1,58 @@
-<footer class="py-16 px-8 border-t border-white/5">
+<style>
+  /* ===== Footer-only shared styles (so icons never blow up) ===== */
+
+  .socials {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: flex-end;
+  }
+
+  .social-pill {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(15, 23, 42, 0.35);
+    backdrop-filter: blur(10px);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    text-decoration: none;
+    flex: 0 0 44px;
+    overflow: hidden; /* prevents SVG overflow */
+  }
+
+  .social-pill:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,0.22);
+  }
+
+  /* IMPORTANT: force icons to be small */
+  .social-icon {
+    width: 20px !important;
+    height: 20px !important;
+    display: block;
+    max-width: 20px !important;
+    max-height: 20px !important;
+  }
+
+  /* Per-network glow colors */
+  .glow-discord:hover   { box-shadow: 0 0 0 6px rgba(88, 101, 242, 0.15), 0 0 26px rgba(88, 101, 242, 0.55); }
+  .glow-youtube:hover   { box-shadow: 0 0 0 6px rgba(255, 0, 0, 0.14),    0 0 26px rgba(255, 0, 0, 0.55); }
+  .glow-x:hover         { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.10), 0 0 26px rgba(255, 255, 255, 0.35); }
+  .glow-instagram:hover { box-shadow: 0 0 0 6px rgba(228, 64, 95, 0.14),    0 0 26px rgba(193, 53, 132, 0.55); }
+  .glow-rep:hover       { box-shadow: 0 0 0 6px rgba(45, 212, 191, 0.14),   0 0 26px rgba(45, 212, 191, 0.55); }
+
+  /* Accessibility */
+  .social-pill:focus-visible {
+    outline: 2px solid #2dd4bf;
+    outline-offset: 4px;
+  }
+</style>
+
+<footer class="py-16 px-8 border-t border-white/5" id="language">
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
 
     <!-- LEFT: Brand -->
@@ -36,8 +90,8 @@
         <a class="social-pill glow-discord"
            href="https://discord.com/invite/AafCaCSRFA"
            target="_blank" rel="noopener noreferrer"
-           aria-label="Discord">
-          <img class="social-icon"
+           aria-label="Discord" title="Discord">
+          <img class="social-icon" alt="Discord"
                src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg"
                style="filter: invert(1);" />
         </a>
@@ -46,8 +100,8 @@
         <a class="social-pill glow-youtube"
            href="https://www.youtube.com/cydereyesx"
            target="_blank" rel="noopener noreferrer"
-           aria-label="YouTube">
-          <img class="social-icon"
+           aria-label="YouTube" title="YouTube">
+          <img class="social-icon" alt="YouTube"
                src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg"
                style="filter: invert(1);" />
         </a>
@@ -56,8 +110,8 @@
         <a class="social-pill glow-x"
            href="https://x.com/cydereyes"
            target="_blank" rel="noopener noreferrer"
-           aria-label="X">
-          <img class="social-icon"
+           aria-label="X" title="X">
+          <img class="social-icon" alt="X"
                src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg"
                style="filter: invert(1);" />
         </a>
@@ -66,8 +120,8 @@
         <a class="social-pill glow-instagram"
            href="https://www.instagram.com/cyder_eyes/"
            target="_blank" rel="noopener noreferrer"
-           aria-label="Instagram">
-          <img class="social-icon"
+           aria-label="Instagram" title="Instagram">
+          <img class="social-icon" alt="Instagram"
                src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg"
                style="filter: invert(1);" />
         </a>
@@ -76,14 +130,15 @@
         <a class="social-pill glow-rep"
            href="https://rep.run/rep/account/cydereyes"
            target="_blank" rel="noopener noreferrer"
-           aria-label="REP">
-          <img class="social-icon"
+           aria-label="REP" title="REP">
+          <img class="social-icon" alt="REP"
                src="images/REP.png"
                style="object-fit: contain;" />
         </a>
 
       </div>
     </div>
+
   </div>
 
   <div class="mt-10 text-center mono text-[10px] opacity-40">
