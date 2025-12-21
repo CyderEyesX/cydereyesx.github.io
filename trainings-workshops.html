@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyderEyesX LLC | Educational Trainings & Workshops</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #020617;
+      color: #f8fafc;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-glow {
+      background: radial-gradient(
+        circle at center,
+        rgba(45, 212, 191, 0.14),
+        transparent 65%
+      );
+    }
+
+    .btn {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(45, 212, 191, 0.25);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* SOCIALS */
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+
+    .social-pill {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(15, 23, 42, 0.35);
+      backdrop-filter: blur(10px);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .social-pill:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <!-- NAVBAR -->
+  <nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
+    <a href="index.html" class="flex items-center gap-4" aria-label="CyderEyesX Home">
+      <img src="images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX" />
+      <span class="mono text-sm">CYDEREYESX</span>
+    </a>
+
+    <div class="hidden md:flex gap-10 mono text-xs opacity-70">
+      <a href="index.html#mission" class="hover:text-teal-400">Mission</a>
+      <a href="index.html#services" class="hover:text-teal-400">Services</a>
+      <a href="index.html#language-access" class="hover:text-teal-400">Language Access</a>
+      <a href="index.html#why-we-teach" class="hover:text-teal-400">Why We Teach</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="min-h-[70vh] flex items-center justify-center hero-glow pt-32 px-6 text-center reveal">
+    <div class="max-w-4xl space-y-8">
+      <div class="mono text-teal-400 text-xs">
+        EDUCATIONAL TRAININGS & WORKSHOPS
+      </div>
+
+      <h1 class="text-5xl md:text-6xl font-bold">
+        Practical Digital Education<br />
+        <span class="text-teal-400">Without Hype</span>
+      </h1>
+
+      <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+        Structured trainings focused on cybersecurity awareness, responsible technology use,
+        and foundational digital skills for real-world contexts.
+      </p>
+    </div>
+  </section>
+
+  <!-- WHAT WE OFFER -->
+  <section class="py-24 px-6 reveal">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
+      <div class="glass p-8 rounded-2xl text-center">
+        <h3 class="font-semibold mb-4">Cybersecurity Awareness</h3>
+        <p class="text-slate-400 text-sm">
+          Understanding common risks, phishing, account protection, and digital hygiene.
+        </p>
+      </div>
+
+      <div class="glass p-8 rounded-2xl text-center">
+        <h3 class="font-semibold mb-4">Digital Literacy Foundations</h3>
+        <p class="text-slate-400 text-sm">
+          Clear explanations of modern digital tools, platforms, and safe usage practices.
+        </p>
+      </div>
+
+      <div class="glass p-8 rounded-2xl text-center">
+        <h3 class="font-semibold mb-4">Emerging Technology Education</h3>
+        <p class="text-slate-400 text-sm">
+          Introductory sessions on blockchain, privacy tools, and ethical technology adoption.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="py-24 px-6 bg-[#010413] reveal">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-6">Who These Trainings Are For</h2>
+      <p class="text-slate-400 leading-relaxed">
+        Educational institutions, community organizations, nonprofits, small teams,
+        and individuals seeking practical, non-speculative digital education.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 px-6 text-center reveal">
+    <h2 class="text-4xl font-bold mb-6">Request Training Information</h2>
+    <p class="text-slate-400 mb-8 max-w-2xl mx-auto">
+      Trainings are customized based on audience, language preference,
+      and learning objectives.
+    </p>
+
+    <a
+      href="mailto:trainings@cydereyesx.com"
+      class="btn inline-block px-12 py-4 bg-white text-black font-semibold rounded-full"
+    >
+      Contact for Trainings
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-16 px-8 border-t border-white/5">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 items-center">
+      <div>
+        <div class="mono text-sm">CYDEREYESX LLC</div>
+        <p class="text-xs text-slate-500">Technology • Education • Security</p>
+        <div class="mt-3 text-xs text-slate-400">
+          <a href="terms.html" class="hover:text-teal-400">Terms of Service</a>
+          ·
+          <a href="privacy.html" class="hover:text-teal-400">Privacy Policy</a>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-500 text-center">
+        Educational entity only. No financial, legal, or investment advice provided.
+      </p>
+
+      <div class="flex justify-center md:justify-end socials">
+        <a class="social-pill" href="https://discord.com/invite/AafCaCSRFA" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg" style="filter:invert(1);" />
+        </a>
+        <a class="social-pill" href="https://www.youtube.com/cydereyesx" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" style="filter:invert(1);" />
+        </a>
+        <a class="social-pill" href="https://x.com/cydereyes" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" style="filter:invert(1);" />
+        </a>
+        <a class="social-pill" href="https://www.instagram.com/cyder_eyes/" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" style="filter:invert(1);" />
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-10 text-center mono text-[10px] opacity-40">
+      © 2025 CyderEyesX LLC. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(r => observer.observe(r));
+  </script>
+
+</body>
+</html>
