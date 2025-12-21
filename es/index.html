@@ -5,119 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CyderEyesX LLC | Educación Digital Segura</title>
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #020617;
-      color: #f8fafc;
-    }
-
-    .mono {
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-    }
-
-    .glass {
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-glow {
-      background: radial-gradient(
-        circle at center,
-        rgba(45, 212, 191, 0.14),
-        transparent 65%
-      );
-    }
-
-    @keyframes breathe {
-      0%, 100% { box-shadow: 0 0 18px rgba(45,212,191,.35); }
-      50% { box-shadow: 0 0 28px rgba(45,212,191,.55); }
-    }
-
-    .logo-glow {
-      background: radial-gradient(circle, rgba(45,212,191,.35), transparent 70%);
-      border-radius: 9999px;
-      padding: 10px;
-      animation: breathe 6s ease-in-out infinite;
-    }
-
-    .btn {
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(45,212,191,.25);
-    }
-
-    .service-card {
-      transition: transform .35s ease, box-shadow .35s ease;
-    }
-    .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(45,212,191,.15);
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .8s ease, transform .8s ease;
-    }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .logo-stage {
-      background: radial-gradient(circle, rgba(45,212,191,.18), transparent 60%);
-      border-radius: 2rem;
-      padding: 3rem;
-    }
-
-    .socials {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      justify-content: flex-end;
-    }
-
-    .social-pill {
-      width: 44px;
-      height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 9999px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(15,23,42,.35);
-      backdrop-filter: blur(10px);
-      transition: transform .25s ease, box-shadow .25s ease;
-      text-decoration: none;
-    }
-
-    .social-pill:hover { transform: translateY(-2px); }
-    .social-icon { width: 20px; height: 20px; }
-
-    .glow-discord:hover   { box-shadow: 0 0 26px rgba(88,101,242,.55); }
-    .glow-youtube:hover   { box-shadow: 0 0 26px rgba(255,0,0,.55); }
-    .glow-x:hover         { box-shadow: 0 0 26px rgba(255,255,255,.35); }
-    .glow-instagram:hover { box-shadow: 0 0 26px rgba(193,53,132,.55); }
-    .glow-rep:hover       { box-shadow: 0 0 26px rgba(45,212,191,.55); }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
-    }
+    body { font-family: 'Inter', sans-serif; background:#020617; color:#f8fafc; }
+    .mono { font-family:'JetBrains Mono', monospace; letter-spacing:.25em; text-transform:uppercase; }
+    .glass { background:rgba(15,23,42,.6); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.08); }
+    .hero-glow { background:radial-gradient(circle,rgba(45,212,191,.14),transparent 65%); }
+    @keyframes breathe { 0%,100%{box-shadow:0 0 18px rgba(45,212,191,.35)}50%{box-shadow:0 0 28px rgba(45,212,191,.55)} }
+    .logo-glow { background:radial-gradient(circle,rgba(45,212,191,.35),transparent 70%); border-radius:9999px; padding:10px; animation:breathe 6s ease-in-out infinite; }
+    .btn{transition:.25s}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(45,212,191,.25)}
+    .reveal{opacity:0;transform:translateY(24px);transition:.8s}
+    .reveal.active{opacity:1;transform:none}
   </style>
 </head>
 
@@ -125,47 +27,48 @@
 
 <!-- NAVBAR -->
 <nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
-  <a href="#top" class="flex items-center gap-4" aria-label="Inicio CyderEyesX">
+  <a href="index.html" class="flex items-center gap-4">
     <div class="logo-glow">
-      <img src="../images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX" />
+      <img src="../images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX">
     </div>
     <span class="mono text-sm">CYDEREYESX</span>
   </a>
 
-  <div class="hidden md:flex gap-10 mono text-xs opacity-70">
-    <a href="#mission" class="hover:text-teal-400">Misión</a>
-    <a href="#services" class="hover:text-teal-400">Servicios</a>
-    <a href="#language" class="hover:text-teal-400">Acceso Lingüístico</a>
+  <div class="hidden md:flex gap-8 mono text-xs opacity-70">
+    <a href="#mission">Misión</a>
+    <a href="#services">Servicios</a>
+    <a href="#language-access">Acceso Lingüístico</a>
+    <a href="#why-we-teach">Por Qué Enseñamos</a>
+    <a href="../index.html" class="text-teal-400">EN</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="min-h-screen flex items-center justify-center hero-glow pt-32 px-6 text-center reveal">
-  <div class="max-w-5xl space-y-10">
-    <img src="../images/cyx-logo-full.png" class="mx-auto h-28 md:h-36" alt="CyderEyesX LLC" />
+<section class="min-h-screen hero-glow flex items-center justify-center pt-32 text-center reveal">
+  <div class="max-w-5xl space-y-10 px-6">
+    <img src="../images/cyx-logo-full.png" class="mx-auto h-32" alt="CyderEyesX Logo">
 
     <div class="mono text-teal-400 text-xs">
       SEGURIDAD • INFRAESTRUCTURA • EDUCACIÓN
     </div>
 
-    <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+    <h1 class="text-5xl md:text-7xl font-bold">
       Educación Digital Segura para la
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-sky-400">
         Próxima Generación
       </span>
     </h1>
 
-    <p class="max-w-2xl mx-auto text-slate-400 text-lg">
-      Educación digital con integridad, enfocada en ciberseguridad,
-      uso ético de la tecnología y protección a largo plazo.
+    <p class="text-slate-400 max-w-2xl mx-auto">
+      Educación tecnológica con enfoque ético, seguridad digital y comprensión real.
     </p>
 
-    <div class="flex flex-col md:flex-row gap-6 justify-center pt-6">
-      <a class="btn px-10 py-4 bg-white text-black font-semibold rounded-full" href="#services">
-        Explorar Programas
+    <div class="flex flex-col md:flex-row gap-6 justify-center">
+      <a href="#services" class="btn px-10 py-4 bg-white text-black rounded-full font-semibold">
+        ¡Explorar en Español!
       </a>
-      <a class="btn px-10 py-4 border border-white/20 rounded-full" href="../index.html">
-        Back to English
+      <a href="../index.html" class="btn px-10 py-4 border border-white/20 rounded-full">
+        Explore in English
       </a>
     </div>
   </div>
@@ -176,78 +79,55 @@
   <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
     <div>
       <div class="mono text-teal-400 text-xs mb-4">Nuestra Filosofía</div>
-      <h2 class="text-4xl font-bold mb-6">La Educación es lo Primero.</h2>
-
+      <h2 class="text-4xl font-bold mb-6">La educación es lo primero.</h2>
       <p class="text-slate-400 mb-6">
-        CyderEyesX LLC es una organización estrictamente educativa.
-        No ofrecemos asesoría financiera, legal ni de inversión.
+        CyderEyesX es una organización educativa. No ofrecemos asesoría financiera,
+        legal ni de inversión.
       </p>
-
       <ul class="space-y-3 text-slate-300">
-        <li>✔ Alfabetización digital y conciencia en seguridad</li>
-        <li>✔ Educación ética en blockchain</li>
-        <li>✔ Sin exageraciones. Sin especulación.</li>
+        <li>✔ Alfabetización digital</li>
+        <li>✔ Educación tecnológica ética</li>
+        <li>✔ Sin promesas irreales</li>
       </ul>
     </div>
 
-    <div class="logo-stage text-center">
-      <img src="../images/cyx-lion-mark.png" class="mx-auto h-48" alt="CyderEyesX" />
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="py-28 px-6 reveal">
-  <div class="max-w-7xl mx-auto text-center mb-24">
-    <div class="mono text-teal-400 text-xs mb-4">Programas Educativos</div>
-    <h2 class="text-5xl font-bold">Rutas de Aprendizaje</h2>
-    <p class="mt-6 text-slate-400 max-w-2xl mx-auto">
-      Programas estructurados para desarrollar confianza,
-      seguridad y competencia digital.
-    </p>
-  </div>
-
-  <div class="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
-
-    <div class="glass p-10 rounded-2xl text-center service-card">
-      <h3 class="text-xl font-bold mb-4">Introducción a Herramientas Digitales</h3>
-      <p class="text-slate-400 text-sm">
-        Fundamentos seguros para el uso responsable de herramientas digitales.
-      </p>
-    </div>
-
-    <div class="glass p-10 rounded-2xl text-center service-card">
-      <h3 class="text-xl font-bold mb-4">Herramientas Digitales Avanzadas</h3>
-      <p class="text-slate-400 text-sm">
-        Configuración de privacidad, seguridad y buenas prácticas.
-      </p>
-    </div>
-
-    <div class="glass p-10 rounded-2xl text-center service-card">
-      <h3 class="text-xl font-bold mb-4">Talleres de Alfabetización</h3>
-      <p class="text-slate-400 text-sm">
-        Educación comunitaria accesible e inclusiva.
-      </p>
-    </div>
-
+    <img src="../images/cyx-lion-mark.png" class="mx-auto h-48" alt="CyderEyesX">
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="py-16 px-8 border-t border-white/5" id="language">
-  <div class="max-w-7xl mx-auto text-center text-xs text-slate-500">
-    © 2025 CyderEyesX LLC. Todos los derechos reservados.
+<footer class="py-16 px-8 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 items-center">
+
+    <div class="flex items-center gap-4">
+      <div class="logo-glow">
+        <img src="../images/cyx-lion-mark.png" class="h-12">
+      </div>
+      <div>
+        <div class="mono text-sm">CYDEREYESX LLC</div>
+        <div class="text-xs text-slate-500 mt-2">
+          <a href="terms.html">Términos</a> · <a href="privacy.html">Privacidad</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-xs text-slate-500 text-center">
+      Entidad educativa. No se ofrece asesoría financiera.
+    </p>
+
+    <div class="flex justify-end gap-4">
+      <img src="../images/REP.png" class="h-6">
+    </div>
+  </div>
+
+  <div class="mt-10 text-center mono text-[10px] opacity-40">
+    © 2025 CyderEyesX LLC
   </div>
 </footer>
 
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('active');
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(r => observer.observe(r));
+  const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('active')),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 </script>
 
 </body>
