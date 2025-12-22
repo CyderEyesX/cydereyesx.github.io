@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CyderEyesX LLC | CEO Personal NFT Collection</title>
 
-<!-- Performance -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
-  
+  <!-- Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -19,10 +19,18 @@
   />
 
   <style>
+    :root{
+      --bg: #020617;
+      --panel: rgba(15, 23, 42, 0.62);
+      --border: rgba(255,255,255,0.10);
+      --teal: rgba(45, 212, 191, 0.9);
+    }
+
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #020617;
+      background-color: var(--bg);
       color: #f8fafc;
+      overflow-x: hidden;
     }
 
     .mono {
@@ -32,132 +40,699 @@
     }
 
     .glass {
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
     }
 
     .hero-glow {
-      background: radial-gradient(
-        circle at center,
-        rgba(45, 212, 191, 0.14),
-        transparent 65%
-      );
+      position: relative;
+      isolation: isolate;
+    }
+
+    /* Aurora background */
+    .aurora {
+      position: absolute;
+      inset: -20%;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(45,212,191,0.22), transparent 55%),
+        radial-gradient(ellipse at 80% 30%, rgba(56,189,248,0.18), transparent 60%),
+        radial-gradient(ellipse at 60% 80%, rgba(99,102,241,0.16), transparent 62%),
+        radial-gradient(ellipse at 30% 75%, rgba(34,197,94,0.10), transparent 60%);
+      filter: blur(18px) saturate(110%);
+      animation: drift 14s ease-in-out infinite alternate;
+      transform: translate3d(0,0,0);
+    }
+
+    @keyframes drift {
+      0%   { transform: translate(-2%, -1%) scale(1.02); opacity: 0.9; }
+      50%  { transform: translate(2%, 1%) scale(1.05); opacity: 1; }
+      100% { transform: translate(-1%, 2%) scale(1.03); opacity: 0.92; }
+    }
+
+    /* Floating particles */
+    .particles {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.55;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(45,212,191,0.35) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 80%, rgba(255,255,255,0.22) 0 1px, transparent 2px),
+        radial-gradient(circle at 70% 30%, rgba(56,189,248,0.28) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 75%, rgba(255,255,255,0.18) 0 1px, transparent 2px),
+        radial-gradient(circle at 55% 55%, rgba(99,102,241,0.24) 0 2px, transparent 3px);
+      background-size: 520px 520px;
+      animation: floaty 18s linear infinite;
+    }
+
+    @keyframes floaty {
+      0%   { background-position: 0 0; }
+      100% { background-position: 520px 520px; }
     }
 
     .card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     }
 
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(45, 212, 191, 0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 28px 70px rgba(45, 212, 191, 0.14);
+      border-color: rgba(45,212,191,0.22);
+    }
+
+    .nft-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(2, 6, 23, 0.55);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      cursor: pointer;
+    }
+
+    .nft-tile:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 26px 60px rgba(56, 189, 248, 0.10);
+      border-color: rgba(56,189,248,0.22);
+    }
+
+    .nft-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+      transition: transform 0.45s ease, filter 0.45s ease;
+      filter: saturate(1.06) contrast(1.03);
+    }
+
+    .nft-tile:hover .nft-img {
+      transform: scale(1.08);
+      filter: saturate(1.15) contrast(1.06);
+    }
+
+    .shine {
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,0.16) 45%, transparent 55%);
+      transform: rotate(12deg) translateX(-60%);
+      transition: transform 0.6s ease;
+      pointer-events: none;
+    }
+
+    .nft-tile:hover .shine {
+      transform: rotate(12deg) translateX(60%);
+    }
+
+    /* Lightbox */
+    .lb-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2,6,23,0.78);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 9999;
+    }
+
+    .lb-backdrop.show {
+      display: flex;
+      animation: fadeIn 180ms ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .lb-panel {
+      width: min(980px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(15,23,42,0.70);
+      box-shadow: 0 40px 120px rgba(0,0,0,0.55);
+      overflow: hidden;
+      transform: translateY(6px);
+      animation: pop 220ms ease-out forwards;
+    }
+
+    @keyframes pop {
+      to { transform: translateY(0); }
+    }
+
+    .lb-img {
+      width: 100%;
+      height: auto;
+      max-height: 72vh;
+      object-fit: contain;
+      background: rgba(2,6,23,0.55);
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .lb-close:hover {
+      background: rgba(255,255,255,0.10);
+      transform: scale(1.03);
+    }
+
+    .badge {
+      border: 1px solid rgba(45,212,191,0.25);
+      background: rgba(45,212,191,0.10);
+      color: rgba(153, 246, 228, 0.95);
     }
   </style>
 </head>
 
 <body data-page="internal">
 
-<!-- GLOBAL HEADER -->
-<div id="site-header"></div>
+  <!-- GLOBAL HEADER -->
+  <div id="site-header"></div>
 
   <!-- HERO -->
-  <section class="min-h-[65vh] flex items-center justify-center hero-glow pt-32 px-6 text-center">
-    <div class="max-w-4xl space-y-8">
-      <div class="mono text-teal-400 text-xs">
-        CEO PERSONAL COLLECTION
-      </div>
+  <section class="hero-glow min-h-[70vh] flex items-center justify-center pt-32 px-6 text-center">
+    <div class="aurora"></div>
+    <div class="particles"></div>
 
-      <h1 class="text-5xl md:text-6xl font-bold">
-        NFT Creative Archive
-      </h1>
+    <div class="max-w-5xl space-y-8">
+      <div class="mono text-teal-400 text-xs">CEO PERSONAL COLLECTION</div>
 
-      <p class="text-slate-400 max-w-2xl mx-auto">
-        A personal, non-commercial collection curated by the founder of CyderEyesX
-        for educational, creative, and archival purposes.
+      <h1 class="text-5xl md:text-6xl font-bold">NFT Creative Archive</h1>
+
+      <p class="text-slate-300 max-w-3xl mx-auto leading-relaxed">
+        A personal, non-commercial archive curated by the founder of CyderEyesX for
+        educational reference, creative inspiration, and long-term digital provenance documentation.
       </p>
+
+      <div class="flex flex-wrap gap-3 justify-center pt-2">
+        <span class="badge text-xs px-4 py-2 rounded-full">Personal Collection</span>
+        <span class="badge text-xs px-4 py-2 rounded-full">Not Financial Advice</span>
+        <span class="badge text-xs px-4 py-2 rounded-full">Non-Commercial Showcase</span>
+      </div>
     </div>
   </section>
 
-  <!-- ABOUT THE COLLECTION -->
-  <section class="py-24 px-6">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+  <!-- DISCLAIMER / PURPOSE -->
+  <section class="py-16 px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
 
-      <div>
-        <div class="mono text-teal-400 text-xs mb-4">Purpose</div>
-        <h2 class="text-4xl font-bold mb-6">Why This Collection Exists</h2>
-
-        <p class="text-slate-400 leading-relaxed mb-6">
-          This NFT collection represents a personal exploration of digital ownership,
-          creative expression, and emerging technology by the CEO of CyderEyesX.
-        </p>
-
-        <p class="text-slate-400 leading-relaxed">
-          It is maintained as a private archive and reference point for educational
-          discussions around blockchain, NFTs, and digital provenance.
-        </p>
-      </div>
-
-      <div class="glass p-10 rounded-2xl card">
-        <div class="mono text-teal-300 text-[11px] mb-4">Important Clarification</div>
+      <div class="glass p-8 rounded-2xl card">
+        <h2 class="font-semibold mb-3">Important Clarification</h2>
         <p class="text-slate-400 text-sm leading-relaxed">
-          This collection is not a commercial offering. NFTs displayed or referenced
-          here are not for sale, not minted for public distribution, and not promoted
-          as investments or financial assets.
+          NFTs displayed here are part of a personal archive. Nothing on this page is an offer to sell,
+          a solicitation, or a recommendation. This page is <strong>not financial advice</strong>.
+        </p>
+      </div>
+
+      <div class="glass p-8 rounded-2xl card">
+        <h2 class="font-semibold mb-3">Why It Exists</h2>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          This gallery helps document learning milestones in Web3, digital collectibles, and on-chain culture—
+          serving as a visual reference during educational conversations.
+        </p>
+      </div>
+
+      <div class="glass p-8 rounded-2xl card">
+        <h2 class="font-semibold mb-3">How to Explore</h2>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Click any NFT to view it in full-screen. Each collection includes an official collection link
+          for context and provenance.
         </p>
       </div>
 
     </div>
   </section>
 
-  <!-- WHAT IT IS / IS NOT -->
-  <section class="py-24 px-6 bg-[#010413]">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 text-center">
+  <!-- COLLECTIONS -->
+  <main class="pb-28">
 
-      <div class="glass p-8 rounded-2xl card">
-        <h3 class="font-semibold mb-3">Personal</h3>
-        <p class="text-slate-400 text-sm">
-          Created and curated independently by the CEO, not by CyderEyesX LLC as a product.
+    <!-- Loaded Lions -->
+    <section class="py-14 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div>
+            <div class="mono text-teal-400 text-xs mb-3">Collection</div>
+            <h2 class="text-4xl font-bold">Loaded Lions</h2>
+            <p class="text-slate-400 mt-3 max-w-2xl">
+              A flagship Cronos NFT collection known for identity, community access, and ecosystem utility within Crypto.com’s NFT landscape.
+            </p>
+          </div>
+
+          <a
+            class="text-teal-400 hover:underline text-sm"
+            href="https://crypto.com/nft/collection/82421cf8e15df0edcaa200af752a344f?tab=items"
+            target="_blank"
+            rel="noopener"
+          >
+            View Collection URL →
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div class="nft-tile" data-title="Loaded Lion #2320" data-src="/images/nft/LL2320.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/LL2320.png" alt="Loaded Lion #2320" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Loaded Lions</div>
+              <div class="font-semibold">Loaded Lion #2320</div>
+              <div class="text-slate-400 text-sm mt-1">File: LL2320.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Loaded Lion #1115" data-src="/images/nft/LL1115.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/LL1115.png" alt="Loaded Lion #1115" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Loaded Lions</div>
+              <div class="font-semibold">Loaded Lion #1115</div>
+              <div class="text-slate-400 text-sm mt-1">File: LL1115.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Loaded Lion #3600" data-src="/images/nft/LL3600.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/LL3600.png" alt="Loaded Lion #3600" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Loaded Lions</div>
+              <div class="font-semibold">Loaded Lion #3600</div>
+              <div class="text-slate-400 text-sm mt-1">File: LL3600.png</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cyber Cubs -->
+    <section class="py-14 px-6 bg-[#010413]">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div>
+            <div class="mono text-teal-400 text-xs mb-3">Collection</div>
+            <h2 class="text-4xl font-bold">Cyber Cubs</h2>
+            <p class="text-slate-400 mt-3 max-w-2xl">
+              A companion-style collection in the Cronos ecosystem, designed with playful visual identity and community-first culture.
+            </p>
+          </div>
+
+          <a
+            class="text-teal-400 hover:underline text-sm"
+            href="https://crypto.com/nft/collection/366e1c3857fecce971703df888904e86?tab=items"
+            target="_blank"
+            rel="noopener"
+          >
+            View Collection URL →
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div class="nft-tile" data-title="Cyber Cubs #3542" data-src="/images/nft/CC3542.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/CC3542.png" alt="Cyber Cubs #3542" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Cyber Cubs</div>
+              <div class="font-semibold">Cyber Cubs #3542</div>
+              <div class="text-slate-400 text-sm mt-1">File: CC3542.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Cyber Cubs #3510" data-src="/images/nft/CC3510.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/CC3510.png" alt="Cyber Cubs #3510" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Cyber Cubs</div>
+              <div class="font-semibold">Cyber Cubs #3510</div>
+              <div class="text-slate-400 text-sm mt-1">File: CC3510.png</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dark Lions -->
+    <section class="py-14 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div>
+            <div class="mono text-teal-400 text-xs mb-3">Collection</div>
+            <h2 class="text-4xl font-bold">Dark Lions</h2>
+            <p class="text-slate-400 mt-3 max-w-2xl">
+              A darker aesthetic branch within the Cronos NFT culture—often framed around rarity, identity, and collector-driven storytelling.
+            </p>
+          </div>
+
+          <a
+            class="text-teal-400 hover:underline text-sm"
+            href="https://crypto.com/nft/collection/5855701d43bc9a7fea90bd254ebd4b6e?tab=items"
+            target="_blank"
+            rel="noopener"
+          >
+            View Collection URL →
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div class="nft-tile" data-title="Dark Lion #8518" data-src="/images/nft/DKL8518.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/DKL8518.png" alt="Dark Lion #8518" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Dark Lions</div>
+              <div class="font-semibold">Dark Lion #8518</div>
+              <div class="text-slate-400 text-sm mt-1">File: DKL8518.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Dark Lion #6841" data-src="/images/nft/DKL6841.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/DKL6841.png" alt="Dark Lion #6841" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Dark Lions</div>
+              <div class="font-semibold">Dark Lion #6841</div>
+              <div class="text-slate-400 text-sm mt-1">File: DKL6841.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Dark Lion #6740" data-src="/images/nft/DKL6740.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/DKL6740.png" alt="Dark Lion #6740" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Dark Lions</div>
+              <div class="font-semibold">Dark Lion #6740</div>
+              <div class="text-slate-400 text-sm mt-1">File: DKL6740.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Dark Lion #1421" data-src="/images/nft/DKL1421.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/DKL1421.png" alt="Dark Lion #1421" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Dark Lions</div>
+              <div class="font-semibold">Dark Lion #1421</div>
+              <div class="text-slate-400 text-sm mt-1">File: DKL1421.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Dark Lion #1244" data-src="/images/nft/DKL1244.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/DKL1244.png" alt="Dark Lion #1244" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Dark Lions</div>
+              <div class="font-semibold">Dark Lion #1244</div>
+              <div class="text-slate-400 text-sm mt-1">File: DKL1244.png</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cronos-7 Visitors -->
+    <section class="py-14 px-6 bg-[#010413]">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div>
+            <div class="mono text-teal-400 text-xs mb-3">Collection</div>
+            <h2 class="text-4xl font-bold">Cronos-7 Visitors</h2>
+            <p class="text-slate-400 mt-3 max-w-2xl">
+              A Cronos-native collection framed around themed identities and collectible variants—useful for showcasing on-chain culture and provenance.
+            </p>
+          </div>
+
+          <a
+            class="text-teal-400 hover:underline text-sm"
+            href="https://crypto.com/nft/collection/566dc0a3e927bc2cc65d4688b3f9608f?tab=items"
+            target="_blank"
+            rel="noopener"
+          >
+            View Collection URL →
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div class="nft-tile" data-title="Cronos-7 Visitors #7630" data-src="/images/nft/C7V7630.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/C7V7630.png" alt="Cronos-7 Visitors #7630" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Cronos-7 Visitors</div>
+              <div class="font-semibold">Cronos-7 Visitors #7630</div>
+              <div class="text-slate-400 text-sm mt-1">File: C7V7630.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Cronos-7 Visitors #5399" data-src="/images/nft/C7V5399.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/C7V5399.png" alt="Cronos-7 Visitors #5399" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Cronos-7 Visitors</div>
+              <div class="font-semibold">Cronos-7 Visitors #5399</div>
+              <div class="text-slate-400 text-sm mt-1">File: C7V5399.png</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Star Atlas -->
+    <section class="py-14 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div>
+            <div class="mono text-teal-400 text-xs mb-3">Collection</div>
+            <h2 class="text-4xl font-bold">Star Atlas</h2>
+            <p class="text-slate-400 mt-3 max-w-2xl">
+              A sci-fi gaming universe where digital assets reflect ships and components—useful for discussions on game economies, digital ownership, and utility-driven collectibles.
+            </p>
+          </div>
+
+          <a
+            class="text-teal-400 hover:underline text-sm"
+            href="https://play.staratlas.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            View Project URL →
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div class="nft-tile" data-title="VZUS ambwe" data-src="/images/nft/VZUS.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/VZUS.png" alt="VZUS ambwe" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Star Atlas</div>
+              <div class="font-semibold">VZUS ambwe</div>
+              <div class="text-slate-400 text-sm mt-1">File: VZUS.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Pearce X5" data-src="/images/nft/PX5.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/PX5.png" alt="Pearce X5" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Star Atlas</div>
+              <div class="font-semibold">Pearce X5</div>
+              <div class="text-slate-400 text-sm mt-1">File: PX5.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Pearce X4" data-src="/images/nft/PX4.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/PX4.png" alt="Pearce X4" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Star Atlas</div>
+              <div class="font-semibold">Pearce X4</div>
+              <div class="text-slate-400 text-sm mt-1">File: PX4.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Opal Jet" data-src="/images/nft/OJ.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/OJ.png" alt="Opal Jet" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Star Atlas</div>
+              <div class="font-semibold">Opal Jet</div>
+              <div class="text-slate-400 text-sm mt-1">File: OJ.png</div>
+            </div>
+          </div>
+
+          <div class="nft-tile" data-title="Rainbow Chi" data-src="/images/nft/RC.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/RC.png" alt="Rainbow Chi" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">Star Atlas</div>
+              <div class="font-semibold">Rainbow Chi</div>
+              <div class="text-slate-400 text-sm mt-1">File: RC.png</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PlaySolana -->
+    <section class="py-14 px-6 bg-[#010413]">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div>
+            <div class="mono text-teal-400 text-xs mb-3">Collection</div>
+            <h2 class="text-4xl font-bold">PlaySolana</h2>
+            <p class="text-slate-400 mt-3 max-w-2xl">
+              A gaming-focused project in the Solana ecosystem—useful for exploring digital items, community incentives, and participation-based rewards models.
+            </p>
+          </div>
+
+          <a
+            class="text-teal-400 hover:underline text-sm"
+            href="https://www.playsolana.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            View Project URL →
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div class="nft-tile" data-title="Player2 #4744" data-src="/images/nft/PLAYER4744.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/PLAYER4744.png" alt="Player2 #4744" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">PlaySolana</div>
+              <div class="font-semibold">Player2 #4744</div>
+              <div class="text-slate-400 text-sm mt-1">File: PLAYER4744.png</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DeEEP DIN NFT Collection -->
+    <section class="py-14 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div>
+            <div class="mono text-teal-400 text-xs mb-3">Collection</div>
+            <h2 class="text-4xl font-bold">DeEEP DIN NFT Collection</h2>
+            <p class="text-slate-400 mt-3 max-w-2xl">
+              A project-aligned collectible used as a visual reference for community participation and ecosystem experimentation within the DeEEP Network environment.
+            </p>
+          </div>
+
+          <a
+            class="text-teal-400 hover:underline text-sm"
+            href="https://www.deeep.network/"
+            target="_blank"
+            rel="noopener"
+          >
+            View Project URL →
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div class="nft-tile" data-title="Cool Leather Ladybug #3259" data-src="/images/nft/CLL3259.png">
+            <div class="shine"></div>
+            <img class="nft-img" src="/images/nft/CLL3259.png" alt="Cool Leather Ladybug #3259" loading="lazy" />
+            <div class="p-5">
+              <div class="mono text-teal-400 text-[10px] mb-2">DeEEP DIN</div>
+              <div class="font-semibold">Cool Leather Ladybug #3259</div>
+              <div class="text-slate-400 text-sm mt-1">File: CLL3259.png</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTNOTE -->
+    <section class="pt-10 pb-20 px-6 text-center bg-[#010413]">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-slate-400 text-sm leading-relaxed">
+          This gallery is an evolving archive. Items may be added or removed over time based on personal curation,
+          learning goals, or ecosystem changes. Nothing on this page is a solicitation.
         </p>
       </div>
+    </section>
 
-      <div class="glass p-8 rounded-2xl card">
-        <h3 class="font-semibold mb-3">Educational</h3>
-        <p class="text-slate-400 text-sm">
-          Used as a learning reference when discussing NFTs and blockchain technology.
-        </p>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lb-backdrop" aria-hidden="true">
+    <div class="relative w-full">
+      <button id="lbClose" class="lb-close" type="button" aria-label="Close">
+        <span aria-hidden="true" class="text-xl">✕</span>
+      </button>
+
+      <div class="lb-panel">
+        <img id="lbImg" class="lb-img" src="" alt="" />
+        <div class="p-6">
+          <div id="lbTitle" class="text-lg font-semibold"></div>
+          <div id="lbPath" class="text-slate-400 text-sm mt-1"></div>
+        </div>
       </div>
-
-      <div class="glass p-8 rounded-2xl card">
-        <h3 class="font-semibold mb-3">Non-Commercial</h3>
-        <p class="text-slate-400 text-sm">
-          No sales, no minting events, no financial solicitation.
-        </p>
-      </div>
-
     </div>
-  </section>
+  </div>
 
-  <!-- STATUS -->
-  <section class="py-24 px-6 text-center">
-    <div class="max-w-4xl mx-auto glass p-10 rounded-2xl">
-      <h2 class="text-3xl font-bold mb-6">Collection Status</h2>
+  <!-- GLOBAL FOOTER -->
+  <div id="site-footer"></div>
 
-      <p class="text-slate-400 mb-6">
-        This archive evolves organically. Items may be added or removed over time
-        as part of ongoing experimentation and learning.
-      </p>
+  <script src="layout.js"></script>
 
-      <p class="text-slate-500 text-sm">
-        No public access, transactions, or participation is offered.
-      </p>
-    </div>
-  </section>
+  <script>
+    (function () {
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lbImg');
+      const lbTitle = document.getElementById('lbTitle');
+      const lbPath = document.getElementById('lbPath');
+      const closeBtn = document.getElementById('lbClose');
 
-<!-- GLOBAL FOOTER -->
-<div id="site-footer"></div>
+      function openLightbox(title, src) {
+        lbImg.src = src;
+        lbImg.alt = title;
+        lbTitle.textContent = title;
+        lbPath.textContent = src;
+        lb.classList.add('show');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
 
-<script src="layout.js"></script>
+      function closeLightbox() {
+        lb.classList.remove('show');
+        lb.setAttribute('aria-hidden', 'true');
+        lbImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.nft-tile').forEach(tile => {
+        tile.addEventListener('click', () => {
+          const title = tile.getAttribute('data-title') || 'NFT';
+          const src = tile.getAttribute('data-src');
+          if (src) openLightbox(title, src);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeLightbox);
+
+      lb.addEventListener('click', (e) => {
+        if (e.target === lb) closeLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lb.classList.contains('show')) closeLightbox();
+      });
+    })();
+  </script>
 
 </body>
 </html>
