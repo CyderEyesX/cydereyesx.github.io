@@ -1,21 +1,26 @@
-<nav id="cyx-nav" class="fixed w-full z-50 px-6 md:px-8 py-4 glass flex justify-between items-center">
+<nav
+  id="cyx-nav"
+  class="fixed w-full z-50 px-6 md:px-8 py-4 glass flex justify-between items-center"
+>
+  <!-- LOGO -->
   <a href="/" class="flex items-center gap-4" aria-label="CyderEyesX Home">
     <div class="logo-glow">
-      <img src="/images/cyx-lion-mark.png" class="h-10 w-10" alt="CyderEyesX" />
+      <img
+        src="/images/cyx-lion-mark.png"
+        class="h-10 w-10"
+        alt="CyderEyesX"
+      />
     </div>
     <span class="mono text-sm">CYDEREYESX</span>
   </a>
 
-  <!-- Desktop Nav -->
+  <!-- ================= DESKTOP NAV ================= -->
   <div class="hidden md:flex items-center gap-8 mono text-xs opacity-70">
     <a class="nav-link hover:text-teal-400" href="/#mission">Mission</a>
     <a class="nav-link hover:text-teal-400" href="/#services">Services</a>
     <a class="nav-link hover:text-teal-400" href="/trainings-workshops.html">Trainings</a>
-    <a class="nav-link hover:text-teal-400" href="/crypto-projects.html">Crypto Projects</a>
-    <a class="nav-link hover:text-teal-400" href="/donations.html">Donations</a>
-    <a class="nav-link hover:text-teal-400" href="/new-nft-collection.html">NFT Collection</a>
 
-    <!-- Resources Dropdown (Desktop) -->
+    <!-- ===== Resources Dropdown (Desktop) ===== -->
     <div class="relative">
       <button
         id="resourcesBtn"
@@ -30,20 +35,40 @@
 
       <div
         id="resourcesMenu"
-        class="absolute right-0 mt-3 w-60 rounded-2xl glass border border-white/10 overflow-hidden hidden"
+        class="absolute right-0 mt-3 w-64 rounded-2xl glass border border-white/10 overflow-hidden hidden"
         role="menu"
         aria-label="Resources menu"
       >
-        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/cyx-learning-token.html">CYX Learning Token</a>
-        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/privacy.html">Privacy Policy</a>
-        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/terms.html">Terms of Service</a>
+        <!-- Core -->
+        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/crypto-projects.html">
+          Crypto Projects
+        </a>
+        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/new-nft-collection.html">
+          NFT Collection
+        </a>
+        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/donations.html">
+          Donations
+        </a>
+
+        <div class="border-t border-white/10 my-1"></div>
+
+        <!-- Educational / Legal -->
+        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/cyx-learning-token.html">
+          CYX Learning Token
+        </a>
+        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/privacy.html">
+          Privacy Policy
+        </a>
+        <a role="menuitem" class="block px-5 py-3 text-xs hover:bg-white/5" href="/terms.html">
+          Terms of Service
+        </a>
       </div>
     </div>
 
     <a class="nav-link hover:text-teal-400" href="/#why-we-teach">Why We Teach</a>
   </div>
 
-  <!-- Mobile button -->
+  <!-- ================= MOBILE BUTTON ================= -->
   <button
     id="mobileMenuBtn"
     class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
@@ -55,7 +80,7 @@
     <span aria-hidden="true" class="text-lg">☰</span>
   </button>
 
-  <!-- Mobile Panel -->
+  <!-- ================= MOBILE PANEL ================= -->
   <div
     id="mobileMenu"
     class="md:hidden fixed inset-x-0 top-[76px] mx-4 rounded-2xl glass border border-white/10 overflow-hidden hidden"
@@ -68,11 +93,9 @@
         <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/#mission">Mission</a>
         <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/#services">Services</a>
         <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/trainings-workshops.html">Trainings</a>
-        <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/crypto-projects.html">Crypto Projects</a>
-        <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/donations.html">Donations</a>
-        <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/new-nft-collection.html">NFT Collection</a>
         <a class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/#why-we-teach">Why We Teach</a>
 
+        <!-- ===== Mobile Resources ===== -->
         <div class="mt-2 border-t border-white/10 pt-2">
           <button
             id="mobileResourcesBtn"
@@ -85,10 +108,33 @@
             <span aria-hidden="true" class="opacity-70">▾</span>
           </button>
 
-          <div id="mobileResourcesMenu" class="hidden pl-2" role="menu" aria-label="Mobile resources menu">
-            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/cyx-learning-token.html">CYX Learning Token</a>
-            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/privacy.html">Privacy Policy</a>
-            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/terms.html">Terms of Service</a>
+          <div
+            id="mobileResourcesMenu"
+            class="pl-2 overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-out"
+            role="menu"
+            aria-label="Mobile resources menu"
+          >
+            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/crypto-projects.html">
+              Crypto Projects
+            </a>
+            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/new-nft-collection.html">
+              NFT Collection
+            </a>
+            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/donations.html">
+              Donations
+            </a>
+
+            <div class="my-2 border-t border-white/10"></div>
+
+            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/cyx-learning-token.html">
+              CYX Learning Token
+            </a>
+            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/privacy.html">
+              Privacy Policy
+            </a>
+            <a role="menuitem" class="block px-4 py-3 rounded-xl hover:bg-white/5" href="/terms.html">
+              Terms of Service
+            </a>
           </div>
         </div>
       </div>
