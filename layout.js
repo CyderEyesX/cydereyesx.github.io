@@ -16,23 +16,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const nav = document.getElementById("cyx-nav");
     if (!nav) return;
 
-    // ---------- Blur / dynamic glass on scroll ----------
-    const setNavState = () => {
+    /* ===============================
+       Header blur / glass on scroll
+       =============================== */
+    const updateNavState = () => {
       if (window.scrollY > 8) {
         nav.classList.add("cyx-nav-scrolled");
       } else {
         nav.classList.remove("cyx-nav-scrolled");
       }
     };
-    setNavState();
-    window.addEventListener("scroll", setNavState, { passive: true });
 
-    // Inject style once (so we don't need extra files)
+    updateNavState();
+    window.addEventListener("scroll", updateNavState, { passive: true });
+
+    // Inject style once
     if (!document.getElementById("cyx-nav-style")) {
       const style = document.createElement("style");
       style.id = "cyx-nav-style";
       style.textContent = `
-        #cyx-nav { transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, backdrop-filter .25s ease; }
+        #cyx-nav {
+          transition: background .25s ease,
+                      border-color .25s ease,
+                      box-shadow .25s ease,
+                      backdrop-filter .25s ease;
+        }
         #cyx-nav.cyx-nav-scrolled {
           background: rgba(15, 23, 42, 0.78) !important;
           border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -43,123 +51,114 @@ document.addEventListener("DOMContentLoaded", () => {
       document.head.appendChild(style);
     }
 
-    // ---------- Desktop Resources dropdown ----------
-    const btn = document.getElementById("resourcesBtn");
-    const menu = document.getElementById("resourcesMenu");
+    /* ===============================
+       Desktop Resources dropdown
+       =============================== */
+    const resourcesBtn = document.getElementById("resourcesBtn");
+    const resourcesMenu = document.getElementById("resourcesMenu");
 
-    const closeDropdown = () => {
-      if (!btn || !menu) return;
-      btn.setAttribute("aria-expanded", "false");
-      menu.classList.add("hidden");
+    const closeResources = () => {
+      if (!resourcesBtn || !resourcesMenu) return;
+      resourcesBtn.setAttribute("aria-expanded", "false");
+      resourcesMenu.classList.add("hidden");
     };
 
-    const openDropdown = () => {
-      if (!btn || !menu) return;
-      btn.setAttribute("aria-expanded", "true");
-      menu.classList.remove("hidden");
+    const toggleResources = (e) => {
+      e.stopPropagation();
+      if (!resourcesBtn || !resourcesMenu) return;
+
+      const expanded = resourcesBtn.getAttribute("aria-expanded") === "true";
+      resourcesBtn.setAttribute("aria-expanded", String(!expanded));
+      resourcesMenu.classList.toggle("hidden", expanded);
     };
 
-    const toggleDropdown = () => {
-      if (!btn || !menu) return;
-      const expanded = btn.getAttribute("aria-expanded") === "true";
-      expanded ? closeDropdown() : openDropdown();
-    };
+    if (resourcesBtn && resourcesMenu) {
+      resourcesBtn.addEventListener("click", toggleResources);
 
-    if (btn && menu) {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleDropdown();
-      });
-
-      // close on outside click
       document.addEventListener("click", (e) => {
-        if (!menu.contains(e.target) && e.target !== btn) closeDropdown();
+        if (!resourcesMenu.contains(e.target) && e.target !== resourcesBtn) {
+          closeResources();
+        }
       });
 
-      // close on ESC
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeDropdown();
+        if (e.key === "Escape") closeResources();
       });
     }
 
-    // ---------- Mobile hamburger menu ----------
+    /* ===============================
+       Mobile menu
+       =============================== */
     const mobileBtn = document.getElementById("mobileMenuBtn");
     const mobilePanel = document.getElementById("mobileMenu");
-    const mobileClose = document.getElementById("mobileMenuCloseBtn");
-
-    const mobileResBtn = document.getElementById("mobileResourcesBtn");
-    const mobileResMenu = document.getElementById("mobileResourcesMenu");
+    const mobileCloseBtn = document.getElementById("mobileMenuCloseBtn");
 
     const openMobile = () => {
-      if (!mobileBtn || !mobilePanel) return;
       mobileBtn.setAttribute("aria-expanded", "true");
       mobilePanel.classList.remove("hidden");
-      document.body.style.overflow = "hidden"; // prevent background scroll
-      // Focus close button for accessibility
-      setTimeout(() => mobileClose?.focus(), 0);
+      document.body.style.overflow = "hidden";
+      setTimeout(() => mobileCloseBtn?.focus(), 0);
     };
 
     const closeMobile = () => {
-      if (!mobileBtn || !mobilePanel) return;
       mobileBtn.setAttribute("aria-expanded", "false");
       mobilePanel.classList.add("hidden");
       document.body.style.overflow = "";
-      // collapse resources submenu
-      if (mobileResBtn && mobileResMenu) {
-        mobileResBtn.setAttribute("aria-expanded", "false");
-        mobileResMenu.classList.add("hidden");
-      }
+      closeMobileResources();
       setTimeout(() => mobileBtn?.focus(), 0);
     };
 
-    const toggleMobile = () => {
-      if (!mobileBtn || !mobilePanel) return;
+    const toggleMobile = (e) => {
+      e.stopPropagation();
       const expanded = mobileBtn.getAttribute("aria-expanded") === "true";
       expanded ? closeMobile() : openMobile();
     };
 
-    if (mobileBtn && mobilePanel) {
-      mobileBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleMobile();
-      });
+    mobileBtn?.addEventListener("click", toggleMobile);
+    mobileCloseBtn?.addEventListener("click", closeMobile);
 
-      mobileClose?.addEventListener("click", closeMobile);
-
-      // close mobile on outside click
-      document.addEventListener("click", (e) => {
-        if (mobilePanel.classList.contains("hidden")) return;
-        const clickedInside = mobilePanel.contains(e.target) || mobileBtn.contains(e.target);
-        if (!clickedInside) closeMobile();
-      });
-
-      // close on ESC
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && mobileBtn.getAttribute("aria-expanded") === "true") {
-          closeMobile();
-        }
-      });
-
-      // Mobile Resources submenu
-      if (mobileResBtn && mobileResMenu) {
-        mobileResBtn.addEventListener("click", () => {
-          const expanded = mobileResBtn.getAttribute("aria-expanded") === "true";
-          mobileResBtn.setAttribute("aria-expanded", expanded ? "false" : "true");
-          mobileResMenu.classList.toggle("hidden", expanded);
-        });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && mobileBtn?.getAttribute("aria-expanded") === "true") {
+        closeMobile();
       }
+    });
 
-      // Close menu after clicking any link inside mobile panel
-      mobilePanel.querySelectorAll("a[href]").forEach(a => {
-        a.addEventListener("click", closeMobile);
-      });
-    }
+    /* ===============================
+       Mobile Resources submenu
+       =============================== */
+    const mobileResBtn = document.getElementById("mobileResourcesBtn");
+    const mobileResMenu = document.getElementById("mobileResourcesMenu");
+
+    const openMobileResources = () => {
+      mobileResBtn.setAttribute("aria-expanded", "true");
+      mobileResMenu.style.maxHeight = mobileResMenu.scrollHeight + "px";
+      mobileResMenu.style.opacity = "1";
+    };
+
+    const closeMobileResources = () => {
+      if (!mobileResBtn || !mobileResMenu) return;
+      mobileResBtn.setAttribute("aria-expanded", "false");
+      mobileResMenu.style.maxHeight = "0px";
+      mobileResMenu.style.opacity = "0";
+    };
+
+    mobileResBtn?.addEventListener("click", () => {
+      const expanded = mobileResBtn.getAttribute("aria-expanded") === "true";
+      expanded ? closeMobileResources() : openMobileResources();
+    });
+
+    // Close mobile menu after clicking any link
+    mobilePanel?.querySelectorAll("a[href]").forEach(link => {
+      link.addEventListener("click", closeMobile);
+    });
   };
 
-// Load both fragments, then init UX
-(async () => {
-  await loadFragment("#site-header", "header.html");
-  await loadFragment("#site-footer", "footer.html");
-  initHeaderUX();
+  /* ===============================
+     Load fragments, then init UX
+     =============================== */
+  (async () => {
+    await loadFragment("#site-header", "/header.html");
+    await loadFragment("#site-footer", "/footer.html");
+    initHeaderUX();
   })();
 });
