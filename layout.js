@@ -1,4 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  /* =========================================================
+     GLOBAL META TAGS + SOCIAL PREVIEW + FAVICON (ONE TIME)
+     ========================================================= */
+  (function injectGlobalMeta() {
+    const head = document.head;
+
+    // Avoid duplicate injection
+    if (document.getElementById("cyx-global-meta")) return;
+
+    const metaBlock = document.createElement("template");
+    metaBlock.id = "cyx-global-meta";
+
+    metaBlock.innerHTML = `
+      <title>CyderEyesX | Secure Digital Education</title>
+
+      <meta name="title" content="CyderEyesX | Secure Digital Education">
+      <meta name="description" content="Secure digital education focused on blockchain literacy, cybersecurity awareness, and emerging technologies.">
+
+      <!-- Open Graph -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://cydereyesx.xyz/">
+      <meta property="og:title" content="CyderEyesX">
+      <meta property="og:description" content="Secure Digital Education • Blockchain • Cybersecurity • Technology Literacy">
+      <meta property="og:image" content="https://raw.githubusercontent.com/CyderEyesX/cydereyesx.github.io/main/images/cyx-logo-full.png">
+
+      <!-- Twitter -->
+      <meta property="twitter:card" content="summary_large_image">
+      <meta property="twitter:title" content="CyderEyesX">
+      <meta property="twitter:description" content="Secure Digital Education • Blockchain • Cybersecurity • Technology Literacy">
+      <meta property="twitter:image" content="https://raw.githubusercontent.com/CyderEyesX/cydereyesx.github.io/main/images/cyx-logo-full.png">
+    `;
+
+    head.prepend(metaBlock.content);
+
+    /* =====================
+       FAVICON
+       ===================== */
+    const favicon = document.createElement("link");
+    favicon.rel = "icon";
+    favicon.type = "image/png";
+    favicon.href = "/images/cyx-lion-mark.png";
+    head.appendChild(favicon);
+
+    const appleIcon = document.createElement("link");
+    appleIcon.rel = "apple-touch-icon";
+    appleIcon.href = "/images/cyx-lion-mark.png";
+    head.appendChild(appleIcon);
+  })();
+
+  /* =========================================================
+     FRAGMENT LOADER
+     ========================================================= */
   const loadFragment = async (selector, file) => {
     const host = document.querySelector(selector);
     if (!host) return;
@@ -12,6 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  /* =========================================================
+     HEADER UX
+     ========================================================= */
   const initHeaderUX = () => {
     const nav = document.getElementById("cyx-nav");
     if (!nav) return;
@@ -30,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateNavState();
     window.addEventListener("scroll", updateNavState, { passive: true });
 
-    // Inject style once
     if (!document.getElementById("cyx-nav-style")) {
       const style = document.createElement("style");
       style.id = "cyx-nav-style";
@@ -58,9 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const resourcesMenu = document.getElementById("resourcesMenu");
 
     const closeResources = () => {
-      if (!resourcesBtn || !resourcesMenu) return;
-      resourcesBtn.setAttribute("aria-expanded", "false");
-      resourcesMenu.classList.add("hidden");
+      resourcesBtn?.setAttribute("aria-expanded", "false");
+      resourcesMenu?.classList.add("hidden");
     };
 
     const toggleResources = (e) => {
@@ -72,19 +126,17 @@ document.addEventListener("DOMContentLoaded", () => {
       resourcesMenu.classList.toggle("hidden", expanded);
     };
 
-    if (resourcesBtn && resourcesMenu) {
-      resourcesBtn.addEventListener("click", toggleResources);
+    resourcesBtn?.addEventListener("click", toggleResources);
 
-      document.addEventListener("click", (e) => {
-        if (!resourcesMenu.contains(e.target) && e.target !== resourcesBtn) {
-          closeResources();
-        }
-      });
+    document.addEventListener("click", (e) => {
+      if (resourcesMenu && !resourcesMenu.contains(e.target) && e.target !== resourcesBtn) {
+        closeResources();
+      }
+    });
 
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeResources();
-      });
-    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeResources();
+    });
 
     /* ===============================
        Mobile menu
@@ -94,27 +146,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileCloseBtn = document.getElementById("mobileMenuCloseBtn");
 
     const openMobile = () => {
-      mobileBtn.setAttribute("aria-expanded", "true");
-      mobilePanel.classList.remove("hidden");
+      mobileBtn?.setAttribute("aria-expanded", "true");
+      mobilePanel?.classList.remove("hidden");
       document.body.style.overflow = "hidden";
       setTimeout(() => mobileCloseBtn?.focus(), 0);
     };
 
     const closeMobile = () => {
-      mobileBtn.setAttribute("aria-expanded", "false");
-      mobilePanel.classList.add("hidden");
+      mobileBtn?.setAttribute("aria-expanded", "false");
+      mobilePanel?.classList.add("hidden");
       document.body.style.overflow = "";
       closeMobileResources();
       setTimeout(() => mobileBtn?.focus(), 0);
     };
 
-    const toggleMobile = (e) => {
+    mobileBtn?.addEventListener("click", (e) => {
       e.stopPropagation();
-      const expanded = mobileBtn.getAttribute("aria-expanded") === "true";
-      expanded ? closeMobile() : openMobile();
-    };
+      mobileBtn.getAttribute("aria-expanded") === "true"
+        ? closeMobile()
+        : openMobile();
+    });
 
-    mobileBtn?.addEventListener("click", toggleMobile);
     mobileCloseBtn?.addEventListener("click", closeMobile);
 
     document.addEventListener("keydown", (e) => {
@@ -130,32 +182,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileResMenu = document.getElementById("mobileResourcesMenu");
 
     const openMobileResources = () => {
-      mobileResBtn.setAttribute("aria-expanded", "true");
+      mobileResBtn?.setAttribute("aria-expanded", "true");
       mobileResMenu.style.maxHeight = mobileResMenu.scrollHeight + "px";
       mobileResMenu.style.opacity = "1";
     };
 
     const closeMobileResources = () => {
-      if (!mobileResBtn || !mobileResMenu) return;
-      mobileResBtn.setAttribute("aria-expanded", "false");
-      mobileResMenu.style.maxHeight = "0px";
-      mobileResMenu.style.opacity = "0";
+      mobileResBtn?.setAttribute("aria-expanded", "false");
+      if (mobileResMenu) {
+        mobileResMenu.style.maxHeight = "0px";
+        mobileResMenu.style.opacity = "0";
+      }
     };
 
     mobileResBtn?.addEventListener("click", () => {
-      const expanded = mobileResBtn.getAttribute("aria-expanded") === "true";
-      expanded ? closeMobileResources() : openMobileResources();
+      mobileResBtn.getAttribute("aria-expanded") === "true"
+        ? closeMobileResources()
+        : openMobileResources();
     });
 
-    // Close mobile menu after clicking any link
     mobilePanel?.querySelectorAll("a[href]").forEach(link => {
       link.addEventListener("click", closeMobile);
     });
   };
 
-  /* ===============================
-     Load fragments, then init UX
-     =============================== */
+  /* =========================================================
+     LOAD FRAGMENTS THEN INIT UX
+     ========================================================= */
   (async () => {
     await loadFragment("#site-header", "/header.html");
     await loadFragment("#site-footer", "/footer.html");
