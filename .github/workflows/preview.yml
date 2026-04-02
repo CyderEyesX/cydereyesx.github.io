@@ -1,0 +1,75 @@
+name: Deploy PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy preview to gh-pages subdirectory
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: .
+          target-folder: preview/pr-${{ github.event.number }}
+          clean: true
+          git-config-name: github-actions[bot]
+          git-config-email: github-actions[bot]@users.noreply.github.com
+          commit-message: "preview: PR #${{ github.event.number }} — ${{ github.sha }}"
+
+      - name: Post preview URL comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const sha = context.sha.slice(0, 7);
+            const url = `https://cydereyesx.github.io/preview/pr-${prNumber}/`;
+            const body = [
+              `## Preview Deployment`,
+              ``,
+              `Your changes are live at: **[${url}](${url})**`,
+              ``,
+              `| | |`,
+              `|---|---|`,
+              `| **Commit** | \`${sha}\` |`,
+              `| **PR** | #${prNumber} |`,
+              `| **Status** | Active |`,
+              ``,
+              `> This preview is updated on every push to the branch and removed automatically when the PR is closed.`,
+            ].join('\n');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+
+            const existing = comments.find(c =>
+              c.user.login === 'github-actions[bot]' &&
+              c.body.includes('Preview Deployment')
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body,
+              });
+            }
