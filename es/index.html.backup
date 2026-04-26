@@ -164,9 +164,6 @@
       * { animation: none !important; transition: none !important; }
     }
   </style>
-  <!-- SimpleAnalytics Tracking -->
-  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
 </head>
 
 <body id="top">
