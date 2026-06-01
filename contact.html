@@ -1,84 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - CyderEyesX</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- SimpleAnalytics Tracking -->
-    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-    <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | CyderEyesX LLC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+    .mono { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.25em; text-transform: uppercase; }
+    .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .glass-input { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.10); color: #f8fafc; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+    .glass-input:focus { outline: none; border-color: rgba(45,212,191,0.5); box-shadow: 0 0 0 3px rgba(45,212,191,0.10); }
+    .glass-input::placeholder { color: #475569; }
+    @keyframes breathe { 0%, 100% { box-shadow: 0 0 18px rgba(45,212,191,0.35); } 50% { box-shadow: 0 0 28px rgba(45,212,191,0.55); } }
+    .logo-glow { background: radial-gradient(circle, rgba(45,212,191,0.35), transparent 70%); border-radius: 9999px; padding: 10px; animation: breathe 6s ease-in-out infinite; }
+    .btn-primary { background: linear-gradient(135deg, #0d9488, #0f766e); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(45,212,191,0.25); }
+    .hero-glow { background: radial-gradient(circle at center, rgba(45,212,191,0.08), transparent 65%); }
+  </style>
 </head>
-<body>
-    <header>
-        <h1>🤖 CyderEyesX</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="contact.html">Contact</a>
-            <a href="es/index.html">Español</a>
-        </nav>
-    </header>
-
-    <main style="max-width: 600px; margin: 2rem auto; padding: 2rem;">
-        <h2>Get in Touch</h2>
-        <p>Have questions about our AI agents? Want to join our waitlist? Send us a message!</p>
-        
-        <form action="https://send.pageclip.co/api_PW7RUMzaMGC40TaLTsDQkC91lTaRSyAs" 
-              class="pageclip-form" 
-              method="post" 
-              style="background: #f9f9f9; padding: 2rem; border-radius: 8px; margin-top: 2rem;">
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Name *</label>
-            <input type="text" 
-                   id="name" 
-                   name="name" 
-                   required 
-                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+<body data-page="internal">
+<div id="site-header"></div>
+<section class="relative pt-40 pb-16 px-6 text-center hero-glow">
+  <div class="max-w-2xl mx-auto">
+    <div class="mono text-teal-400 text-xs mb-4 tracking-widest">Get In Touch</div>
+    <h1 class="text-5xl font-bold mb-4">Contact Us</h1>
+    <p class="text-slate-400 text-lg leading-relaxed">Have questions about our AI services, workshops, or educational programs?<br />We would love to hear from you.</p>
+  </div>
+</section>
+<main class="px-6 max-w-5xl mx-auto pb-24">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+    <div class="space-y-8">
+      <div class="glass rounded-2xl p-6">
+        <div class="mono text-teal-400 text-xs mb-4">Direct Contact</div>
+        <div class="space-y-4">
+          <div>
+            <p class="text-slate-400 text-sm mb-1">General Inquiries</p>
+            <a href="mailto:info@cydereyesx.com" class="text-white hover:text-teal-400 transition-colors font-medium">info@cydereyesx.com</a>
           </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email *</label>
-            <input type="email" 
-                   id="email" 
-                   name="email" 
-                   required 
-                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+          <div>
+            <p class="text-slate-400 text-sm mb-1">Agent Services</p>
+            <a href="mailto:agents@cydereyesx.com" class="text-white hover:text-teal-400 transition-colors font-medium">agents@cydereyesx.com</a>
           </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Subject</label>
-            <input type="text" 
-                   id="subject" 
-                   name="subject" 
-                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+        </div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="mono text-teal-400 text-xs mb-4">Services</div>
+        <ul class="space-y-3 text-slate-300">
+          <li class="flex items-start gap-3"><span class="text-teal-400 mt-0.5">→</span><span>AI Agent Workshops and Training</span></li>
+          <li class="flex items-start gap-3"><span class="text-teal-400 mt-0.5">→</span><span>DeFi and Crypto Education</span></li>
+          <li class="flex items-start gap-3"><span class="text-teal-400 mt-0.5">→</span><span>Custom AI Agent Development</span></li>
+          <li class="flex items-start gap-3"><span class="text-teal-400 mt-0.5">→</span><span>Sovereign AI Infrastructure Consulting</span></li>
+        </ul>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="mono text-teal-400 text-xs mb-4">Response Time</div>
+        <p class="text-slate-300 text-sm leading-relaxed">We typically respond within <strong class="text-white">24-48 hours</strong>. For urgent matters, reach us directly via email.</p>
+      </div>
+    </div>
+    <div class="glass rounded-2xl p-8">
+      <div class="mono text-teal-400 text-xs mb-6">Send a Message</div>
+      <form action="https://send.pageclip.co/api_PW7RUMzaMGC40TaLTsDQkC91lTaRSyAs" class="pageclip-form" method="post">
+        <div class="space-y-5">
+          <div>
+            <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Name *</label>
+            <input type="text" id="name" name="name" required placeholder="Your full name" class="glass-input w-full px-4 py-3 rounded-xl text-sm" />
           </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message *</label>
-            <textarea id="message" 
-                      name="message" 
-                      rows="6" 
-                      required
-                      style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; resize: vertical;"></textarea>
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email *</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com" class="glass-input w-full px-4 py-3 rounded-xl text-sm" />
           </div>
-          
-          <button type="submit" 
-                  class="pageclip-form__submit"
-                  style="width: 100%; padding: 0.75rem; background: #0066cc; color: white; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; font-weight: 600;">
-            Send Message
-          </button>
-        </form>
-
-        <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
-        
-        <p style="margin-top: 2rem; text-align: center; color: #666;">
-            Messages are sent to: <strong>info@cydereyesx.com</strong>
-        </p>
-    </main>
-
-    <footer style="text-align: center; padding: 2rem; color: #666;">
-        <p>&copy; 2026 CyderEyesX LLC. All rights reserved.</p>
-    </footer>
+          <div>
+            <label for="subject" class="block text-sm font-medium text-slate-300 mb-2">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="How can we help?" class="glass-input w-full px-4 py-3 rounded-xl text-sm" />
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message *</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project or question..." class="glass-input w-full px-4 py-3 rounded-xl text-sm resize-vertical"></textarea>
+          </div>
+          <button type="submit" class="pageclip-form__submit btn-primary w-full py-3 px-6 rounded-xl text-white font-semibold text-sm">Send Message</button>
+        </div>
+      </form>
+      <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+    </div>
+  </div>
+</main>
+<div id="site-footer"></div>
+<script src="layout.js"></script>
 </body>
 </html>
