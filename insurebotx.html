@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InsureBotX | CyderEyesX LLC</title>
+  <meta name="description" content="InsureBotX — an AI chat assistant that captures and qualifies insurance leads 24/7, in English and Spanish. A product of CyderEyesX LLC." />
+
+  <link rel="preload" as="image" href="images/cyx-lion-mark.png" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts (same as site) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #020617;
+      color: #f8fafc;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+    .glass {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .hero-glow {
+      background: radial-gradient(circle at center, rgba(45, 212, 191, 0.14), transparent 65%);
+    }
+    .logo-glow {
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.35), transparent 70%);
+      border-radius: 9999px; padding: 10px;
+    }
+    .btn { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(45, 212, 191, 0.25); }
+    .btn:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 4px; }
+    .service-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(45, 212, 191, 0.15); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* Chat demo (signature) */
+    .demo { position: relative; }
+    .chat { min-height: 280px; display:flex; flex-direction:column; gap:10px; }
+    .bubble { max-width:80%; padding:10px 14px; border-radius:14px; font-size:.9rem; line-height:1.45;
+      opacity:0; transform:translateY(6px); animation:rise .35s forwards; }
+    .bot { align-self:flex-start; background:#0f1f33; border:1px solid rgba(255,255,255,.08); border-bottom-left-radius:4px; }
+    .me  { align-self:flex-end; background:linear-gradient(100deg,#2dd4bf,#38bdf8); color:#04211d; border-bottom-right-radius:4px; font-weight:500; }
+    .chips { align-self:flex-start; display:flex; gap:8px; flex-wrap:wrap; opacity:0; animation:rise .35s forwards; }
+    .chip { border:1px solid #2dd4bf; color:#2dd4bf; border-radius:999px; padding:6px 13px; font-size:.8rem; }
+    @keyframes rise { to { opacity:1; transform:translateY(0); } }
+    .typing { align-self:flex-start; background:#0f1f33; border:1px solid rgba(255,255,255,.08);
+      border-radius:14px; border-bottom-left-radius:4px; padding:13px 16px; display:flex; gap:4px; }
+    .typing i { width:6px; height:6px; border-radius:50%; background:#64748b; animation:blink 1.2s infinite; }
+    .typing i:nth-child(2){animation-delay:.2s} .typing i:nth-child(3){animation-delay:.4s}
+    @keyframes blink { 0%,60%,100%{opacity:.25} 30%{opacity:1} }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      .bubble, .chips { opacity:1; transform:none; }
+    }
+  </style>
+
+  <!-- SimpleAnalytics -->
+  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+</head>
+
+<body id="top" data-page="insurebotx">
+
+  <!-- GLOBAL HEADER (injected by layout.js) -->
+  <div id="site-header"></div>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex items-center hero-glow pt-32 pb-16 px-6 reveal">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+      <div>
+        <div class="mono text-teal-400 text-xs mb-4">CyderEyesX · Products</div>
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+          Turn website visitors into
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-sky-400">qualified insurance leads</span>
+        </h1>
+        <p class="text-slate-400 text-lg max-w-xl mb-8">
+          InsureBotX is an AI chat assistant that greets your visitors, asks the right questions
+          in English or Spanish, and sends you the lead — instantly. Works 24/7, on any website,
+          in one line of code.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a class="btn px-8 py-4 bg-gradient-to-r from-teal-400 to-sky-400 text-black font-semibold rounded-full text-center"
+             href="https://insurebot.cydereyesx.com/onboarding.html">Subscribe now →</a>
+          <a class="btn px-8 py-4 border border-white/20 rounded-full text-center" href="#how">How it works</a>
+        </div>
+        <div class="mono text-[11px] text-slate-400 mt-6 flex flex-wrap gap-x-6 gap-y-2">
+          <span>● Bilingual EN / ES</span><span>● 24/7</span><span>● Zero Data Retention</span>
+        </div>
+      </div>
+
+      <!-- SIGNATURE: live chat demo -->
+      <div class="demo glass rounded-2xl p-5" aria-hidden="true">
+        <div class="flex items-center gap-3 pb-4 border-b border-white/10">
+          <div class="logo-glow"><img src="/images/cyx-lion-mark.png" class="h-8 w-8" alt="" /></div>
+          <div>
+            <div class="font-semibold text-sm">InsureBotX</div>
+            <div class="text-teal-400 text-[11px]">● online</div>
+          </div>
+        </div>
+        <div class="chat pt-4" id="chat"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="mono text-teal-400 text-xs mb-4">How it works</div>
+        <h2 class="text-4xl md:text-5xl font-bold">Live in minutes, not weeks</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div class="glass p-8 rounded-2xl service-card">
+          <div class="mono text-teal-300 text-2xl mb-4">01</div>
+          <h3 class="text-lg font-bold mb-3">Subscribe</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Pick a plan and tell us your agency name, the products you sell, and where you want leads delivered.</p>
+        </div>
+        <div class="glass p-8 rounded-2xl service-card">
+          <div class="mono text-teal-300 text-2xl mb-4">02</div>
+          <h3 class="text-lg font-bold mb-3">We configure it</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Your assistant is set up with your branding and connected to your Telegram and Google Sheet.</p>
+        </div>
+        <div class="glass p-8 rounded-2xl service-card">
+          <div class="mono text-teal-300 text-2xl mb-4">03</div>
+          <h3 class="text-lg font-bold mb-3">Paste &amp; go live</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Add one line of code to your website. The chat appears, and leads start arriving.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="py-28 px-6 reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="mono text-teal-400 text-xs mb-4">What you get</div>
+        <h2 class="text-4xl md:text-5xl font-bold">Built for insurance agents</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">🌎 Bilingual by default</h3><p class="text-slate-400 text-sm">Detects English or Spanish from the first message and stays in that language.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">🎯 Qualifies automatically</h3><p class="text-slate-400 text-sm">Asks what they need — life, auto, home, health, annuities — and captures contact details.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">⚡ Instant alerts</h3><p class="text-slate-400 text-sm">Every lead lands in your Telegram and inbox the moment the chat ends.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">📊 Your Google Sheet</h3><p class="text-slate-400 text-sm">Leads are organized in a sheet you own and control.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">🛡️ Privacy first</h3><p class="text-slate-400 text-sm">No sensitive data collected by chat. Lead data is cleared on a 24-hour cycle.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">🧩 One line to install</h3><p class="text-slate-400 text-sm">Paste a single script tag on any website. No developer needed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="mono text-teal-400 text-xs mb-4">Pricing</div>
+        <h2 class="text-4xl md:text-5xl font-bold">Simple plans, setup included</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div class="glass p-8 rounded-2xl service-card flex flex-col">
+          <h3 class="font-bold text-lg mb-1">Starter</h3>
+          <div class="text-3xl font-bold mb-1">$297</div><div class="text-slate-400 text-sm mb-6">+ $97/mo</div>
+          <ul class="text-slate-400 text-sm space-y-2 mb-8 flex-1">
+            <li>Chat Widget + Telegram</li><li>Bilingual EN/ES</li><li>Google Sheet delivery</li>
+          </ul>
+          <a class="btn block text-center px-5 py-3 border border-white/20 rounded-full" href="https://insurebot.cydereyesx.com/onboarding.html">Choose Starter</a>
+        </div>
+        <div class="glass p-8 rounded-2xl service-card flex flex-col border border-teal-400/40" style="box-shadow:0 0 0 1px rgba(45,212,191,.4),0 20px 50px rgba(45,212,191,.12)">
+          <div class="mono text-[10px] text-teal-300 mb-2">★ Most popular</div>
+          <h3 class="font-bold text-lg mb-1">Pro</h3>
+          <div class="text-3xl font-bold mb-1">$397</div><div class="text-slate-400 text-sm mb-6">+ $124/mo</div>
+          <ul class="text-slate-400 text-sm space-y-2 mb-8 flex-1">
+            <li>Everything in Starter</li><li>Priority lead delivery</li><li>Email + PDF to agent</li>
+          </ul>
+          <a class="btn block text-center px-5 py-3 bg-gradient-to-r from-teal-400 to-sky-400 text-black font-semibold rounded-full" href="https://insurebot.cydereyesx.com/onboarding.html">Choose Pro</a>
+        </div>
+        <div class="glass p-8 rounded-2xl service-card flex flex-col">
+          <h3 class="font-bold text-lg mb-1">Agency</h3>
+          <div class="text-3xl font-bold mb-1">$597</div><div class="text-slate-400 text-sm mb-6">+ $161/mo</div>
+          <ul class="text-slate-400 text-sm space-y-2 mb-8 flex-1">
+            <li>Everything in Pro</li><li>Airtable integration</li><li>Multi-agent support</li>
+          </ul>
+          <a class="btn block text-center px-5 py-3 border border-white/20 rounded-full" href="https://insurebot.cydereyesx.com/onboarding.html">Choose Agency</a>
+        </div>
+        <div class="glass p-8 rounded-2xl service-card flex flex-col">
+          <h3 class="font-bold text-lg mb-1">Enterprise</h3>
+          <div class="text-3xl font-bold mb-1">$897</div><div class="text-slate-400 text-sm mb-6">+ $215/mo</div>
+          <ul class="text-slate-400 text-sm space-y-2 mb-8 flex-1">
+            <li>Everything in Agency</li><li>Future channels included</li><li>Priority support</li>
+          </ul>
+          <a class="btn block text-center px-5 py-3 border border-white/20 rounded-full" href="https://insurebot.cydereyesx.com/onboarding.html">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-28 px-6 text-center hero-glow reveal">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to capture every lead?</h2>
+      <p class="text-slate-400 mb-10">Subscribe today and have your bilingual AI assistant live on your website this week.</p>
+      <a class="btn inline-block px-10 py-4 bg-gradient-to-r from-teal-400 to-sky-400 text-black font-semibold rounded-full" href="https://insurebot.cydereyesx.com/onboarding.html">Subscribe to InsureBotX →</a>
+      <p class="mono text-[10px] text-slate-500 mt-10">InsureBotX is a product of CyderEyesX LLC · Not an insurance company</p>
+    </div>
+  </section>
+
+  <!-- GLOBAL FOOTER (injected by layout.js) -->
+  <div id="site-footer"></div>
+
+  <!-- Scroll reveal -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }), { threshold: 0.12 });
+    reveals.forEach(r => ro.observe(r));
+  </script>
+
+  <!-- Global header & footer -->
+  <script src="layout.js"></script>
+
+  <!-- Chat demo -->
+  <script>
+    const seq = [
+      {t:'bot',x:"Hi! 👋 What are you looking for today?"},
+      {t:'chips',x:["Life","Auto","Home","Health"]},
+      {t:'me',x:"Life insurance"},
+      {t:'bot',x:"Great — what's your name?"},
+      {t:'me',x:"Maria Gonzalez"},
+      {t:'bot',x:"Thanks Maria! An agent will reach out shortly. ✅"}
+    ];
+    const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    const chat = document.getElementById('chat');
+    function render(n){
+      if(n.t==='chips'){ const w=document.createElement('div'); w.className='chips';
+        n.x.forEach(c=>{const s=document.createElement('span'); s.className='chip'; s.textContent=c; w.appendChild(s);}); chat.appendChild(w); }
+      else { const b=document.createElement('div'); b.className='bubble '+n.t; b.textContent=n.x; chat.appendChild(b); }
+      chat.scrollTop=chat.scrollHeight;
+    }
+    function typing(cb){ const d=document.createElement('div'); d.className='typing'; d.innerHTML='<i></i><i></i><i></i>';
+      chat.appendChild(d); chat.scrollTop=chat.scrollHeight; setTimeout(()=>{d.remove();cb();},850); }
+    function play(){ chat.innerHTML=''; let i=0;
+      (function step(){
+        if(i>=seq.length){ if(!reduce) setTimeout(play,3200); return; }
+        const n=seq[i++];
+        if(reduce){ render(n); step(); return; }
+        if(n.t==='bot'){ typing(()=>{render(n); setTimeout(step,650);}); }
+        else { render(n); setTimeout(step, n.t==='chips'?700:850); }
+      })();
+    }
+    if(reduce) play(); else setTimeout(play,500);
+  </script>
+</body>
+</html>
