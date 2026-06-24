@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ORION-X AI | CyderEyesX LLC</title>
+  <meta name="description" content="ORION-X — a private, locally-hosted AI assistant. Unlimited conversations, no usage caps. A product of CyderEyesX LLC." />
+
+  <link rel="preload" as="image" href="images/cyx-lion-mark.png" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts (same as site) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #020617;
+      color: #f8fafc;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+    .glass {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .hero-glow {
+      background: radial-gradient(circle at center, rgba(251, 146, 60, 0.14), transparent 65%);
+    }
+    .logo-glow {
+      background: radial-gradient(circle, rgba(251, 146, 60, 0.35), transparent 70%);
+      border-radius: 9999px; padding: 10px;
+    }
+    .btn { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(251, 146, 60, 0.25); }
+    .btn:focus-visible { outline: 2px solid #fb923c; outline-offset: 4px; }
+    .service-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(251, 146, 60, 0.15); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* Chat demo (signature) */
+    .demo { position: relative; }
+    .chat { min-height: 280px; display:flex; flex-direction:column; gap:10px; }
+    .bubble { max-width:80%; padding:10px 14px; border-radius:14px; font-size:.9rem; line-height:1.45;
+      opacity:0; transform:translateY(6px); animation:rise .35s forwards; }
+    .bot { align-self:flex-start; background:#0f1f33; border:1px solid rgba(255,255,255,.08); border-bottom-left-radius:4px; }
+    .me  { align-self:flex-end; background:linear-gradient(100deg,#fb923c,#fbbf24); color:#2c1605; border-bottom-right-radius:4px; font-weight:500; }
+    @keyframes rise { to { opacity:1; transform:translateY(0); } }
+    .typing { align-self:flex-start; background:#0f1f33; border:1px solid rgba(255,255,255,.08);
+      border-radius:14px; border-bottom-left-radius:4px; padding:13px 16px; display:flex; gap:4px; }
+    .typing i { width:6px; height:6px; border-radius:50%; background:#64748b; animation:blink 1.2s infinite; }
+    .typing i:nth-child(2){animation-delay:.2s} .typing i:nth-child(3){animation-delay:.4s}
+    @keyframes blink { 0%,60%,100%{opacity:.25} 30%{opacity:1} }
+
+    /* Coming soon tier overlay */
+    .tier-locked { position: relative; opacity: 0.55; }
+    .tier-locked::after {
+      content: "COMING SOON";
+      position: absolute; top: 14px; right: 14px;
+      font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em;
+      color: #94a3b8; border: 1px solid rgba(255,255,255,0.15); border-radius: 999px;
+      padding: 4px 10px; background: rgba(2,6,23,0.6);
+    }
+    .tier-locked .btn { pointer-events: none; opacity: 0.4; }
+
+    /* Modal */
+    #orionxModal { display: none; }
+    #orionxModal.open { display: flex; }
+    .modal-input {
+      width: 100%; background: rgba(2,6,23,0.6); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; padding: 12px 14px; color: #f8fafc; font-size: 14px;
+      outline: none; transition: border-color .2s ease;
+    }
+    .modal-input:focus { border-color: #fb923c; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      .bubble { opacity:1; transform:none; }
+    }
+  </style>
+
+  <!-- SimpleAnalytics -->
+  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+</head>
+
+<body id="top" data-page="orionx">
+
+  <!-- GLOBAL HEADER (injected by layout.js) -->
+  <div id="site-header"></div>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex items-center hero-glow pt-32 pb-16 px-6 reveal">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+      <div>
+        <div class="mono text-orange-400 text-xs mb-4">CyderEyesX · Products</div>
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+          Your own AI assistant.
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">No limits. No cloud.</span>
+        </h1>
+        <p class="text-slate-400 text-lg max-w-xl mb-8">
+          ORION-X is a private AI assistant running on our own hardware — not a third-party API.
+          Ask as much as you want, whenever you want. Currently in beta with a limited number of seats.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button id="openOrionxModalBtn" class="btn px-8 py-4 bg-gradient-to-r from-orange-400 to-amber-300 text-black font-semibold rounded-full text-center">
+            Request Beta Access →
+          </button>
+          <a class="btn px-8 py-4 border border-white/20 rounded-full text-center" href="#how">How it works</a>
+        </div>
+        <div class="mono text-[11px] text-slate-400 mt-6 flex flex-wrap gap-x-6 gap-y-2">
+          <span>● Unlimited messages</span><span>● Private infrastructure</span>
+          <span id="cuposBadge">● Loading seats…</span>
+        </div>
+      </div>
+
+      <!-- SIGNATURE: live chat demo -->
+      <div class="demo glass rounded-2xl p-5" aria-hidden="true">
+        <div class="flex items-center gap-3 pb-4 border-b border-white/10">
+          <div class="logo-glow"><img src="/images/cyx-lion-mark.png" class="h-8 w-8" alt="" /></div>
+          <div>
+            <div class="font-semibold text-sm">ORION-X</div>
+            <div class="text-orange-400 text-[11px]">● online</div>
+          </div>
+        </div>
+        <div class="chat pt-4" id="chat"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="mono text-orange-400 text-xs mb-4">How it works</div>
+        <h2 class="text-4xl md:text-5xl font-bold">Simple, honest, unlimited</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div class="glass p-8 rounded-2xl service-card">
+          <div class="mono text-orange-300 text-2xl mb-4">01</div>
+          <h3 class="text-lg font-bold mb-3">Request access</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Beta seats are limited. Tell us your name and email — we review every request personally.</p>
+        </div>
+        <div class="glass p-8 rounded-2xl service-card">
+          <div class="mono text-orange-300 text-2xl mb-4">02</div>
+          <h3 class="text-lg font-bold mb-3">We confirm by Telegram</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">If a seat is open, you'll get a payment link and setup instructions within 24 hours.</p>
+        </div>
+        <div class="glass p-8 rounded-2xl service-card">
+          <div class="mono text-orange-300 text-2xl mb-4">03</div>
+          <h3 class="text-lg font-bold mb-3">Start chatting</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Get your login and start using ORION-X immediately — no message limits, ever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="py-28 px-6 reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="mono text-orange-400 text-xs mb-4">What you get</div>
+        <h2 class="text-4xl md:text-5xl font-bold">Honest about its limits</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">♾️ No message caps</h3><p class="text-slate-400 text-sm">Ask as many questions as you want — there is no daily or monthly limit.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">🔒 Private infrastructure</h3><p class="text-slate-400 text-sm">Runs on hardware we own and control. Your conversations are not sold or used to train third-party models.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">📅 Knowledge cutoff, disclosed</h3><p class="text-slate-400 text-sm">The model's knowledge has a training cutoff date. We tell you exactly what that is — no surprises.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">🪙 Beta seats, genuinely limited</h3><p class="text-slate-400 text-sm">We cap active seats to keep response times reasonable on our current hardware.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">🚫 No web search (yet)</h3><p class="text-slate-400 text-sm">The Basic tier does not browse the internet. That's coming in a future tier.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">🚫 No image generation (yet)</h3><p class="text-slate-400 text-sm">Text conversation only for now. Image generation is on the roadmap.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="mono text-orange-400 text-xs mb-4">Pricing</div>
+        <h2 class="text-4xl md:text-5xl font-bold">One honest tier. Three coming soon.</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+
+        <!-- TIER 1: ACTIVE -->
+        <div class="glass p-8 rounded-2xl service-card flex flex-col border border-orange-400/40" style="box-shadow:0 0 0 1px rgba(251,146,60,.4),0 20px 50px rgba(251,146,60,.12)">
+          <div class="mono text-[10px] text-orange-300 mb-2">★ Available now — Beta</div>
+          <h3 class="font-bold text-lg mb-1">Pegasus Edition</h3>
+          <div class="text-3xl font-bold mb-1">$9</div><div class="text-slate-400 text-sm mb-6">/month</div>
+          <ul class="text-slate-400 text-sm space-y-2 mb-8 flex-1">
+            <li>Unlimited conversations</li><li>Local LLM, no third party</li><li>No web search, no images</li>
+          </ul>
+          <button class="orionx-tier-btn btn block w-full text-center px-5 py-3 bg-gradient-to-r from-orange-400 to-amber-300 text-black font-semibold rounded-full">
+            Request Access
+          </button>
+        </div>
+
+        <!-- TIER 2: COMING SOON -->
+        <div class="glass p-8 rounded-2xl service-card flex flex-col tier-locked">
+          <h3 class="font-bold text-lg mb-1">+ Search Engine</h3>
+          <div class="text-3xl font-bold mb-1">—</div><div class="text-slate-400 text-sm mb-6">TBD</div>
+          <ul class="text-slate-400 text-sm space-y-2 mb-8 flex-1">
+            <li>Everything in Pegasus Edition</li><li>Live web search</li><li>Current events &amp; data</li>
+          </ul>
+          <button class="btn block w-full text-center px-5 py-3 border border-white/20 rounded-full" disabled>Coming Soon</button>
+        </div>
+
+        <!-- TIER 3: COMING SOON -->
+        <div class="glass p-8 rounded-2xl service-card flex flex-col tier-locked">
+          <h3 class="font-bold text-lg mb-1">+ Image Generation</h3>
+          <div class="text-3xl font-bold mb-1">—</div><div class="text-slate-400 text-sm mb-6">TBD</div>
+          <ul class="text-slate-400 text-sm space-y-2 mb-8 flex-1">
+            <li>Everything in Search tier</li><li>AI image generation</li><li>Visual content creation</li>
+          </ul>
+          <button class="btn block w-full text-center px-5 py-3 border border-white/20 rounded-full" disabled>Coming Soon</button>
+        </div>
+
+        <!-- TIER 4: COMING SOON -->
+        <div class="glass p-8 rounded-2xl service-card flex flex-col tier-locked">
+          <h3 class="font-bold text-lg mb-1">+ Education Premium</h3>
+          <div class="text-3xl font-bold mb-1">—</div><div class="text-slate-400 text-sm mb-6">TBD</div>
+          <ul class="text-slate-400 text-sm space-y-2 mb-8 flex-1">
+            <li>Everything in Image tier</li><li>Educational databases</li><li>Built for learning &amp; research</li>
+          </ul>
+          <button class="btn block w-full text-center px-5 py-3 border border-white/20 rounded-full" disabled>Coming Soon</button>
+        </div>
+
+      </div>
+      <p class="mono text-[10px] text-slate-500 text-center mt-10">Pegasus Edition runs on shared infrastructure · Response times may vary during peak hours</p>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-28 px-6 text-center hero-glow reveal">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">Beta seats are limited.</h2>
+      <p class="text-slate-400 mb-10">Request access today — we review every application personally and reply within 24 hours.</p>
+      <button class="orionx-tier-btn btn inline-block px-10 py-4 bg-gradient-to-r from-orange-400 to-amber-300 text-black font-semibold rounded-full">
+        Request Beta Access →
+      </button>
+      <p class="mono text-[10px] text-slate-500 mt-10">ORION-X is a product of CyderEyesX LLC · Knowledge limited to model training data</p>
+    </div>
+  </section>
+
+  <!-- ============ REQUEST ACCESS MODAL ============ -->
+  <div id="orionxModal" class="fixed inset-0 z-[100] items-center justify-center px-6" style="background: rgba(2,6,23,0.85); backdrop-filter: blur(6px);">
+    <div class="glass rounded-2xl p-8 w-full max-w-md relative">
+      <button id="closeOrionxModalBtn" aria-label="Close" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl leading-none">×</button>
+
+      <div class="mono text-orange-400 text-xs mb-2">Request Beta Access</div>
+      <h3 class="text-2xl font-bold mb-1">ORION-X Pegasus Edition</h3>
+      <p id="orionxModalCupos" class="text-slate-400 text-sm mb-6">Checking seat availability…</p>
+
+      <form id="orionxForm" class="space-y-4">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Name *</label>
+          <input type="text" id="orionxNombre" required class="modal-input" placeholder="Your name" />
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Email *</label>
+          <input type="email" id="orionxEmail" required class="modal-input" placeholder="you@example.com" />
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Telegram username (optional)</label>
+          <input type="text" id="orionxTelegram" class="modal-input" placeholder="@yourhandle" />
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Notes (optional)</label>
+          <textarea id="orionxNotas" class="modal-input" rows="2" placeholder="Anything we should know?"></textarea>
+        </div>
+
+        <button type="submit" id="orionxSubmitBtn" class="btn w-full px-5 py-3 bg-gradient-to-r from-orange-400 to-amber-300 text-black font-semibold rounded-full">
+          Submit Request
+        </button>
+
+        <p id="orionxFormMsg" class="text-sm text-center" style="display:none;"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- GLOBAL FOOTER (injected by layout.js) -->
+  <div id="site-footer"></div>
+
+  <!-- Scroll reveal -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }), { threshold: 0.12 });
+    reveals.forEach(r => ro.observe(r));
+  </script>
+
+  <!-- Global header & footer -->
+  <script src="layout.js"></script>
+
+  <!-- Chat demo -->
+  <script>
+    const seq = [
+      {t:'bot',x:"Hi, I'm ORION-X. Ask me anything — there's no message limit. 👋"},
+      {t:'me',x:"Can you help me draft an email?"},
+      {t:'bot',x:"Of course! Tell me who it's for and what you need to say."},
+      {t:'me',x:"To a client, explaining a delay in delivery."},
+      {t:'bot',x:"Got it — drafting that now. ✅ (and yes, you can ask me 100 more things after this)"}
+    ];
+    const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    const chat = document.getElementById('chat');
+    function render(n){
+      const b=document.createElement('div'); b.className='bubble '+n.t; b.textContent=n.x; chat.appendChild(b);
+      chat.scrollTop=chat.scrollHeight;
+    }
+    function typing(cb){ const d=document.createElement('div'); d.className='typing'; d.innerHTML='<i></i><i></i><i></i>';
+      chat.appendChild(d); chat.scrollTop=chat.scrollHeight; setTimeout(()=>{d.remove();cb();},850); }
+    function play(){ chat.innerHTML=''; let i=0;
+      (function step(){
+        if(i>=seq.length){ if(!reduce) setTimeout(play,3200); return; }
+        const n=seq[i++];
+        if(reduce){ render(n); step(); return; }
+        if(n.t==='bot'){ typing(()=>{render(n); setTimeout(step,650);}); }
+        else { render(n); setTimeout(step,850); }
+      })();
+    }
+    if(reduce) play(); else setTimeout(play,500);
+  </script>
+
+  <!-- ORIONX_REQUEST_ACCESS_MODAL v1 -->
+  <script>
+    (function () {
+      const API_BASE = 'https://insurebot.cydereyesx.com';
+
+      const modal = document.getElementById('orionxModal');
+      const openBtns = document.querySelectorAll('#openOrionxModalBtn, .orionx-tier-btn');
+      const closeBtn = document.getElementById('closeOrionxModalBtn');
+      const cuposBadge = document.getElementById('cuposBadge');
+      const modalCupos = document.getElementById('orionxModalCupos');
+      const form = document.getElementById('orionxForm');
+      const submitBtn = document.getElementById('orionxSubmitBtn');
+      const formMsg = document.getElementById('orionxFormMsg');
+
+      let cuposCache = null;
+
+      async function fetchCupos() {
+        try {
+          const res = await fetch(`${API_BASE}/api/orionx/cupos`, { cache: 'no-cache' });
+          if (!res.ok) throw new Error('bad response');
+          const data = await res.json();
+          cuposCache = data;
+          return data;
+        } catch (err) {
+          console.error('ORION-X cupos fetch failed', err);
+          return null;
+        }
+      }
+
+      function renderCuposBadge(data) {
+        if (!data) {
+          cuposBadge.textContent = '● Seats: check on request';
+          return;
+        }
+        cuposBadge.textContent = `● ${data.disponibles}/${data.total} beta seats available`;
+      }
+
+      function renderModalCupos(data) {
+        if (!data) {
+          modalCupos.textContent = 'Could not check seat availability — you can still apply.';
+          return;
+        }
+        if (data.disponibles > 0) {
+          modalCupos.textContent = `${data.disponibles} of ${data.total} beta seats currently available.`;
+        } else {
+          modalCupos.textContent = `All ${data.total} beta seats are currently full — you'll be added to the waitlist.`;
+        }
+      }
+
+      function openModal() {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        renderModalCupos(cuposCache);
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      openBtns.forEach(btn => btn.addEventListener('click', openModal));
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const nombre = document.getElementById('orionxNombre').value.trim();
+        const email = document.getElementById('orionxEmail').value.trim();
+        const telegram_username = document.getElementById('orionxTelegram').value.trim();
+        const notas = document.getElementById('orionxNotas').value.trim();
+
+        if (!nombre || !email) return;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+        formMsg.style.display = 'none';
+
+        try {
+          const res = await fetch(`${API_BASE}/api/orionx/request-access`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, email, telegram_username, notas })
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            formMsg.textContent = "Request received! We'll be in touch within 24 hours.";
+            formMsg.style.color = '#fb923c';
+            formMsg.style.display = 'block';
+            form.reset();
+            setTimeout(closeModal, 2200);
+            fetchCupos().then(renderCuposBadge);
+          } else {
+            formMsg.textContent = 'Something went wrong — please try again or email us directly.';
+            formMsg.style.color = '#f87171';
+            formMsg.style.display = 'block';
+          }
+        } catch (err) {
+          console.error('ORION-X request-access failed', err);
+          formMsg.textContent = 'Network error — please try again.';
+          formMsg.style.color = '#f87171';
+          formMsg.style.display = 'block';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Request';
+        }
+      });
+
+      // Initial load
+      fetchCupos().then(renderCuposBadge);
+    })();
+  </script>
+
+</body>
+</html>
