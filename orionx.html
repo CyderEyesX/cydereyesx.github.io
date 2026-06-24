@@ -281,6 +281,11 @@
           <textarea id="orionxNotas" class="modal-input" rows="2" placeholder="Anything we should know?"></textarea>
         </div>
 
+        <label class="flex items-start gap-3 text-xs text-slate-400 cursor-pointer">
+          <input type="checkbox" id="orionxTermsCheckbox" required class="mt-0.5" style="accent-color:#fb923c" />
+          <span>I have read and agree to the <a href="/terms.html" target="_blank" class="text-orange-400 underline hover:text-orange-300">Terms of Service</a>. I understand ORION-X is an experimental AI system and its responses may be inaccurate or incomplete.</span>
+        </label>
+
         <button type="submit" id="orionxSubmitBtn" class="btn w-full px-5 py-3 bg-gradient-to-r from-orange-400 to-amber-300 text-black font-semibold rounded-full">
           Submit Request
         </button>
@@ -404,8 +409,16 @@
         const email = document.getElementById('orionxEmail').value.trim();
         const telegram_username = document.getElementById('orionxTelegram').value.trim();
         const notas = document.getElementById('orionxNotas').value.trim();
+        const termsAccepted = document.getElementById('orionxTermsCheckbox').checked;
 
         if (!nombre || !email) return;
+
+        if (!termsAccepted) {
+          formMsg.textContent = 'You must agree to the Terms of Service to continue.';
+          formMsg.style.color = '#f87171';
+          formMsg.style.display = 'block';
+          return;
+        }
 
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending…';
@@ -415,7 +428,7 @@
           const res = await fetch(`${API_BASE}/api/orionx/request-access`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre, email, telegram_username, notas })
+            body: JSON.stringify({ nombre, email, telegram_username, notas, terms_accepted: true })
           });
           const data = await res.json();
 
