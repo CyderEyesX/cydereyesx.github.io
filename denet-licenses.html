@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeNet Licenses | CyderEyesX LLC — Official DeNet Distributor</title>
+
+  <link rel="preload" as="image" href="images/cyx-lion-mark.png">
+
+  <!-- Tailwind (Play CDN — same as the rest of the site) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* =========================================================
+       BASE TOKENS (ported from index.html so this page matches
+       the rest of cydereyesx.xyz; header/footer rely on these)
+       ========================================================= */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #020617;
+      color: #f8fafc;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Navbar logo breathing glow (used by header.html) */
+    @keyframes breathe {
+      0%, 100% { box-shadow: 0 0 18px rgba(45, 212, 191, 0.35); }
+      50%       { box-shadow: 0 0 28px rgba(45, 212, 191, 0.55); }
+    }
+    .logo-glow {
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.35), transparent 70%);
+      border-radius: 9999px;
+      padding: 10px;
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    .nav-link.active-link { color: #2dd4bf; opacity: 1; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* =========================================================
+       DENET ACCENT — WHITE + GOLD (official DeNet look).
+       NOTE: no public DeNet brand-kit hex was found, so this is
+       a premium gold you can tune in ONE place. If you have the
+       exact distributor brand gold, change --dn / --dn-deep here.
+       ========================================================= */
+    :root {
+      --dn:        #F4C04E;  /* DeNet gold (primary accent)      */
+      --dn-light:  #FCE7A1;  /* champagne highlight              */
+      --dn-deep:   #C8941F;  /* deep gold (gradients / shadow)   */
+      --dn-glow:   rgba(244, 192, 78, 0.45);
+      --ink:       #0b0b10;  /* near-black text on gold buttons  */
+    }
+
+    .dn-text   { color: var(--dn); }
+    .dn-border { border-color: rgba(244, 192, 78, 0.40); }
+
+    /* Hero halo in gold (overrides index's teal hero-glow) */
+    .dn-hero-glow {
+      background: radial-gradient(circle at center, rgba(244, 192, 78, 0.14), transparent 65%);
+    }
+
+    /* Primary "Buy" button — gold gradient, dark ink for contrast */
+    .dn-btn {
+      background: linear-gradient(135deg, var(--dn) 0%, var(--dn-deep) 100%);
+      color: var(--ink);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 24px rgba(244, 192, 78, 0.30);
+    }
+    .dn-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 38px rgba(244, 192, 78, 0.55);
+    }
+    .dn-btn:focus-visible { outline: 2px solid var(--dn-light); outline-offset: 4px; }
+
+    /* Ghost button */
+    .dn-ghost { transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease; }
+    .dn-ghost:hover { transform: translateY(-2px); border-color: rgba(244, 192, 78, 0.55); background: rgba(244, 192, 78, 0.08); }
+
+    /* Cards */
+    .dn-card { transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease; }
+    .dn-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(244, 192, 78, 0.15);
+      border-color: rgba(244, 192, 78, 0.30);
+    }
+
+    /* Co-brand lockup */
+    .cobrand-x { color: #475569; font-weight: 300; }
+
+    /* =========================================================
+       LANGUAGE TOGGLE (segmented EN | ES switch)
+       ========================================================= */
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 4px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(10px);
+    }
+    .lang-toggle button {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.15em;
+      font-size: 11px;
+      padding: 7px 16px;
+      border-radius: 9999px;
+      color: #94a3b8;
+      transition: color 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+    }
+    .lang-toggle button[aria-pressed="true"] {
+      color: var(--ink);
+      background: linear-gradient(135deg, var(--dn), var(--dn-deep));
+      box-shadow: 0 4px 14px rgba(244, 192, 78, 0.40);
+    }
+    .lang-toggle button:focus-visible { outline: 2px solid var(--dn-light); outline-offset: 2px; }
+
+    /* =========================================================
+       SIGNATURE: animated "node-mesh dome" (original art — no
+       DeNet logo is reproduced here). Pulsing storage nodes
+       sheltered under a protective dome = decentralized storage.
+       ========================================================= */
+    @keyframes dn-pulse {
+      0%, 100% { opacity: 0.35; r: 3; }
+      50%       { opacity: 1;    r: 4.6; }
+    }
+    .dn-node { animation: dn-pulse 3.2s ease-in-out infinite; transform-origin: center; }
+    .dn-node:nth-child(2) { animation-delay: 0.4s; }
+    .dn-node:nth-child(3) { animation-delay: 0.8s; }
+    .dn-node:nth-child(4) { animation-delay: 1.2s; }
+    .dn-node:nth-child(5) { animation-delay: 1.6s; }
+    .dn-node:nth-child(6) { animation-delay: 2.0s; }
+    .dn-node:nth-child(7) { animation-delay: 2.4s; }
+
+    @keyframes dn-sweep {
+      0%   { stroke-dashoffset: 520; opacity: 0.15; }
+      50%  { opacity: 0.6; }
+      100% { stroke-dashoffset: 0; opacity: 0.15; }
+    }
+    .dn-dome-arc { stroke-dasharray: 520; animation: dn-sweep 6s linear infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+
+  <!-- SimpleAnalytics (do not remove — site-wide) -->
+  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+</head>
+
+<body id="top" data-page="denet-licenses">
+
+  <!-- GLOBAL HEADER (injected by layout.js) -->
+  <div id="site-header"></div>
+
+  <!-- =====================================================
+       1. HERO  —  thesis + prominent EN/ES toggle + Buy CTA
+       ===================================================== -->
+  <section class="min-h-screen flex items-center justify-center dn-hero-glow pt-32 pb-20 px-6 reveal">
+    <div class="max-w-6xl w-full grid lg:grid-cols-2 gap-14 items-center">
+
+      <!-- Left: copy -->
+      <div class="text-center lg:text-left space-y-8">
+
+        <!-- Language toggle -->
+        <div class="flex justify-center lg:justify-start">
+          <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+            <button id="lang-en" type="button" aria-pressed="true"  onclick="setLang('en')">EN</button>
+            <button id="lang-es" type="button" aria-pressed="false" onclick="setLang('es')">ES</button>
+          </div>
+        </div>
+
+        <div class="mono dn-text text-xs" data-i18n="hero_eyebrow"></div>
+
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight" data-i18n="hero_title"></h1>
+
+        <p class="text-slate-400 text-lg max-w-xl mx-auto lg:mx-0" data-i18n="hero_sub"></p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+          <a class="dn-btn px-9 py-4 font-semibold rounded-full text-center"
+             href="https://distributors.denet.pro/CyderEyesX" target="_blank" rel="noopener"
+             data-i18n="hero_cta"></a>
+          <a class="dn-ghost px-9 py-4 rounded-full border border-white/20 text-center"
+             href="#what" data-i18n="hero_cta2"></a>
+        </div>
+
+        <p class="text-xs text-slate-500" data-i18n="hero_trust_line"></p>
+      </div>
+
+      <!-- Right: signature node-mesh dome (gold) -->
+      <div class="flex justify-center">
+        <svg viewBox="0 0 360 320" class="w-full max-w-md" role="img" aria-label="Decentralized storage node network">
+          <defs>
+            <radialGradient id="dnHalo" cx="50%" cy="45%" r="55%">
+              <stop offset="0%"  stop-color="#F4C04E" stop-opacity="0.30"/>
+              <stop offset="100%" stop-color="#F4C04E" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="dnArc" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="#FCE7A1"/>
+              <stop offset="100%" stop-color="#C8941F"/>
+            </linearGradient>
+          </defs>
+
+          <!-- halo -->
+          <circle cx="180" cy="150" r="150" fill="url(#dnHalo)"/>
+
+          <!-- protective dome arcs (the "Iron Dome" motif) -->
+          <path class="dn-dome-arc" d="M40 230 A140 140 0 0 1 320 230" fill="none" stroke="url(#dnArc)" stroke-width="1.4" opacity="0.5"/>
+          <path d="M70 230 A110 110 0 0 1 290 230" fill="none" stroke="#F4C04E" stroke-width="1" opacity="0.25"/>
+          <path d="M100 230 A80 80 0 0 1 260 230" fill="none" stroke="#F4C04E" stroke-width="1" opacity="0.18"/>
+
+          <!-- mesh links -->
+          <g stroke="#F4C04E" stroke-width="1" opacity="0.35">
+            <line x1="180" y1="120" x2="110" y2="175"/>
+            <line x1="180" y1="120" x2="250" y2="175"/>
+            <line x1="110" y1="175" x2="180" y2="210"/>
+            <line x1="250" y1="175" x2="180" y2="210"/>
+            <line x1="110" y1="175" x2="250" y2="175"/>
+            <line x1="180" y1="120" x2="180" y2="210"/>
+            <line x1="110" y1="175" x2="80" y2="120"/>
+            <line x1="250" y1="175" x2="280" y2="120"/>
+          </g>
+
+          <!-- storage nodes -->
+          <g fill="#FCE7A1">
+            <circle class="dn-node" cx="180" cy="120" r="4"/>
+            <circle class="dn-node" cx="110" cy="175" r="4"/>
+            <circle class="dn-node" cx="250" cy="175" r="4"/>
+            <circle class="dn-node" cx="180" cy="210" r="4"/>
+            <circle class="dn-node" cx="80"  cy="120" r="4"/>
+            <circle class="dn-node" cx="280" cy="120" r="4"/>
+            <circle class="dn-node" cx="180" cy="150" r="4"/>
+          </g>
+
+          <!-- center shield glyph -->
+          <path d="M180 138 l16 7 v10 c0 10 -7 16 -16 20 c-9 -4 -16 -10 -16 -20 v-10 z"
+                fill="rgba(244,192,78,0.18)" stroke="#F4C04E" stroke-width="1.3"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       2. TRUST BAND  —  co-brand lockup + authority + facts
+       ===================================================== -->
+  <section class="py-14 px-6 bg-[#010413] border-y border-white/5 reveal">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- CyderEyesX  ×  DeNet  co-brand lockup
+           Upload the official DeNet logo to /images/denet-logo.png
+           (you have the right to use it as an official distributor).
+           If the file is missing, it falls back to a gold "DENET" wordmark. -->
+      <div class="flex items-center justify-center gap-4 mb-8">
+        <img src="/images/cyx-lion-mark.png" class="h-9" alt="CyderEyesX">
+        <span class="cobrand-x text-xl">×</span>
+        <img src="/images/denet-logo.png" class="h-8" alt="DeNet"
+             onerror="this.style.display='none';var w=document.getElementById('denet-wm');if(w)w.style.display='inline-block';">
+        <span id="denet-wm" style="display:none" class="mono dn-text text-base">DENET</span>
+      </div>
+
+      <div class="text-center mb-10">
+        <span class="inline-block mono text-[11px] dn-text border dn-border rounded-full px-4 py-2"
+              data-i18n="trust_badge"></span>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-3xl font-bold dn-text">2,000+</div>
+          <div class="mono text-[10px] text-slate-500 mt-2" data-i18n="stat_keepers"></div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold dn-text">7.3M+</div>
+          <div class="mono text-[10px] text-slate-500 mt-2" data-i18n="stat_users"></div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold dn-text">194</div>
+          <div class="mono text-[10px] text-slate-500 mt-2" data-i18n="stat_countries"></div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold dn-text">20M+</div>
+          <div class="mono text-[10px] text-slate-500 mt-2" data-i18n="stat_files"></div>
+        </div>
+      </div>
+      <p class="text-center text-[11px] text-slate-600 mt-8" data-i18n="stat_source"></p>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       3. WHAT IS A DATAKEEPER  —  simplified explanation
+       ===================================================== -->
+  <section id="what" class="py-28 px-6 reveal">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="mono dn-text text-xs mb-4" data-i18n="what_eyebrow"></div>
+        <h2 class="text-4xl md:text-5xl font-bold" data-i18n="what_title"></h2>
+        <p class="mt-6 text-slate-400 max-w-3xl mx-auto leading-relaxed" data-i18n="what_intro"></p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass dn-card p-8 rounded-2xl">
+          <div class="mono text-[11px] dn-text mb-3" data-i18n="what_c1_t"></div>
+          <p class="text-slate-400 text-sm leading-relaxed" data-i18n="what_c1_b"></p>
+        </div>
+        <div class="glass dn-card p-8 rounded-2xl">
+          <div class="mono text-[11px] dn-text mb-3" data-i18n="what_c2_t"></div>
+          <p class="text-slate-400 text-sm leading-relaxed" data-i18n="what_c2_b"></p>
+        </div>
+        <div class="glass dn-card p-8 rounded-2xl">
+          <div class="mono text-[11px] dn-text mb-3" data-i18n="what_c3_t"></div>
+          <p class="text-slate-400 text-sm leading-relaxed" data-i18n="what_c3_b"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       4. WHY A LICENSE  —  the hooks
+       ===================================================== -->
+  <section class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="mono dn-text text-xs mb-4" data-i18n="why_eyebrow"></div>
+        <h2 class="text-4xl md:text-5xl font-bold" data-i18n="why_title"></h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="glass dn-card p-8 rounded-2xl flex gap-5">
+          <div class="text-2xl">🖥️</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2" data-i18n="why_h1_t"></h3>
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="why_h1_b"></p>
+          </div>
+        </div>
+        <div class="glass dn-card p-8 rounded-2xl flex gap-5">
+          <div class="text-2xl">📈</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2" data-i18n="why_h2_t"></h3>
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="why_h2_b"></p>
+          </div>
+        </div>
+        <div class="glass dn-card p-8 rounded-2xl flex gap-5">
+          <div class="text-2xl">🛡️</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2" data-i18n="why_h3_t"></h3>
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="why_h3_b"></p>
+          </div>
+        </div>
+        <div class="glass dn-card p-8 rounded-2xl flex gap-5">
+          <div class="text-2xl">🎓</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2" data-i18n="why_h4_t"></h3>
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="why_h4_b"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       5. HOW IT WORKS  —  3 real steps (sequence -> numbered)
+       ===================================================== -->
+  <section class="py-28 px-6 reveal">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="mono dn-text text-xs mb-4" data-i18n="how_eyebrow"></div>
+        <h2 class="text-4xl md:text-5xl font-bold" data-i18n="how_title"></h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass dn-card p-8 rounded-2xl">
+          <div class="mono text-3xl font-bold dn-text mb-4">01</div>
+          <h3 class="font-bold text-lg mb-2" data-i18n="how_s1_t"></h3>
+          <p class="text-slate-400 text-sm leading-relaxed" data-i18n="how_s1_b"></p>
+        </div>
+        <div class="glass dn-card p-8 rounded-2xl">
+          <div class="mono text-3xl font-bold dn-text mb-4">02</div>
+          <h3 class="font-bold text-lg mb-2" data-i18n="how_s2_t"></h3>
+          <p class="text-slate-400 text-sm leading-relaxed" data-i18n="how_s2_b"></p>
+        </div>
+        <div class="glass dn-card p-8 rounded-2xl">
+          <div class="mono text-3xl font-bold dn-text mb-4">03</div>
+          <h3 class="font-bold text-lg mb-2" data-i18n="how_s3_t"></h3>
+          <p class="text-slate-400 text-sm leading-relaxed" data-i18n="how_s3_b"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       6. EARLY ADOPTER POSITIONING  (honest scarcity)
+       ===================================================== -->
+  <section class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="mono dn-text text-xs mb-4" data-i18n="early_eyebrow"></div>
+      <h2 class="text-3xl md:text-5xl font-bold mb-6" data-i18n="early_title"></h2>
+      <p class="text-slate-400 leading-relaxed mb-10 max-w-2xl mx-auto" data-i18n="early_body"></p>
+      <a class="dn-btn inline-block px-10 py-4 font-semibold rounded-full"
+         href="https://distributors.denet.pro/CyderEyesX" target="_blank" rel="noopener"
+         data-i18n="early_cta"></a>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       7. FINAL CTA
+       ===================================================== -->
+  <section class="py-28 px-6 dn-hero-glow reveal">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl md:text-6xl font-bold mb-6" data-i18n="final_title"></h2>
+      <p class="text-slate-400 text-lg mb-10" data-i18n="final_sub"></p>
+      <a class="dn-btn inline-block px-12 py-5 text-lg font-semibold rounded-full"
+         href="https://distributors.denet.pro/CyderEyesX" target="_blank" rel="noopener"
+         data-i18n="final_cta"></a>
+      <p class="mono text-[10px] text-slate-600 mt-6" data-i18n="final_secured"></p>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       8. DISCLAIMER  (no financial advice — matches footer)
+       ===================================================== -->
+  <section class="py-10 px-6 border-t border-white/5">
+    <p class="max-w-3xl mx-auto text-center text-[11px] text-slate-600 leading-relaxed" data-i18n="disclaimer"></p>
+  </section>
+
+  <!-- GLOBAL FOOTER (injected by layout.js) -->
+  <div id="site-footer"></div>
+
+  <!-- =====================================================
+       SCROLL REVEAL
+       ===================================================== -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => revealObserver.observe(r));
+  </script>
+
+  <!-- Inject global header & footer -->
+  <script src="layout.js"></script>
+
+  <!-- =====================================================
+       I18N  —  EN/ES dictionary + toggle (no page reload)
+       Edit copy here. Values may contain inline HTML.
+       ===================================================== -->
+  <script>
+    const I18N = {
+      en: {
+        /* HERO */
+        hero_eyebrow:   "OFFICIAL DENET DISTRIBUTOR · CYDEREYESX LLC",
+        hero_title:     'Own a piece of the <span class="dn-text">decentralized</span> storage economy.',
+        hero_sub:       "Turn idle hardware into a working node on DeNet — the DePIN storage network securing data for the next generation of the web. Acquire your Datakeeper License through an official distributor.",
+        hero_cta:       "Buy a Datakeeper License →",
+        hero_cta2:      "How it works",
+        hero_trust_line:"Purchased through CyderEyesX — one of a limited group of official DeNet distributors worldwide.",
+
+        /* TRUST */
+        trust_badge:    "VERIFIED · OFFICIAL DENET DISTRIBUTOR — 1 OF 40 SELECTED GLOBALLY",
+        stat_keepers:   "Datakeepers powering the network",
+        stat_users:     "Storage & watcher nodes",
+        stat_countries: "Countries contributing",
+        stat_files:     "Files protected on Protocol v4",
+        stat_source:    "Network figures published by DeNet (denet.pro). They describe the DeNet network, not the performance of any single node.",
+
+        /* WHAT */
+        what_eyebrow:   "The Basics",
+        what_title:     "What is a Datakeeper?",
+        what_intro:     "A Datakeeper is a node in the DeNet network that rents out unused disk space. Users and businesses pay to store data; the network encrypts each file, spreads it across many Datakeepers, and verifies it with a Proof-of-Storage algorithm. In short: your hardware helps store the decentralized web — and gets rewarded for it.",
+        what_c1_t:      "Storage, decentralized",
+        what_c1_b:      "Instead of one company's data center, files live encrypted and replicated across thousands of independent nodes. No single point of failure, no middleman.",
+        what_c2_t:      "Proof-of-Storage",
+        what_c2_b:      "The network constantly verifies that your node actually holds the data it claims to. Honest storage is what earns rewards — it's eco-friendly mining that reuses space you already own.",
+        what_c3_t:      "Two ways to earn",
+        what_c3_b:      "DeNet states Datakeepers have two reward sources: direct payments for the storage they provide, and a share of the network's tokenomics.",
+
+        /* WHY */
+        why_eyebrow:    "Why a License",
+        why_title:      "Four reasons operators move now.",
+        why_h1_t:       "Monetize idle hardware",
+        why_h1_b:       "That spare drive, mini-PC, or always-on machine can do real work. A license lets it join the network and contribute storage instead of sitting unused.",
+        why_h2_t:       "A passive-income mindset",
+        why_h2_b:       "Once your node runs, it works around the clock. DeNet markets Datakeeper nodes as a passive-income opportunity tied to real storage demand — not hype.",
+        why_h3_t:       "Secure the network",
+        why_h3_b:       "Every node you run adds redundancy and resilience to a system built to protect data the centralized world keeps leaking. You own infrastructure, not just a token.",
+        why_h4_t:       "Real Web3 education",
+        why_h4_b:       "Running a node is the fastest way to actually understand DePIN, storage proofs, and tokenomics. With CyderEyesX you get a distributor who teaches, not just sells.",
+
+        /* HOW */
+        how_eyebrow:    "The Path",
+        how_title:      "From license to live node in three steps.",
+        how_s1_t:       "Get your license",
+        how_s1_b:       "Acquire a Datakeeper License through the official CyderEyesX distributor link. One license = one node slot in the network.",
+        how_s2_t:       "Set up your node",
+        how_s2_b:       "Install the DeNet node on a desktop or server (Windows, macOS, or Linux). Minimal requirements, beginner-friendly managers, and CyderEyesX guidance if you want it.",
+        how_s3_t:       "Store & earn",
+        how_s3_b:       "Your node starts holding encrypted data fragments and earning rewards for verified storage. Keep it online — availability is what compounds.",
+
+        /* EARLY */
+        early_eyebrow:  "Positioning",
+        early_title:    "Early operators stand at the front of the line.",
+        early_body:     "DeNet is moving through its Protocol v4 phase toward real-world usage. Official distribution runs through a limited set of partners worldwide — CyderEyesX is one of them. Operators who set up and stabilize their nodes early establish their place in the network before mainstream demand arrives. The window to be early doesn't stay open forever.",
+        early_cta:      "Secure your license →",
+
+        /* FINAL */
+        final_title:    "Do the impossible.",
+        final_sub:      "Claim your Datakeeper License through CyderEyesX and start running real decentralized infrastructure today.",
+        final_cta:      "Buy through CyderEyesX →",
+        final_secured:  "OFFICIAL DISTRIBUTOR LINK · DISTRIBUTORS.DENET.PRO/CYDEREYESX",
+
+        /* DISCLAIMER */
+        disclaimer:     "CyderEyesX LLC is an official DeNet distributor and an educational technology entity. This page is informational and does not constitute financial, investment, legal, or tax advice. Buying a Datakeeper License and operating a node involves risk; rewards are not guaranteed and depend on the DeNet network, token markets, and your own operation. Always do your own research before participating. DeNet, Datakeeper, and related marks belong to their respective owners."
+      },
+
+      es: {
+        /* HERO */
+        hero_eyebrow:   "DISTRIBUIDOR OFICIAL DE DENET · CYDEREYESX LLC",
+        hero_title:     'Sé dueño de una parte de la economía de almacenamiento <span class="dn-text">descentralizado</span>.',
+        hero_sub:       "Convierte hardware inactivo en un nodo activo dentro de DeNet — la red de almacenamiento DePIN que asegura los datos de la próxima generación de la web. Adquiere tu Licencia Datakeeper a través de un distribuidor oficial.",
+        hero_cta:       "Compra una Licencia Datakeeper →",
+        hero_cta2:      "Cómo funciona",
+        hero_trust_line:"Comprada a través de CyderEyesX — uno de un grupo limitado de distribuidores oficiales de DeNet en el mundo.",
+
+        /* TRUST */
+        trust_badge:    "VERIFICADO · DISTRIBUIDOR OFICIAL DE DENET — 1 DE 40 SELECCIONADOS GLOBALMENTE",
+        stat_keepers:   "Datakeepers que sostienen la red",
+        stat_users:     "Nodos de almacenamiento y watchers",
+        stat_countries: "Países que contribuyen",
+        stat_files:     "Archivos protegidos en el Protocolo v4",
+        stat_source:    "Cifras de red publicadas por DeNet (denet.pro). Describen la red DeNet, no el rendimiento de ningún nodo individual.",
+
+        /* WHAT */
+        what_eyebrow:   "Lo Esencial",
+        what_title:     "¿Qué es un Datakeeper?",
+        what_intro:     "Un Datakeeper es un nodo en la red DeNet que renta espacio de disco no utilizado. Usuarios y empresas pagan por almacenar datos; la red cifra cada archivo, lo replica entre muchos Datakeepers y lo verifica con un algoritmo de Prueba de Almacenamiento. En resumen: tu hardware ayuda a almacenar la web descentralizada — y recibe recompensas por hacerlo.",
+        what_c1_t:      "Almacenamiento descentralizado",
+        what_c1_b:      "En vez del centro de datos de una sola empresa, los archivos viven cifrados y replicados en miles de nodos independientes. Sin punto único de falla, sin intermediarios.",
+        what_c2_t:      "Prueba de Almacenamiento",
+        what_c2_b:      "La red verifica constantemente que tu nodo realmente guarda los datos que dice tener. El almacenamiento honesto es lo que genera recompensas — es minería eco-amigable que reutiliza espacio que ya posees.",
+        what_c3_t:      "Dos formas de ganar",
+        what_c3_b:      "DeNet indica que los Datakeepers tienen dos fuentes de recompensa: pagos directos por el almacenamiento que aportan y una parte de la tokenómica de la red.",
+
+        /* WHY */
+        why_eyebrow:    "Por Qué una Licencia",
+        why_title:      "Cuatro razones para actuar ahora.",
+        why_h1_t:       "Monetiza hardware inactivo",
+        why_h1_b:       "Ese disco extra, mini-PC o máquina siempre encendida puede hacer trabajo real. Una licencia le permite unirse a la red y aportar almacenamiento en lugar de quedarse sin uso.",
+        why_h2_t:       "Mentalidad de ingreso pasivo",
+        why_h2_b:       "Una vez que tu nodo corre, trabaja las 24 horas. DeNet promociona los nodos Datakeeper como una oportunidad de ingreso pasivo ligada a demanda real de almacenamiento — no a especulación.",
+        why_h3_t:       "Asegura la red",
+        why_h3_b:       "Cada nodo que operas añade redundancia y resiliencia a un sistema creado para proteger los datos que el mundo centralizado sigue filtrando. Posees infraestructura, no solo un token.",
+        why_h4_t:       "Educación Web3 real",
+        why_h4_b:       "Operar un nodo es la forma más rápida de entender de verdad DePIN, pruebas de almacenamiento y tokenómica. Con CyderEyesX obtienes un distribuidor que enseña, no que solo vende.",
+
+        /* HOW */
+        how_eyebrow:    "El Camino",
+        how_title:      "De la licencia al nodo activo en tres pasos.",
+        how_s1_t:       "Obtén tu licencia",
+        how_s1_b:       "Adquiere una Licencia Datakeeper mediante el enlace oficial del distribuidor CyderEyesX. Una licencia = un espacio de nodo en la red.",
+        how_s2_t:       "Configura tu nodo",
+        how_s2_b:       "Instala el nodo DeNet en un equipo de escritorio o servidor (Windows, macOS o Linux). Requisitos mínimos, gestores fáciles para principiantes y acompañamiento de CyderEyesX si lo deseas.",
+        how_s3_t:       "Almacena y gana",
+        how_s3_b:       "Tu nodo empieza a guardar fragmentos de datos cifrados y a ganar recompensas por almacenamiento verificado. Mantenlo en línea — la disponibilidad es lo que se acumula.",
+
+        /* EARLY */
+        early_eyebrow:  "Posicionamiento",
+        early_title:    "Quien opera temprano va al frente de la fila.",
+        early_body:     "DeNet avanza por su fase de Protocolo v4 hacia el uso en el mundo real. La distribución oficial pasa por un conjunto limitado de socios en el mundo — CyderEyesX es uno de ellos. Quienes configuran y estabilizan sus nodos temprano establecen su lugar en la red antes de que llegue la demanda masiva. La ventana para ser temprano no queda abierta para siempre.",
+        early_cta:      "Asegura tu licencia →",
+
+        /* FINAL */
+        final_title:    "Haz lo imposible.",
+        final_sub:      "Reclama tu Licencia Datakeeper a través de CyderEyesX y empieza a operar infraestructura descentralizada real hoy.",
+        final_cta:      "Compra con CyderEyesX →",
+        final_secured:  "ENLACE OFICIAL DE DISTRIBUIDOR · DISTRIBUTORS.DENET.PRO/CYDEREYESX",
+
+        /* DISCLAIMER */
+        disclaimer:     "CyderEyesX LLC es un distribuidor oficial de DeNet y una entidad de tecnología educativa. Esta página es informativa y no constituye asesoría financiera, de inversión, legal ni fiscal. Comprar una Licencia Datakeeper y operar un nodo implica riesgo; las recompensas no están garantizadas y dependen de la red DeNet, de los mercados de tokens y de tu propia operación. Investiga siempre por tu cuenta antes de participar. DeNet, Datakeeper y las marcas relacionadas pertenecen a sus respectivos dueños."
+      }
+    };
+
+    function setLang(lang) {
+      const dict = I18N[lang] || I18N.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+      document.documentElement.lang = lang;
+      const enBtn = document.getElementById('lang-en');
+      const esBtn = document.getElementById('lang-es');
+      if (enBtn && esBtn) {
+        enBtn.setAttribute('aria-pressed', String(lang === 'en'));
+        esBtn.setAttribute('aria-pressed', String(lang === 'es'));
+      }
+      try { localStorage.setItem('cyx_denet_lang', lang); } catch (e) {}
+    }
+
+    (function initLang() {
+      let lang = 'en';
+      try {
+        const saved = localStorage.getItem('cyx_denet_lang');
+        if (saved === 'en' || saved === 'es') lang = saved;
+        else if ((navigator.language || '').toLowerCase().startsWith('es')) lang = 'es';
+      } catch (e) {}
+      setLang(lang);
+    })();
+  </script>
+
+</body>
+</html>
