@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AccessX Tap | Accessible NFC Content Hosting — CyderEyesX</title>
+  <meta name="description" content="AccessX Tap by CyderEyesX — secure, cloud-hosted accessible content for NFC tags. Audio, video, documents and screen-reader-ready text for blind and low-vision students and staff." />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+    .mono { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.25em; text-transform: uppercase; }
+    .glass { background: rgba(15,23,42,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+    .hero-glow { background: radial-gradient(circle at center, rgba(16,185,129,0.16), transparent 65%); }
+    .btn { transition: transform .25s ease, box-shadow .25s ease; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(16,185,129,0.28); }
+    .btn:focus-visible { outline: 2px solid #34d399; outline-offset: 4px; }
+    .service-card { transition: transform .35s ease, box-shadow .35s ease; }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(16,185,129,0.15); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .logo-stage { background: radial-gradient(circle, rgba(16,185,129,0.20), transparent 60%); border-radius: 2rem; padding: 2.5rem; }
+    .price-card { transition: transform .3s ease, box-shadow .3s ease; }
+    .price-card:hover { transform: translateY(-4px); }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+</head>
+
+<body id="top" data-page="accessxtap">
+
+  <!-- GLOBAL HEADER -->
+  <div id="site-header"></div>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex items-center justify-center hero-glow pt-32 px-6 text-center reveal">
+    <div class="max-w-4xl space-y-8">
+      <img src="https://accessxtap.cydereyesx.com/static/logo.png" alt="AccessX Tap"
+           class="mx-auto h-40 md:h-52" onerror="this.style.display='none'" />
+      <div class="mono text-emerald-400 text-xs">ACCESSIBILITY • NFC • HOSTING</div>
+      <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+        Accessible content for
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">every NFC tag</span>
+      </h1>
+      <p class="max-w-2xl mx-auto text-slate-400 text-lg">
+        Turn any printed document or object into audio, video, or screen-reader-ready text
+        with a single tap — built for blind and low-vision students and staff.
+      </p>
+      <div class="flex flex-col md:flex-row gap-5 justify-center pt-4">
+        <a class="btn px-10 py-4 bg-emerald-400 text-black font-semibold rounded-full"
+           href="https://accessxtap.cydereyesx.com/request">Request access</a>
+        <a class="btn px-10 py-4 border border-white/20 rounded-full"
+           href="https://accessxtap.cydereyesx.com/login">Sign in</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IT DOES -->
+  <section class="py-24 px-6 bg-[#010413] reveal">
+    <div class="max-w-6xl mx-auto text-center mb-14">
+      <div class="mono text-emerald-400 text-xs mb-4">What AccessX Tap does</div>
+      <h2 class="text-3xl md:text-4xl font-bold">One tap. Any format. Fully accessible.</h2>
+    </div>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
+      <div class="glass p-8 rounded-2xl service-card">
+        <div class="mono text-[11px] text-emerald-300 mb-3">Dynamic links</div>
+        <p class="text-slate-400 text-sm leading-relaxed">Change the content behind a tag anytime — the NFC tag is never reprogrammed.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl service-card">
+        <div class="mono text-[11px] text-emerald-300 mb-3">Accessible by design</div>
+        <p class="text-slate-400 text-sm leading-relaxed">Text renders as clean pages screen readers read natively. PDFs, audio and video play inline.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl service-card">
+        <div class="mono text-[11px] text-emerald-300 mb-3">Usage analytics</div>
+        <p class="text-slate-400 text-sm leading-relaxed">See taps over time, devices, and top resources — data to justify budgets.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl service-card">
+        <div class="mono text-[11px] text-emerald-300 mb-3">Secure sharing</div>
+        <p class="text-slate-400 text-sm leading-relaxed">Password-protect links or set expiration dates for sensitive materials.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="py-24 px-6 reveal">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+      <div class="logo-stage text-center">
+        <img src="https://accessxtap.cydereyesx.com/static/favicon.png" class="mx-auto h-40" alt="AccessX Tap"
+             onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="mono text-emerald-400 text-xs mb-4">How it works</div>
+        <h2 class="text-3xl font-bold mb-6">Print Braille. Tap. Understand.</h2>
+        <ol class="space-y-4 text-slate-300 text-sm leading-relaxed">
+          <li><b class="text-emerald-300">1.</b> Upload a document, audio clip, video, or type a description in your dashboard.</li>
+          <li><b class="text-emerald-300">2.</b> AccessX Tap generates a short, secure link.</li>
+          <li><b class="text-emerald-300">3.</b> Write the link to an NFC tag and print your Braille label on it.</li>
+          <li><b class="text-emerald-300">4.</b> A student taps the tag with any phone and instantly hears or reads the content — no app, no download.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="py-24 px-6 bg-[#010413] reveal">
+    <div class="max-w-6xl mx-auto text-center mb-14">
+      <div class="mono text-emerald-400 text-xs mb-4">Plans</div>
+      <h2 class="text-3xl md:text-4xl font-bold">For departments, campuses, and institutions</h2>
+    </div>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-6">
+      <div class="glass price-card p-7 rounded-2xl flex flex-col">
+        <h3 class="text-xl font-bold">Pilot</h3>
+        <div class="text-3xl font-bold text-emerald-400 my-2">By request</div>
+        <ul class="text-slate-400 text-sm space-y-2 mt-3 mb-6 flex-1">
+          <li>Guided trial</li><li>Limited tags</li><li>Basic analytics</li><li>Shared domain</li>
+        </ul>
+        <a class="btn text-center px-4 py-3 rounded-xl border border-emerald-400/40 text-emerald-400 hover:bg-emerald-400 hover:text-black transition" href="https://accessxtap.cydereyesx.com/request">Request a pilot</a>
+      </div>
+      <div class="glass price-card p-7 rounded-2xl flex flex-col border border-emerald-400/40">
+        <h3 class="text-xl font-bold">Department</h3>
+        <div class="text-3xl font-bold text-emerald-400 my-2">$49<span class="text-base">/mo</span></div>
+        <ul class="text-slate-400 text-sm space-y-2 mt-3 mb-6 flex-1">
+          <li>Up to 250 tags</li><li>50 GB storage</li><li>Audio &amp; video</li><li>Full analytics</li><li>Access control</li>
+        </ul>
+        <a class="btn text-center px-4 py-3 rounded-xl bg-emerald-400 text-black font-semibold" href="https://accessxtap.cydereyesx.com/request">Get started</a>
+      </div>
+      <div class="glass price-card p-7 rounded-2xl flex flex-col">
+        <h3 class="text-xl font-bold">Campus</h3>
+        <div class="text-3xl font-bold text-emerald-400 my-2">$199<span class="text-base">/mo</span></div>
+        <ul class="text-slate-400 text-sm space-y-2 mt-3 mb-6 flex-1">
+          <li>Whole campus</li><li>250 GB storage</li><li>Protected &amp; expiring links</li><li>CSV / PDF exports</li><li>Priority support</li>
+        </ul>
+        <a class="btn text-center px-4 py-3 rounded-xl border border-emerald-400/40 text-emerald-400 hover:bg-emerald-400 hover:text-black transition" href="https://accessxtap.cydereyesx.com/request">Get started</a>
+      </div>
+      <div class="glass price-card p-7 rounded-2xl flex flex-col">
+        <h3 class="text-xl font-bold">Institution</h3>
+        <div class="text-3xl font-bold text-emerald-400 my-2">Custom</div>
+        <ul class="text-slate-400 text-sm space-y-2 mt-3 mb-6 flex-1">
+          <li>Multi-campus</li><li>White-label domain</li><li>SSO &amp; SLA</li><li>Dedicated onboarding</li>
+        </ul>
+        <a class="btn text-center px-4 py-3 rounded-xl border border-emerald-400/40 text-emerald-400 hover:bg-emerald-400 hover:text-black transition" href="https://accessxtap.cydereyesx.com/request">Contact us</a>
+      </div>
+    </div>
+    <p class="text-center text-slate-500 text-xs mt-8">Pricing shown for planning purposes. See our
+      <a href="/accessxtap-terms.html" class="text-emerald-400 hover:underline">Terms of Service</a>.</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 px-6 text-center reveal">
+    <div class="max-w-3xl mx-auto glass rounded-3xl p-12">
+      <h2 class="text-3xl font-bold mb-4">Make your materials accessible today</h2>
+      <p class="text-slate-400 mb-8">Request access and our team will set up your institution.</p>
+      <a class="btn inline-block px-10 py-4 bg-emerald-400 text-black font-semibold rounded-full" href="https://accessxtap.cydereyesx.com/request">Request access</a>
+    </div>
+  </section>
+
+  <!-- GLOBAL FOOTER -->
+  <div id="site-footer"></div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+    }, { threshold: 0.15 });
+    reveals.forEach(r => revealObserver.observe(r));
+  </script>
+  <script src="layout.js"></script>
+</body>
+</html>
