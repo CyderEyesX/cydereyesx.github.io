@@ -382,6 +382,41 @@ Cydereyesx gallery · HTML
     @media (prefers-reduced-motion: reduce) {
       .aurora, .centerpiece-img { animation: none !important; }
     }
+ 
+    /* WASTELAND-WEB-ROOM-PATCH */
+    .plaque-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--brass);
+      text-decoration: none;
+      border-bottom: 1px solid var(--brass-line);
+      padding-bottom: 1px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .plaque-link:hover { color: var(--marble); border-color: var(--brass); }
+ 
+    .room-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+ 
+    .curator-note {
+      margin-top: 18px;
+      padding: 16px 20px;
+      border-left: 2px solid var(--brass-line);
+      background: rgba(201,168,118,0.04);
+      font-style: italic;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--ink-dim);
+      max-width: 640px;
+    }
   </style>
 </head>
  
@@ -399,6 +434,7 @@ Cydereyesx gallery · HTML
     <a href="#room-star-atlas" class="wr-item"><span class="wr-label">Star Atlas</span><span class="wr-dot"></span></a>
     <a href="#room-playsolana" class="wr-item"><span class="wr-label">PlaySolana</span><span class="wr-dot"></span></a>
     <a href="#room-deeep" class="wr-item"><span class="wr-label">DeEEP DIN</span><span class="wr-dot"></span></a>
+    <a href="#room-wasteland-web" class="wr-item"><span class="wr-label">Wasteland Web</span><span class="wr-dot"></span></a>
   </nav>
  
   <!-- HERO / THRESHOLD -->
@@ -474,7 +510,7 @@ Cydereyesx gallery · HTML
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 01 / 07</div>
+            <div class="room-index mb-2">Room 01 / 08</div>
             <h2 class="room-title">Loaded Lions</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A flagship Cronos NFT collection known for identity, community access, and ecosystem utility within Crypto.com's NFT landscape.
@@ -510,7 +546,7 @@ Cydereyesx gallery · HTML
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 02 / 07</div>
+            <div class="room-index mb-2">Room 02 / 08</div>
             <h2 class="room-title">Cyber Cubs</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A companion-style collection in the Cronos ecosystem, designed with playful visual identity and community-first culture.
@@ -540,7 +576,7 @@ Cydereyesx gallery · HTML
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 03 / 07</div>
+            <div class="room-index mb-2">Room 03 / 08</div>
             <h2 class="room-title">Dark Lions</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A darker aesthetic branch within the Cronos NFT culture—often framed around rarity, identity, and collector-driven storytelling.
@@ -588,7 +624,7 @@ Cydereyesx gallery · HTML
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 04 / 07</div>
+            <div class="room-index mb-2">Room 04 / 08</div>
             <h2 class="room-title">Cronos-7 Visitors</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A Cronos-native collection framed around themed identities and collectible variants—useful for showcasing on-chain culture and provenance.
@@ -618,7 +654,7 @@ Cydereyesx gallery · HTML
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 05 / 07</div>
+            <div class="room-index mb-2">Room 05 / 08</div>
             <h2 class="room-title">Star Atlas</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A sci-fi gaming universe where digital assets reflect ships and components—useful for discussions on game economies, digital ownership, and utility-driven collectibles.
@@ -666,7 +702,7 @@ Cydereyesx gallery · HTML
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 06 / 07</div>
+            <div class="room-index mb-2">Room 06 / 08</div>
             <h2 class="room-title">PlaySolana</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A gaming-focused project in the Solana ecosystem—useful for exploring digital items, community incentives, and participation-based rewards models.
@@ -690,7 +726,7 @@ Cydereyesx gallery · HTML
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 07 / 07</div>
+            <div class="room-index mb-2">Room 07 / 08</div>
             <h2 class="room-title">DeEEP DIN Collection</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A project-aligned collectible used as a visual reference for community participation and ecosystem experimentation within the DeEEP Network environment.
@@ -705,6 +741,96 @@ Cydereyesx gallery · HTML
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">DeEEP DIN</div><div class="plaque-title">Cool Leather Ladybug #3259</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. CLL3259.png</div></div>
           </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- Room 8 — The Wasteland Web (Presearch Nodes) -->
+    <!-- WASTELAND-WEB-ROOM-PATCH -->
+    <section id="room-wasteland-web" class="room py-16 px-6" style="background:var(--bg-room)">
+      <div class="max-w-7xl mx-auto">
+        <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-6">
+          <div>
+            <div class="room-index mb-2">Room 08 / 08 <span class="room-tag">&middot; Project Closed</span></div>
+            <h2 class="room-title">The Wasteland Web</h2>
+            <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
+              Presearch Node NFTs once represented an active node on the Presearch network and the earning
+              rights that came with it. The Wasteland Web Collection wrapped that utility in narrative: three
+              Web3-native node types &mdash; Crawler, Vector, and C-Seek &mdash; cast as living artifacts from
+              a rebellion to free knowledge from corporate and alien control, set in the post-algorithmic
+              ruins of the internet.
+            </p>
+            <div class="curator-note">
+              Curator's note: this project closed unexpectedly, and the infrastructure it promised never
+              arrived. These pieces stay in the archive regardless &mdash; not for what they turned out to
+              be worth, but for the art itself, and as a standing reminder that conviction is not due
+              diligence.
+            </div>
+          </div>
+        </div>
+ 
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14 mt-10">
+ 
+          <div class="pedestal" tabindex="0" role="button" aria-label="View Crawler Node #337" data-title="Crawler Node #337" data-collection="The Wasteland Web" data-ref="Crawler_Node_#337.png" data-src="/images/nft/Crawler_Node_%23337.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/Crawler_Node_%23337.png" alt="Crawler Node #337" loading="lazy" /></div>
+            <div class="plinth"></div>
+            <div class="plaque">
+              <div class="plaque-eyebrow">The Wasteland Web</div>
+              <div class="plaque-title">Crawler Node #337</div>
+              <div class="plaque-rule"></div>
+              <div class="plaque-ref">Ref. Crawler_Node_#337.png</div>
+              <a class="plaque-link" href="https://opensea.io/item/base/0x1bb1681960e4aa85b42f61344116c08f5e70e7e8/381" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on OpenSea &#8599;</a>
+            </div>
+          </div>
+ 
+          <div class="pedestal" tabindex="0" role="button" aria-label="View Crawler Node #130" data-title="Crawler Node #130" data-collection="The Wasteland Web" data-ref="Crawler_Node_#130.png" data-src="/images/nft/Crawler_Node_%23130.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/Crawler_Node_%23130.png" alt="Crawler Node #130" loading="lazy" /></div>
+            <div class="plinth"></div>
+            <div class="plaque">
+              <div class="plaque-eyebrow">The Wasteland Web</div>
+              <div class="plaque-title">Crawler Node #130</div>
+              <div class="plaque-rule"></div>
+              <div class="plaque-ref">Ref. Crawler_Node_#130.png</div>
+              <a class="plaque-link" href="https://opensea.io/item/base/0x1bb1681960e4aa85b42f61344116c08f5e70e7e8/152" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on OpenSea &#8599;</a>
+            </div>
+          </div>
+ 
+          <div class="pedestal" tabindex="0" role="button" aria-label="View Vector Node #160" data-title="Vector Node #160" data-collection="The Wasteland Web" data-ref="Vector_Node_#160.png" data-src="/images/nft/Vector_Node_%23160.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/Vector_Node_%23160.png" alt="Vector Node #160" loading="lazy" /></div>
+            <div class="plinth"></div>
+            <div class="plaque">
+              <div class="plaque-eyebrow">The Wasteland Web</div>
+              <div class="plaque-title">Vector Node #160</div>
+              <div class="plaque-rule"></div>
+              <div class="plaque-ref">Ref. Vector_Node_#160.png</div>
+              <a class="plaque-link" href="https://opensea.io/item/base/0x1bb1681960e4aa85b42f61344116c08f5e70e7e8/516" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on OpenSea &#8599;</a>
+            </div>
+          </div>
+ 
+          <div class="pedestal" tabindex="0" role="button" aria-label="View Vector Node #8" data-title="Vector Node #8" data-collection="The Wasteland Web" data-ref="Vector_Node_#8.png" data-src="/images/nft/Vector_Node_%238.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/Vector_Node_%238.png" alt="Vector Node #8" loading="lazy" /></div>
+            <div class="plinth"></div>
+            <div class="plaque">
+              <div class="plaque-eyebrow">The Wasteland Web</div>
+              <div class="plaque-title">Vector Node #8</div>
+              <div class="plaque-rule"></div>
+              <div class="plaque-ref">Ref. Vector_Node_#8.png</div>
+              <a class="plaque-link" href="https://opensea.io/item/base/0x1bb1681960e4aa85b42f61344116c08f5e70e7e8/128" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on OpenSea &#8599;</a>
+            </div>
+          </div>
+ 
+          <div class="pedestal" tabindex="0" role="button" aria-label="View C-Seek Node #12" data-title="C-Seek Node #12" data-collection="The Wasteland Web" data-ref="C-Seek_Node_#12.png" data-src="/images/nft/C-Seek_Node_%2312.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/C-Seek_Node_%2312.png" alt="C-Seek Node #12" loading="lazy" /></div>
+            <div class="plinth"></div>
+            <div class="plaque">
+              <div class="plaque-eyebrow">The Wasteland Web</div>
+              <div class="plaque-title">C-Seek Node #12</div>
+              <div class="plaque-rule"></div>
+              <div class="plaque-ref">Ref. C-Seek_Node_#12.png</div>
+              <a class="plaque-link" href="https://opensea.io/item/base/0x1bb1681960e4aa85b42f61344116c08f5e70e7e8/188" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on OpenSea &#8599;</a>
+            </div>
+          </div>
+ 
         </div>
       </div>
     </section>
