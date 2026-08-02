@@ -1,26 +1,23 @@
-
-
-Cydereyesx gallery · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CyderEyesX | The Gallery — A Personal Archive</title>
- 
+
   <!-- Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
- 
+
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
- 
+
   <!-- Fonts: Cormorant Garamond (engraved plaque serif) + Inter (body) + JetBrains Mono (utility) -->
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
     rel="stylesheet"
   />
- 
+
   <style>
     :root{
       --bg: #020617;
@@ -28,7 +25,7 @@ Cydereyesx gallery · HTML
       --panel: rgba(15, 23, 42, 0.55);
       --border: rgba(255,255,255,0.08);
       --teal: rgba(45, 212, 191, 0.9);
- 
+
       /* Museum palette — new for this page */
       --brass: #c9a876;
       --brass-dim: #8a744a;
@@ -37,32 +34,32 @@ Cydereyesx gallery · HTML
       --ink: #d9d4c6;
       --ink-dim: #8c8a80;
     }
- 
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg);
       color: var(--ink);
       overflow-x: hidden;
     }
- 
+
     .mono {
       font-family: 'JetBrains Mono', monospace;
       letter-spacing: 0.25em;
       text-transform: uppercase;
     }
- 
+
     .serif {
       font-family: 'Cormorant Garamond', serif;
     }
- 
+
     .glass {
       background: var(--panel);
       backdrop-filter: blur(14px);
       border: 1px solid var(--border);
     }
- 
+
     .hero-glow { position: relative; isolation: isolate; }
- 
+
     .aurora {
       position: absolute;
       inset: -20%;
@@ -74,12 +71,12 @@ Cydereyesx gallery · HTML
       filter: blur(20px) saturate(105%);
       animation: drift 16s ease-in-out infinite alternate;
     }
- 
+
     @keyframes drift {
       0%   { transform: translate(-2%, -1%) scale(1.02); opacity: 0.9; }
       100% { transform: translate(2%, 1%) scale(1.05); opacity: 1; }
     }
- 
+
     /* ============ COLUMNS (hero threshold) ============ */
     .column {
       width: 26px;
@@ -104,7 +101,7 @@ Cydereyesx gallery · HTML
     }
     .column::before { top: -10px; }
     .column::after { bottom: -10px; }
- 
+
     /* ============ HERO CENTERPIECE ============ */
     .centerpiece-ring {
       position: relative;
@@ -133,7 +130,7 @@ Cydereyesx gallery · HTML
       50%  { transform: rotate(0.6deg) scale(1.015); filter: saturate(1.08); }
       100% { transform: rotate(0deg) scale(1); filter: saturate(1.02); }
     }
- 
+
     /* ============ WAYFINDING RAIL ============ */
     .wing-rail {
       position: fixed;
@@ -183,7 +180,7 @@ Cydereyesx gallery · HTML
       transform: scale(1.35);
     }
     .wr-item.active .wr-label { opacity: 1; color: var(--brass); transform: translateX(0); }
- 
+
     /* ============ ROOM PLAQUE (section header) ============ */
     .room-plaque {
       border-left: 2px solid var(--brass-line);
@@ -213,7 +210,7 @@ Cydereyesx gallery · HTML
       transition: color 0.2s ease, border-color 0.2s ease;
     }
     .room-link:hover { color: var(--marble); border-color: var(--brass); }
- 
+
     /* ============ PEDESTAL (NFT card) ============ */
     .pedestal {
       position: relative;
@@ -246,7 +243,7 @@ Cydereyesx gallery · HTML
       transition: transform 0.5s ease, filter 0.5s ease;
     }
     .pedestal:hover .pedestal-img { transform: scale(1.045); }
- 
+
     .spotlight {
       position: absolute;
       inset: 0;
@@ -256,7 +253,7 @@ Cydereyesx gallery · HTML
       pointer-events: none;
     }
     .pedestal:hover .spotlight { opacity: 1; }
- 
+
     /* Plinth base beneath the frame */
     .plinth {
       height: 8px;
@@ -265,7 +262,7 @@ Cydereyesx gallery · HTML
       border-left: 1px solid var(--brass-line);
       border-right: 1px solid var(--brass-line);
     }
- 
+
     /* Engraved brass plaque under each piece */
     .plaque {
       margin-top: 12px;
@@ -298,7 +295,7 @@ Cydereyesx gallery · HTML
       color: var(--ink-dim);
       letter-spacing: 0.02em;
     }
- 
+
     /* ============ LIGHTBOX ============ */
     .lb-backdrop {
       position: fixed;
@@ -313,7 +310,7 @@ Cydereyesx gallery · HTML
     }
     .lb-backdrop.show { display: flex; animation: fadeIn 180ms ease-out; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
- 
+
     .lb-panel {
       width: min(980px, 100%);
       border-radius: 6px;
@@ -325,7 +322,7 @@ Cydereyesx gallery · HTML
       animation: pop 220ms ease-out forwards;
     }
     @keyframes pop { to { transform: translateY(0); } }
- 
+
     .lb-img {
       width: 100%;
       height: auto;
@@ -333,7 +330,7 @@ Cydereyesx gallery · HTML
       object-fit: contain;
       background: rgba(2,6,23,0.6);
     }
- 
+
     .lb-close {
       position: absolute;
       top: 14px;
@@ -354,13 +351,13 @@ Cydereyesx gallery · HTML
       border-color: var(--brass);
       transform: scale(1.03);
     }
- 
+
     .badge {
       border: 1px solid var(--brass-line);
       background: rgba(201,168,118,0.08);
       color: var(--brass);
     }
- 
+
     /* ============ ENTRANCE PLAQUES (disclaimer) ============ */
     .entrance-plaque {
       border: 1px solid var(--brass-line);
@@ -373,16 +370,16 @@ Cydereyesx gallery · HTML
       font-size: 1.4rem;
       color: var(--marble);
     }
- 
+
     a, button { outline-offset: 3px; }
     a:focus-visible, button:focus-visible, .pedestal:focus-visible {
       outline: 1px solid var(--brass);
     }
- 
+
     @media (prefers-reduced-motion: reduce) {
       .aurora, .centerpiece-img { animation: none !important; }
     }
- 
+
     /* WASTELAND-WEB-ROOM-PATCH */
     .plaque-link {
       display: inline-block;
@@ -397,7 +394,7 @@ Cydereyesx gallery · HTML
       transition: color 0.2s ease, border-color 0.2s ease;
     }
     .plaque-link:hover { color: var(--marble); border-color: var(--brass); }
- 
+
     .room-tag {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
@@ -405,7 +402,7 @@ Cydereyesx gallery · HTML
       text-transform: uppercase;
       color: var(--ink-dim);
     }
- 
+
     .curator-note {
       margin-top: 18px;
       padding: 16px 20px;
@@ -419,12 +416,12 @@ Cydereyesx gallery · HTML
     }
   </style>
 </head>
- 
+
 <body data-page="internal">
- 
+
   <!-- GLOBAL HEADER -->
   <div id="site-header"></div>
- 
+
   <!-- WAYFINDING RAIL -->
   <nav id="wingRail" class="wing-rail" aria-label="Gallery wings">
     <a href="#room-loaded-lions" class="wr-item"><span class="wr-label">Loaded Lions</span><span class="wr-dot"></span></a>
@@ -435,15 +432,16 @@ Cydereyesx gallery · HTML
     <a href="#room-playsolana" class="wr-item"><span class="wr-label">PlaySolana</span><span class="wr-dot"></span></a>
     <a href="#room-deeep" class="wr-item"><span class="wr-label">DeEEP DIN</span><span class="wr-dot"></span></a>
     <a href="#room-wasteland-web" class="wr-item"><span class="wr-label">Wasteland Web</span><span class="wr-dot"></span></a>
+    <a href="#room-wolfies" class="wr-item"><span class="wr-label">Wolfies</span><span class="wr-dot"></span></a>
   </nav>
- 
+
   <!-- HERO / THRESHOLD -->
   <section class="hero-glow min-h-[78vh] flex items-center justify-center pt-32 px-6 text-center">
     <div class="aurora"></div>
- 
+
     <div class="max-w-4xl w-full space-y-9">
       <div class="mono text-[11px]" style="color:var(--brass)">The CyderEyesX Gallery</div>
- 
+
       <div class="flex items-center justify-center gap-8 md:gap-14">
         <div class="column hidden sm:block"></div>
         <div class="centerpiece-ring flex items-center justify-center shrink-0">
@@ -451,15 +449,15 @@ Cydereyesx gallery · HTML
         </div>
         <div class="column hidden sm:block"></div>
       </div>
- 
+
       <h1 class="serif font-semibold text-5xl md:text-6xl" style="color:var(--marble)">A Personal Archive</h1>
- 
+
       <p class="max-w-2xl mx-auto leading-relaxed" style="color:var(--ink)">
         Seven rooms, nineteen pieces — a founder's own digital collectibles, kept and shown
         the way you'd keep anything worth walking past twice. Wander the wings on the right,
         or simply scroll.
       </p>
- 
+
       <div class="flex flex-wrap gap-3 justify-center pt-2">
         <span class="badge text-xs px-4 py-2 rounded-full">Personal Collection</span>
         <span class="badge text-xs px-4 py-2 rounded-full">Not Financial Advice</span>
@@ -467,13 +465,13 @@ Cydereyesx gallery · HTML
       </div>
     </div>
   </section>
- 
+
   <!-- ENTRANCE PLAQUES / DISCLAIMER -->
   <section class="py-16 px-6">
     <div class="max-w-6xl mx-auto">
       <div class="mono text-[11px] mb-8 text-center" style="color:var(--brass-dim)">Before You Enter</div>
       <div class="grid md:grid-cols-3 gap-px" style="background:var(--brass-line)">
- 
+
         <div class="entrance-plaque p-8" style="border-radius:0">
           <h2 class="mb-3">Important Clarification</h2>
           <p class="text-sm leading-relaxed" style="color:var(--ink-dim)">
@@ -481,7 +479,7 @@ Cydereyesx gallery · HTML
             a solicitation, or a recommendation. This page is <strong style="color:var(--ink)">not financial advice</strong>.
           </p>
         </div>
- 
+
         <div class="entrance-plaque p-8" style="border-radius:0">
           <h2 class="mb-3">Why It Exists</h2>
           <p class="text-sm leading-relaxed" style="color:var(--ink-dim)">
@@ -489,7 +487,7 @@ Cydereyesx gallery · HTML
             serving as a visual reference during educational conversations.
           </p>
         </div>
- 
+
         <div class="entrance-plaque p-8" style="border-radius:0">
           <h2 class="mb-3">How to Explore</h2>
           <p class="text-sm leading-relaxed" style="color:var(--ink-dim)">
@@ -497,20 +495,20 @@ Cydereyesx gallery · HTML
             for context and provenance. Use the wings on the right to jump between rooms.
           </p>
         </div>
- 
+
       </div>
     </div>
   </section>
- 
+
   <!-- ROOMS -->
   <main class="pb-28">
- 
+
     <!-- Room 1 — Loaded Lions -->
     <section id="room-loaded-lions" class="room py-16 px-6">
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 01 / 08</div>
+            <div class="room-index mb-2">Room 01 / 09</div>
             <h2 class="room-title">Loaded Lions</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A flagship Cronos NFT collection known for identity, community access, and ecosystem utility within Crypto.com's NFT landscape.
@@ -518,20 +516,20 @@ Cydereyesx gallery · HTML
           </div>
           <a class="room-link" href="https://crypto.com/nft/collection/82421cf8e15df0edcaa200af752a344f?tab=items" target="_blank" rel="noopener">Provenance ↗</a>
         </div>
- 
+
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
           <div class="pedestal" tabindex="0" role="button" aria-label="View Loaded Lion #2320" data-title="Loaded Lion #2320" data-collection="Loaded Lions" data-ref="LL2320.png" data-src="/images/nft/LL2320.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/LL2320.png" alt="Loaded Lion #2320" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Loaded Lions</div><div class="plaque-title">Loaded Lion #2320</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. LL2320.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Loaded Lion #1115" data-title="Loaded Lion #1115" data-collection="Loaded Lions" data-ref="LL1115.png" data-src="/images/nft/LL1115.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/LL1115.png" alt="Loaded Lion #1115" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Loaded Lions</div><div class="plaque-title">Loaded Lion #1115</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. LL1115.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Loaded Lion #3600" data-title="Loaded Lion #3600" data-collection="Loaded Lions" data-ref="LL3600.png" data-src="/images/nft/LL3600.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/LL3600.png" alt="Loaded Lion #3600" loading="lazy" /></div>
             <div class="plinth"></div>
@@ -540,13 +538,13 @@ Cydereyesx gallery · HTML
         </div>
       </div>
     </section>
- 
+
     <!-- Room 2 — Cyber Cubs -->
     <section id="room-cyber-cubs" class="room py-16 px-6" style="background:var(--bg-room)">
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 02 / 08</div>
+            <div class="room-index mb-2">Room 02 / 09</div>
             <h2 class="room-title">Cyber Cubs</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A companion-style collection in the Cronos ecosystem, designed with playful visual identity and community-first culture.
@@ -554,14 +552,14 @@ Cydereyesx gallery · HTML
           </div>
           <a class="room-link" href="https://crypto.com/nft/collection/366e1c3857fecce971703df888904e86?tab=items" target="_blank" rel="noopener">Provenance ↗</a>
         </div>
- 
+
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
           <div class="pedestal" tabindex="0" role="button" aria-label="View Cyber Cubs #3542" data-title="Cyber Cubs #3542" data-collection="Cyber Cubs" data-ref="CC3542.png" data-src="/images/nft/CC3542.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/CC3542.png" alt="Cyber Cubs #3542" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Cyber Cubs</div><div class="plaque-title">Cyber Cubs #3542</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. CC3542.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Cyber Cubs #3510" data-title="Cyber Cubs #3510" data-collection="Cyber Cubs" data-ref="CC3510.png" data-src="/images/nft/CC3510.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/CC3510.png" alt="Cyber Cubs #3510" loading="lazy" /></div>
             <div class="plinth"></div>
@@ -570,13 +568,13 @@ Cydereyesx gallery · HTML
         </div>
       </div>
     </section>
- 
+
     <!-- Room 3 — Dark Lions -->
     <section id="room-dark-lions" class="room py-16 px-6">
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 03 / 08</div>
+            <div class="room-index mb-2">Room 03 / 09</div>
             <h2 class="room-title">Dark Lions</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A darker aesthetic branch within the Cronos NFT culture—often framed around rarity, identity, and collector-driven storytelling.
@@ -584,32 +582,32 @@ Cydereyesx gallery · HTML
           </div>
           <a class="room-link" href="https://crypto.com/nft/collection/5855701d43bc9a7fea90bd254ebd4b6e?tab=items" target="_blank" rel="noopener">Provenance ↗</a>
         </div>
- 
+
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
           <div class="pedestal" tabindex="0" role="button" aria-label="View Dark Lion #8518" data-title="Dark Lion #8518" data-collection="Dark Lions" data-ref="DKL8518.png" data-src="/images/nft/DKL8518.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/DKL8518.png" alt="Dark Lion #8518" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Dark Lions</div><div class="plaque-title">Dark Lion #8518</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. DKL8518.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Dark Lion #6841" data-title="Dark Lion #6841" data-collection="Dark Lions" data-ref="DKL6841.png" data-src="/images/nft/DKL6841.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/DKL6841.png" alt="Dark Lion #6841" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Dark Lions</div><div class="plaque-title">Dark Lion #6841</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. DKL6841.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Dark Lion #6740" data-title="Dark Lion #6740" data-collection="Dark Lions" data-ref="DKL6740.png" data-src="/images/nft/DKL6740.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/DKL6740.png" alt="Dark Lion #6740" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Dark Lions</div><div class="plaque-title">Dark Lion #6740</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. DKL6740.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Dark Lion #1421" data-title="Dark Lion #1421" data-collection="Dark Lions" data-ref="DKL1421.png" data-src="/images/nft/DKL1421.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/DKL1421.png" alt="Dark Lion #1421" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Dark Lions</div><div class="plaque-title">Dark Lion #1421</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. DKL1421.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Dark Lion #1244" data-title="Dark Lion #1244" data-collection="Dark Lions" data-ref="DKL1244.png" data-src="/images/nft/DKL1244.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/DKL1244.png" alt="Dark Lion #1244" loading="lazy" /></div>
             <div class="plinth"></div>
@@ -618,13 +616,13 @@ Cydereyesx gallery · HTML
         </div>
       </div>
     </section>
- 
+
     <!-- Room 4 — Cronos-7 Visitors -->
     <section id="room-cronos7" class="room py-16 px-6" style="background:var(--bg-room)">
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 04 / 08</div>
+            <div class="room-index mb-2">Room 04 / 09</div>
             <h2 class="room-title">Cronos-7 Visitors</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A Cronos-native collection framed around themed identities and collectible variants—useful for showcasing on-chain culture and provenance.
@@ -632,14 +630,14 @@ Cydereyesx gallery · HTML
           </div>
           <a class="room-link" href="https://crypto.com/nft/collection/566dc0a3e927bc2cc65d4688b3f9608f?tab=items" target="_blank" rel="noopener">Provenance ↗</a>
         </div>
- 
+
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
           <div class="pedestal" tabindex="0" role="button" aria-label="View Cronos-7 Visitors #7630" data-title="Cronos-7 Visitors #7630" data-collection="Cronos-7 Visitors" data-ref="C7V7630.png" data-src="/images/nft/C7V7630.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/C7V7630.png" alt="Cronos-7 Visitors #7630" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Cronos-7 Visitors</div><div class="plaque-title">Cronos-7 Visitors #7630</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. C7V7630.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Cronos-7 Visitors #5399" data-title="Cronos-7 Visitors #5399" data-collection="Cronos-7 Visitors" data-ref="C7V5399.png" data-src="/images/nft/C7V5399.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/C7V5399.png" alt="Cronos-7 Visitors #5399" loading="lazy" /></div>
             <div class="plinth"></div>
@@ -648,13 +646,13 @@ Cydereyesx gallery · HTML
         </div>
       </div>
     </section>
- 
+
     <!-- Room 5 — Star Atlas -->
     <section id="room-star-atlas" class="room py-16 px-6">
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 05 / 08</div>
+            <div class="room-index mb-2">Room 05 / 09</div>
             <h2 class="room-title">Star Atlas</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A sci-fi gaming universe where digital assets reflect ships and components—useful for discussions on game economies, digital ownership, and utility-driven collectibles.
@@ -662,32 +660,32 @@ Cydereyesx gallery · HTML
           </div>
           <a class="room-link" href="https://play.staratlas.com/" target="_blank" rel="noopener">Provenance ↗</a>
         </div>
- 
+
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
           <div class="pedestal" tabindex="0" role="button" aria-label="View VZUS ambwe" data-title="VZUS ambwe" data-collection="Star Atlas" data-ref="VZUS.png" data-src="/images/nft/VZUS.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/VZUS.png" alt="VZUS ambwe" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Star Atlas</div><div class="plaque-title">VZUS ambwe</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. VZUS.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Pearce X5" data-title="Pearce X5" data-collection="Star Atlas" data-ref="PX5.png" data-src="/images/nft/PX5.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/PX5.png" alt="Pearce X5" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Star Atlas</div><div class="plaque-title">Pearce X5</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. PX5.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Pearce X4" data-title="Pearce X4" data-collection="Star Atlas" data-ref="PX4.png" data-src="/images/nft/PX4.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/PX4.png" alt="Pearce X4" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Star Atlas</div><div class="plaque-title">Pearce X4</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. PX4.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Opal Jet" data-title="Opal Jet" data-collection="Star Atlas" data-ref="OJ.png" data-src="/images/nft/OJ.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/OJ.png" alt="Opal Jet" loading="lazy" /></div>
             <div class="plinth"></div>
             <div class="plaque"><div class="plaque-eyebrow">Star Atlas</div><div class="plaque-title">Opal Jet</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. OJ.png</div></div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Rainbow Chi" data-title="Rainbow Chi" data-collection="Star Atlas" data-ref="RC.png" data-src="/images/nft/RC.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/RC.png" alt="Rainbow Chi" loading="lazy" /></div>
             <div class="plinth"></div>
@@ -696,13 +694,13 @@ Cydereyesx gallery · HTML
         </div>
       </div>
     </section>
- 
+
     <!-- Room 6 — PlaySolana -->
     <section id="room-playsolana" class="room py-16 px-6" style="background:var(--bg-room)">
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 06 / 08</div>
+            <div class="room-index mb-2">Room 06 / 09</div>
             <h2 class="room-title">PlaySolana</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A gaming-focused project in the Solana ecosystem—useful for exploring digital items, community incentives, and participation-based rewards models.
@@ -710,7 +708,7 @@ Cydereyesx gallery · HTML
           </div>
           <a class="room-link" href="https://www.playsolana.com/" target="_blank" rel="noopener">Provenance ↗</a>
         </div>
- 
+
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
           <div class="pedestal" tabindex="0" role="button" aria-label="View Player2 #4744" data-title="Player2 #4744" data-collection="PlaySolana" data-ref="PLAYER4744.png" data-src="/images/nft/PLAYER4744.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/PLAYER4744.png" alt="Player2 #4744" loading="lazy" /></div>
@@ -720,13 +718,13 @@ Cydereyesx gallery · HTML
         </div>
       </div>
     </section>
- 
+
     <!-- Room 7 — DeEEP DIN -->
     <section id="room-deeep" class="room py-16 px-6">
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div class="room-index mb-2">Room 07 / 08</div>
+            <div class="room-index mb-2">Room 07 / 09</div>
             <h2 class="room-title">DeEEP DIN Collection</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               A project-aligned collectible used as a visual reference for community participation and ecosystem experimentation within the DeEEP Network environment.
@@ -734,7 +732,7 @@ Cydereyesx gallery · HTML
           </div>
           <a class="room-link" href="https://www.deeep.network/" target="_blank" rel="noopener">Provenance ↗</a>
         </div>
- 
+
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
           <div class="pedestal" tabindex="0" role="button" aria-label="View Cool Leather Ladybug #3259" data-title="Cool Leather Ladybug #3259" data-collection="DeEEP DIN" data-ref="CLL3259.png" data-src="/images/nft/CLL3259.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/CLL3259.png" alt="Cool Leather Ladybug #3259" loading="lazy" /></div>
@@ -744,14 +742,14 @@ Cydereyesx gallery · HTML
         </div>
       </div>
     </section>
- 
+
     <!-- Room 8 — The Wasteland Web (Presearch Nodes) -->
     <!-- WASTELAND-WEB-ROOM-PATCH -->
     <section id="room-wasteland-web" class="room py-16 px-6" style="background:var(--bg-room)">
       <div class="max-w-7xl mx-auto">
         <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-6">
           <div>
-            <div class="room-index mb-2">Room 08 / 08 <span class="room-tag">&middot; Project Closed</span></div>
+            <div class="room-index mb-2">Room 08 / 09 <span class="room-tag">&middot; Project Closed</span></div>
             <h2 class="room-title">The Wasteland Web</h2>
             <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
               Presearch Node NFTs once represented an active node on the Presearch network and the earning
@@ -768,9 +766,9 @@ Cydereyesx gallery · HTML
             </div>
           </div>
         </div>
- 
+
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14 mt-10">
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Crawler Node #337" data-title="Crawler Node #337" data-collection="The Wasteland Web" data-ref="Crawler_Node_#337.png" data-src="/images/nft/Crawler_Node_%23337.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/Crawler_Node_%23337.png" alt="Crawler Node #337" loading="lazy" /></div>
             <div class="plinth"></div>
@@ -782,7 +780,7 @@ Cydereyesx gallery · HTML
               <a class="plaque-link" href="https://opensea.io/item/base/0x1bb1681960e4aa85b42f61344116c08f5e70e7e8/381" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on OpenSea &#8599;</a>
             </div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Crawler Node #130" data-title="Crawler Node #130" data-collection="The Wasteland Web" data-ref="Crawler_Node_#130.png" data-src="/images/nft/Crawler_Node_%23130.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/Crawler_Node_%23130.png" alt="Crawler Node #130" loading="lazy" /></div>
             <div class="plinth"></div>
@@ -794,7 +792,7 @@ Cydereyesx gallery · HTML
               <a class="plaque-link" href="https://opensea.io/item/base/0x1bb1681960e4aa85b42f61344116c08f5e70e7e8/152" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on OpenSea &#8599;</a>
             </div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Vector Node #160" data-title="Vector Node #160" data-collection="The Wasteland Web" data-ref="Vector_Node_#160.png" data-src="/images/nft/Vector_Node_%23160.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/Vector_Node_%23160.png" alt="Vector Node #160" loading="lazy" /></div>
             <div class="plinth"></div>
@@ -806,7 +804,7 @@ Cydereyesx gallery · HTML
               <a class="plaque-link" href="https://opensea.io/item/base/0x1bb1681960e4aa85b42f61344116c08f5e70e7e8/516" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on OpenSea &#8599;</a>
             </div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View Vector Node #8" data-title="Vector Node #8" data-collection="The Wasteland Web" data-ref="Vector_Node_#8.png" data-src="/images/nft/Vector_Node_%238.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/Vector_Node_%238.png" alt="Vector Node #8" loading="lazy" /></div>
             <div class="plinth"></div>
@@ -818,7 +816,7 @@ Cydereyesx gallery · HTML
               <a class="plaque-link" href="https://opensea.io/item/base/0x1bb1681960e4aa85b42f61344116c08f5e70e7e8/128" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on OpenSea &#8599;</a>
             </div>
           </div>
- 
+
           <div class="pedestal" tabindex="0" role="button" aria-label="View C-Seek Node #12" data-title="C-Seek Node #12" data-collection="The Wasteland Web" data-ref="C-Seek_Node_#12.png" data-src="/images/nft/C-Seek_Node_%2312.png">
             <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/C-Seek_Node_%2312.png" alt="C-Seek Node #12" loading="lazy" /></div>
             <div class="plinth"></div>
@@ -830,11 +828,45 @@ Cydereyesx gallery · HTML
               <a class="plaque-link" href="https://opensea.io/item/base/0x1bb1681960e4aa85b42f61344116c08f5e70e7e8/188" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on OpenSea &#8599;</a>
             </div>
           </div>
- 
+
         </div>
       </div>
     </section>
- 
+
+    <!-- Room 9 -- Wolfies -->
+    <!-- WOLFIES-ROOM-PATCH -->
+    <section id="room-wolfies" class="room py-16 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="room-plaque flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          <div>
+            <div class="room-index mb-2">Room 09 / 09</div>
+            <h2 class="room-title">Wolfies</h2>
+            <p class="mt-3 max-w-2xl text-sm" style="color:var(--ink-dim)">
+              5,212 NFTs on Cronos built around a different mechanic: liquidity as a built-in feature.
+              Each Wolfie is backed by $PACK-CRO liquidity pool tokens, redeemable by burning the NFT --
+              an attempt to address the common "floor price means nothing without buyers" problem in
+              PFP collections.
+            </p>
+          </div>
+          <a class="room-link" href="https://wolfswap.app/wolfies" target="_blank" rel="noopener">Provenance &#8599;</a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
+          <div class="pedestal" tabindex="0" role="button" aria-label="View Wolfie #1807" data-title="Wolfie #1807" data-collection="Wolfies" data-ref="Wolfie_1807.png" data-src="/images/nft/Wolfie_1807.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/Wolfie_1807.png" alt="Wolfie #1807" loading="lazy" /></div>
+            <div class="plinth"></div>
+            <div class="plaque"><div class="plaque-eyebrow">Wolfies</div><div class="plaque-title">Wolfie #1807</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. Wolfie_1807.png</div></div>
+          </div>
+
+          <div class="pedestal" tabindex="0" role="button" aria-label="View Wolfie #1628" data-title="Wolfie #1628" data-collection="Wolfies" data-ref="Wolfie_1628.png" data-src="/images/nft/Wolfie_1628.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/Wolfie_1628.png" alt="Wolfie #1628" loading="lazy" /></div>
+            <div class="plinth"></div>
+            <div class="plaque"><div class="plaque-eyebrow">Wolfies</div><div class="plaque-title">Wolfie #1628</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. Wolfie_1628.png</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTNOTE -->
     <section class="pt-10 pb-20 px-6 text-center" style="background:var(--bg-room)">
       <div class="max-w-4xl mx-auto">
@@ -844,16 +876,16 @@ Cydereyesx gallery · HTML
         </p>
       </div>
     </section>
- 
+
   </main>
- 
+
   <!-- LIGHTBOX -->
   <div id="lightbox" class="lb-backdrop" aria-hidden="true">
     <div class="relative w-full">
       <button id="lbClose" class="lb-close" type="button" aria-label="Close">
         <span aria-hidden="true" class="text-xl">✕</span>
       </button>
- 
+
       <div class="lb-panel">
         <img id="lbImg" class="lb-img" src="" alt="" />
         <div class="p-8">
@@ -865,12 +897,12 @@ Cydereyesx gallery · HTML
       </div>
     </div>
   </div>
- 
+
   <!-- GLOBAL FOOTER -->
   <div id="site-footer"></div>
- 
+
   <script src="layout.js"></script>
- 
+
   <script>
     (function () {
       // ---- Lightbox ----
@@ -880,7 +912,7 @@ Cydereyesx gallery · HTML
       const lbEyebrow = document.getElementById('lbEyebrow');
       const lbPath = document.getElementById('lbPath');
       const closeBtn = document.getElementById('lbClose');
- 
+
       function openLightbox(el) {
         const title = el.getAttribute('data-title') || 'NFT';
         const src = el.getAttribute('data-src');
@@ -896,27 +928,27 @@ Cydereyesx gallery · HTML
         lb.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
       }
- 
+
       function closeLightbox() {
         lb.classList.remove('show');
         lb.setAttribute('aria-hidden', 'true');
         lbImg.src = '';
         document.body.style.overflow = '';
       }
- 
+
       document.querySelectorAll('.pedestal').forEach(p => {
         p.addEventListener('click', () => openLightbox(p));
         p.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(p); }
         });
       });
- 
+
       closeBtn.addEventListener('click', closeLightbox);
       lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && lb.classList.contains('show')) closeLightbox();
       });
- 
+
       // ---- Wayfinding rail: highlight current room on scroll ----
       const rooms = document.querySelectorAll('.room[id]');
       const railItems = document.querySelectorAll('#wingRail .wr-item');
@@ -933,7 +965,6 @@ Cydereyesx gallery · HTML
       }
     })();
   </script>
- 
+
 </body>
 </html>
- 
