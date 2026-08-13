@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<!-- FUTURISTIC REDESIGN PASS -- 2026-08-13 -- CSS-only reskin per brief: cyan/ember holo-vault
+     palette, Orbitron display type, animated circuit-field background, hero emblem swapped to
+     NEW_CyderEyesX_Logo.png, "Genesis Collection Singularities" tagging added to 4 pieces.
+     All 31 pedestals / 12 rooms / provenance links preserved unchanged. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -12,27 +16,32 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Fonts: Cormorant Garamond (engraved plaque serif) + Inter (body) + JetBrains Mono (utility) -->
+  <!-- Fonts: Orbitron (holo display) + Inter (body) + JetBrains Mono (utility) -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
     rel="stylesheet"
   />
 
   <style>
     :root{
-      --bg: #020617;
-      --bg-room: #05080f;
-      --panel: rgba(15, 23, 42, 0.55);
-      --border: rgba(255,255,255,0.08);
-      --teal: rgba(45, 212, 191, 0.9);
+      --bg: #030812;
+      --bg-room: #060c1a;
+      --panel: rgba(8, 18, 34, 0.6);
+      --border: rgba(45,232,212,0.10);
+      --teal: rgba(38, 232, 212, 0.95);
 
-      /* Museum palette — new for this page */
-      --brass: #c9a876;
-      --brass-dim: #8a744a;
-      --brass-line: rgba(201,168,118,0.22);
-      --marble: #ede7db;
-      --ink: #d9d4c6;
-      --ink-dim: #8c8a80;
+      /* Holographic-vault palette — repurposes the museum variable names below
+         (kept as-is so every downstream rule recolors automatically) */
+      --brass: #2DD4BF;            /* was warm brass -> now electric cyan, matches site-wide teal */
+      --brass-dim: #4FB0A6;
+      --brass-line: rgba(45,212,191,0.24);
+      --marble: #E4ECF5;            /* was ivory marble -> now cool chrome */
+      --ink: #B9C6D6;
+      --ink-dim: #64748B;
+
+      /* New for the futuristic redesign */
+      --ember: #E2483F;             /* the logo's wing red — reserved for Genesis Singularity pieces */
+      --ember-dim: rgba(226,72,63,0.35);
     }
 
     body {
@@ -49,7 +58,8 @@
     }
 
     .serif {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.03em;
     }
 
     .glass {
@@ -65,16 +75,16 @@
       inset: -20%;
       z-index: -2;
       background:
-        radial-gradient(ellipse at 25% 25%, rgba(201,168,118,0.10), transparent 55%),
-        radial-gradient(ellipse at 75% 30%, rgba(45,212,191,0.08), transparent 60%),
-        radial-gradient(ellipse at 55% 80%, rgba(201,168,118,0.06), transparent 62%);
-      filter: blur(20px) saturate(105%);
-      animation: drift 16s ease-in-out infinite alternate;
+        radial-gradient(ellipse at 22% 28%, rgba(45,212,191,0.14), transparent 55%),
+        radial-gradient(ellipse at 78% 24%, rgba(226,72,63,0.07), transparent 58%),
+        radial-gradient(ellipse at 50% 82%, rgba(45,212,191,0.09), transparent 62%);
+      filter: blur(24px) saturate(115%);
+      animation: drift 14s ease-in-out infinite alternate;
     }
 
     @keyframes drift {
-      0%   { transform: translate(-2%, -1%) scale(1.02); opacity: 0.9; }
-      100% { transform: translate(2%, 1%) scale(1.05); opacity: 1; }
+      0%   { transform: translate(-3%, -2%) scale(1.02) rotate(-0.6deg); opacity: 0.85; }
+      100% { transform: translate(3%, 2%) scale(1.08) rotate(0.6deg); opacity: 1; }
     }
 
     /* ============ COLUMNS (hero threshold) ============ */
@@ -115,20 +125,28 @@
       position: absolute;
       inset: -18px;
       border-radius: 999px;
-      border: 1px dashed rgba(201,168,118,0.14);
+      border: 1px dashed rgba(45,212,191,0.22);
+      animation: ringSpin 40s linear infinite;
+    }
+    @keyframes ringSpin {
+      to { transform: rotate(360deg); }
     }
     .centerpiece-img {
       position: absolute;
       inset: 14px;
       border-radius: 999px;
-      object-fit: cover;
-      box-shadow: 0 0 60px rgba(201,168,118,0.18), 0 0 0 1px rgba(201,168,118,0.25);
-      animation: turntable 22s linear infinite;
+      object-fit: contain;
+      background: radial-gradient(circle, #0b1522 0%, #030812 70%);
+      -webkit-mask-image: radial-gradient(circle, black 58%, transparent 80%);
+      mask-image: radial-gradient(circle, black 58%, transparent 80%);
+      box-shadow: 0 0 60px rgba(45,212,191,0.22), 0 0 0 1px rgba(45,212,191,0.3);
+      animation: turntable 10s ease-in-out infinite;
     }
     @keyframes turntable {
-      0%   { transform: rotate(0deg) scale(1); filter: saturate(1.02); }
-      50%  { transform: rotate(0.6deg) scale(1.015); filter: saturate(1.08); }
-      100% { transform: rotate(0deg) scale(1); filter: saturate(1.02); }
+      0%, 100% { transform: scale(1); filter: saturate(1.05) brightness(1); opacity: 1; }
+      45%      { transform: scale(1.015); filter: saturate(1.15) brightness(1.06); opacity: 1; }
+      50%      { opacity: 0.92; }
+      55%      { transform: scale(1.015); filter: saturate(1.15) brightness(1.06); opacity: 1; }
     }
 
     /* ============ WAYFINDING RAIL ============ */
@@ -168,16 +186,16 @@
     .wr-dot {
       width: 7px;
       height: 7px;
-      border-radius: 999px;
-      background: rgba(201,168,118,0.28);
-      border: 1px solid rgba(201,168,118,0.4);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      background: rgba(45,212,191,0.28);
+      border: 1px solid rgba(45,212,191,0.4);
       transition: all 0.25s ease;
       flex-shrink: 0;
     }
     .wr-item.active .wr-dot {
       background: var(--brass);
-      box-shadow: 0 0 10px rgba(201,168,118,0.7);
-      transform: scale(1.35);
+      box-shadow: 0 0 10px rgba(45,212,191,0.8);
+      transform: scale(1.4);
     }
     .wr-item.active .wr-label { opacity: 1; color: var(--brass); transform: translateX(0); }
 
@@ -193,11 +211,14 @@
       color: var(--brass-dim);
     }
     .room-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 600;
-      font-size: 2.75rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 2.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
       color: var(--marble);
-      line-height: 1.05;
+      line-height: 1.15;
+      text-shadow: 0 0 24px rgba(45,212,191,0.25);
     }
     .room-link {
       font-family: 'JetBrains Mono', monospace;
@@ -223,16 +244,32 @@
     .pedestal-frame {
       position: relative;
       overflow: hidden;
-      border-radius: 4px;
+      border-radius: 2px;
       border: 1px solid var(--brass-line);
-      background: rgba(2,6,23,0.6);
+      background: rgba(3,8,18,0.7);
       transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .pedestal-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 40%, rgba(45,212,191,0.16) 50%, transparent 60%);
+      background-size: 220% 220%;
+      background-position: -60% -60%;
+      opacity: 0;
+      transition: opacity 0.4s ease, background-position 0.9s ease;
+      pointer-events: none;
+    }
+    .pedestal:hover .pedestal-frame::after,
+    .pedestal:focus-visible .pedestal-frame::after {
+      opacity: 1;
+      background-position: 60% 60%;
     }
     .pedestal:hover .pedestal-frame,
     .pedestal:focus-visible .pedestal-frame {
-      border-color: rgba(201,168,118,0.55);
+      border-color: rgba(45,212,191,0.6);
       transform: translateY(-4px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 30px rgba(45,212,191,0.12);
     }
     .pedestal-img {
       width: 100%;
@@ -247,7 +284,7 @@
     .spotlight {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 20%, rgba(201,168,118,0.20), transparent 60%);
+      background: radial-gradient(circle at 50% 20%, rgba(45,212,191,0.22), transparent 60%);
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
@@ -258,7 +295,7 @@
     .plinth {
       height: 8px;
       margin: 0 6px;
-      background: linear-gradient(180deg, rgba(201,168,118,0.10), rgba(201,168,118,0.0));
+      background: linear-gradient(180deg, rgba(45,212,191,0.14), rgba(45,212,191,0.0));
       border-left: 1px solid var(--brass-line);
       border-right: 1px solid var(--brass-line);
     }
@@ -276,10 +313,11 @@
       color: var(--brass-dim);
     }
     .plaque-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Inter', sans-serif;
       font-weight: 600;
-      font-style: italic;
-      font-size: 1.25rem;
+      font-style: normal;
+      font-size: 1.05rem;
+      letter-spacing: 0.01em;
       color: var(--marble);
       margin-top: 3px;
     }
@@ -347,7 +385,7 @@
       transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
     }
     .lb-close:hover {
-      background: rgba(201,168,118,0.12);
+      background: rgba(45,212,191,0.14);
       border-color: var(--brass);
       transform: scale(1.03);
     }
@@ -365,9 +403,11 @@
       border-radius: 4px;
     }
     .entrance-plaque h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 600;
-      font-size: 1.4rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       color: var(--marble);
     }
 
@@ -376,8 +416,69 @@
       outline: 1px solid var(--brass);
     }
 
+    /* ============ AMBIENT CIRCUIT FIELD (sitewide dynamic background) ============ */
+    .circuit-field {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      pointer-events: none;
+      opacity: 0.5;
+      background-image:
+        linear-gradient(rgba(45,212,191,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45,212,191,0.05) 1px, transparent 1px);
+      background-size: 46px 46px;
+      animation: gridDrift 70s linear infinite;
+    }
+    @keyframes gridDrift {
+      to { background-position: 460px 690px, 460px 690px; }
+    }
+
+    /* ============ HERO SCAN SWEEP ============ */
+    .scan-sweep {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 140px;
+      top: -140px;
+      z-index: -1;
+      background: linear-gradient(180deg, transparent, rgba(45,212,191,0.10), transparent);
+      mix-blend-mode: screen;
+      animation: scanSweep 7s linear infinite;
+    }
+    @keyframes scanSweep {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(calc(78vh + 140px)); }
+    }
+
+    /* ============ GENESIS COLLECTION SINGULARITIES ============ */
+    .genesis-singularity .pedestal-frame {
+      border-color: var(--ember-dim);
+      animation: singularityPulse 4.5s ease-in-out infinite;
+    }
+    .singularity-tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 2;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ember);
+      background: rgba(226,72,63,0.14);
+      border: 1px solid var(--ember-dim);
+      padding: 3px 7px;
+      border-radius: 2px;
+      backdrop-filter: blur(4px);
+    }
+    @keyframes singularityPulse {
+      0%, 100% { box-shadow: 0 0 0 1px var(--ember-dim), 0 0 22px rgba(226,72,63,0.14); }
+      50%      { box-shadow: 0 0 0 1px var(--ember), 0 0 42px rgba(226,72,63,0.3); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .aurora, .centerpiece-img { animation: none !important; }
+      .aurora, .centerpiece-img, .centerpiece-ring::before, .circuit-field,
+      .scan-sweep, .genesis-singularity .pedestal-frame { animation: none !important; }
     }
 
     /* WASTELAND-WEB-ROOM-PATCH */
@@ -407,7 +508,7 @@
       margin-top: 18px;
       padding: 16px 20px;
       border-left: 2px solid var(--brass-line);
-      background: rgba(201,168,118,0.04);
+      background: rgba(45,212,191,0.05);
       font-style: italic;
       font-size: 0.85rem;
       line-height: 1.6;
@@ -418,6 +519,8 @@
 </head>
 
 <body data-page="internal">
+
+  <div class="circuit-field" aria-hidden="true"></div>
 
   <!-- GLOBAL HEADER -->
   <div id="site-header"></div>
@@ -441,6 +544,7 @@
   <!-- HERO / THRESHOLD -->
   <section class="hero-glow min-h-[78vh] flex items-center justify-center pt-32 px-6 text-center">
     <div class="aurora"></div>
+    <div class="scan-sweep" aria-hidden="true"></div>
 
     <div class="max-w-4xl w-full space-y-9">
       <div class="mono text-[11px]" style="color:var(--brass)">The CyderEyesX Gallery</div>
@@ -448,15 +552,15 @@
       <div class="flex items-center justify-center gap-8 md:gap-14">
         <div class="column hidden sm:block"></div>
         <div class="centerpiece-ring flex items-center justify-center shrink-0">
-          <img class="centerpiece-img" src="/images/nft/LL2320.png" alt="Featured piece from the archive" />
+          <img class="centerpiece-img" src="/images/nft/NEW_CyderEyesX_Logo.png" alt="CyderEyesX emblem" />
         </div>
         <div class="column hidden sm:block"></div>
       </div>
 
-      <h1 class="serif font-semibold text-5xl md:text-6xl" style="color:var(--marble)">A Personal Archive</h1>
+      <h1 class="serif font-semibold text-5xl md:text-6xl uppercase" style="color:var(--marble)">A Living Archive</h1>
 
       <p class="max-w-2xl mx-auto leading-relaxed" style="color:var(--ink)">
-        Seven rooms, nineteen pieces — a founder's own digital collectibles, kept and shown
+        Twelve rooms, thirty-one pieces — a founder's own digital collectibles, kept and shown
         the way you'd keep anything worth walking past twice. Wander the wings on the right,
         or simply scroll.
       </p>
@@ -910,21 +1014,26 @@
               franchise -- 9,000 avatars, artifacts, robots, and cinematic moments on Cronos. It later
               expanded into companion collections including The Synthetix and The Synths.
             </p>
+            <div class="curator-note">
+              Curator's note: SYNTHTOPIA #7033, SYNTHTOPIA #6320, THE SYNTHS #287, and THE SYNTHS #002
+              are catalogued in this archive as the "Genesis Collection Singularities" &mdash; a personal
+              tier marking, not an official rarity designation from either project.
+            </div>
           </div>
           <a class="room-link" href="https://synthverse.world/" target="_blank" rel="noopener">Provenance &#8599;</a>
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
-          <div class="pedestal" tabindex="0" role="button" aria-label="View SYNTHTOPIA #7033" data-title="SYNTHTOPIA #7033" data-collection="Synthtopia" data-ref="SYNTHTOPIA #7033.png" data-src="/images/nft/SYNTHTOPIA%20%237033.png">
-            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/SYNTHTOPIA%20%237033.png" alt="SYNTHTOPIA #7033" loading="lazy" /></div>
+          <div class="pedestal genesis-singularity" tabindex="0" role="button" aria-label="View SYNTHTOPIA #7033 (Celestial)" data-title="SYNTHTOPIA #7033 (Celestial)" data-collection="Synthtopia" data-ref="SYNTHTOPIA #7033.png" data-src="/images/nft/SYNTHTOPIA%20%237033.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><div class="singularity-tag">Genesis Singularity</div><img class="pedestal-img" src="/images/nft/SYNTHTOPIA%20%237033.png" alt="SYNTHTOPIA #7033 (Celestial)" loading="lazy" /></div>
             <div class="plinth"></div>
-            <div class="plaque"><div class="plaque-eyebrow">Synthtopia</div><div class="plaque-title">SYNTHTOPIA #7033</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. SYNTHTOPIA #7033.png</div></div>
+            <div class="plaque"><div class="plaque-eyebrow">Synthtopia</div><div class="plaque-title">SYNTHTOPIA #7033 (Celestial)</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. SYNTHTOPIA #7033.png</div></div>
           </div>
 
-          <div class="pedestal" tabindex="0" role="button" aria-label="View SYNTHTOPIA #6320" data-title="SYNTHTOPIA #6320" data-collection="Synthtopia" data-ref="SYNTHTOPIA #6320.png" data-src="/images/nft/SYNTHTOPIA%20%236320.png">
-            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/SYNTHTOPIA%20%236320.png" alt="SYNTHTOPIA #6320" loading="lazy" /></div>
+          <div class="pedestal genesis-singularity" tabindex="0" role="button" aria-label="View SYNTHTOPIA #6320 (Celestial)" data-title="SYNTHTOPIA #6320 (Celestial)" data-collection="Synthtopia" data-ref="SYNTHTOPIA #6320.png" data-src="/images/nft/SYNTHTOPIA%20%236320.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><div class="singularity-tag">Genesis Singularity</div><img class="pedestal-img" src="/images/nft/SYNTHTOPIA%20%236320.png" alt="SYNTHTOPIA #6320 (Celestial)" loading="lazy" /></div>
             <div class="plinth"></div>
-            <div class="plaque"><div class="plaque-eyebrow">Synthtopia</div><div class="plaque-title">SYNTHTOPIA #6320</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. SYNTHTOPIA #6320.png</div></div>
+            <div class="plaque"><div class="plaque-eyebrow">Synthtopia</div><div class="plaque-title">SYNTHTOPIA #6320 (Celestial)</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. SYNTHTOPIA #6320.png</div></div>
           </div>
         </div>
       </div>
@@ -947,16 +1056,16 @@
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
-          <div class="pedestal" tabindex="0" role="button" aria-label="View THE SYNTHS #287" data-title="THE SYNTHS #287" data-collection="The Synths" data-ref="synthtopia-the-synths-the-synths-287.png" data-src="/images/nft/synthtopia-the-synths-the-synths-287.png">
-            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/synthtopia-the-synths-the-synths-287.png" alt="THE SYNTHS #287" loading="lazy" /></div>
+          <div class="pedestal genesis-singularity" tabindex="0" role="button" aria-label="View THE SYNTHS #287 (Nexus)" data-title="THE SYNTHS #287 (Nexus)" data-collection="The Synths" data-ref="synthtopia-the-synths-the-synths-287.png" data-src="/images/nft/synthtopia-the-synths-the-synths-287.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><div class="singularity-tag">Genesis Singularity</div><img class="pedestal-img" src="/images/nft/synthtopia-the-synths-the-synths-287.png" alt="THE SYNTHS #287 (Nexus)" loading="lazy" /></div>
             <div class="plinth"></div>
-            <div class="plaque"><div class="plaque-eyebrow">The Synths</div><div class="plaque-title">THE SYNTHS #287</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. synthtopia-the-synths-the-synths-287.png</div></div>
+            <div class="plaque"><div class="plaque-eyebrow">The Synths</div><div class="plaque-title">THE SYNTHS #287 (Nexus)</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. synthtopia-the-synths-the-synths-287.png</div></div>
           </div>
 
-          <div class="pedestal" tabindex="0" role="button" aria-label="View THE SYNTHS #002" data-title="THE SYNTHS #002" data-collection="The Synths" data-ref="synthtopia-the-synths-the-synths-002.png" data-src="/images/nft/synthtopia-the-synths-the-synths-002.png">
-            <div class="pedestal-frame"><div class="spotlight"></div><img class="pedestal-img" src="/images/nft/synthtopia-the-synths-the-synths-002.png" alt="THE SYNTHS #002" loading="lazy" /></div>
+          <div class="pedestal genesis-singularity" tabindex="0" role="button" aria-label="View THE SYNTHS #002 (Zenith)" data-title="THE SYNTHS #002 (Zenith)" data-collection="The Synths" data-ref="synthtopia-the-synths-the-synths-002.png" data-src="/images/nft/synthtopia-the-synths-the-synths-002.png">
+            <div class="pedestal-frame"><div class="spotlight"></div><div class="singularity-tag">Genesis Singularity</div><img class="pedestal-img" src="/images/nft/synthtopia-the-synths-the-synths-002.png" alt="THE SYNTHS #002 (Zenith)" loading="lazy" /></div>
             <div class="plinth"></div>
-            <div class="plaque"><div class="plaque-eyebrow">The Synths</div><div class="plaque-title">THE SYNTHS #002</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. synthtopia-the-synths-the-synths-002.png</div></div>
+            <div class="plaque"><div class="plaque-eyebrow">The Synths</div><div class="plaque-title">THE SYNTHS #002 (Zenith)</div><div class="plaque-rule"></div><div class="plaque-ref">Ref. synthtopia-the-synths-the-synths-002.png</div></div>
           </div>
         </div>
       </div>
