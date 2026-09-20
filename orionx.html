@@ -92,6 +92,9 @@
   <!-- SimpleAnalytics -->
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+  <!-- Cloudflare Turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 </head>
 
 <body id="top" data-page="orionx">
@@ -286,6 +289,14 @@
           <span>I have read and agree to the <a href="/orionx-terms.html" target="_blank" class="text-orange-400 underline hover:text-orange-300">Terms of Service</a>. I understand ORION-X is an experimental AI system and its responses may be inaccurate or incomplete.</span>
         </label>
 
+        <!-- Cloudflare Turnstile widget -->
+        <div class="cf-turnstile"
+             data-sitekey="0x4AAAAAAE9Vw_PqOlJBb6c0"
+             data-action="orionx_request_access"
+             data-theme="dark"
+             id="orionxTurnstile">
+        </div>
+
         <button type="submit" id="orionxSubmitBtn" class="btn w-full px-5 py-3 bg-gradient-to-r from-orange-400 to-amber-300 text-black font-semibold rounded-full">
           Submit Request
         </button>
@@ -420,6 +431,18 @@
           return;
         }
 
+        // Turnstile token — must be present before submitting
+        const cf_turnstile_response = window.turnstile
+          ? window.turnstile.getResponse(document.getElementById('orionxTurnstile'))
+          : (document.querySelector('[name="cf-turnstile-response"]') || {}).value || '';
+
+        if (!cf_turnstile_response) {
+          formMsg.textContent = 'Please complete the security verification before submitting.';
+          formMsg.style.color = '#f87171';
+          formMsg.style.display = 'block';
+          return;
+        }
+
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending…';
         formMsg.style.display = 'none';
@@ -428,7 +451,7 @@
           const res = await fetch(`${API_BASE}/api/orionx/request-access`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre, email, telegram_username, notas, terms_accepted: true })
+            body: JSON.stringify({ nombre, email, telegram_username, notas, terms_accepted: true, cf_turnstile_response })
           });
           const data = await res.json();
 
@@ -452,6 +475,7 @@
         } finally {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Request';
+          if (window.turnstile) window.turnstile.reset(document.getElementById('orionxTurnstile'));
         }
       });
 
