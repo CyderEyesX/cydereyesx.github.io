@@ -13,9 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     metaBlock.id = "cyx-global-meta";
 
     metaBlock.innerHTML = `
-      <title>CyderEyesX | Secure Digital Education</title>
-
-      <meta name="title" content="CyderEyesX | Secure Digital Education">
       <meta name="description" content="Secure digital education focused on blockchain literacy, cybersecurity awareness, and emerging technologies.">
 
       <!-- Open Graph -->
