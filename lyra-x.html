@@ -17,7 +17,6 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen" />
 
   <style>
     body {
@@ -347,8 +346,10 @@
         Essential plan seat.
       </p>
 
-      <form action="https://send.pageclip.co/q0FvRBcTbEwf3qbEQcwFfSQw7xNFYr6u" class="pageclip-form" method="post" id="lyraJoinForm">
+      <form action="https://api.web3forms.com/submit" method="post" id="lyraJoinForm">
+        <input type="hidden" name="access_key" value="fe980ce7-61a4-425c-b305-946f309850b6" />
         <input type="hidden" name="subject" value="LYRA-X — Essential Plan request" />
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
         <div class="space-y-5">
           <div>
             <label for="lx-name" class="block text-sm font-medium text-slate-300 mb-2">Name *</label>
@@ -379,10 +380,44 @@
             style="background: linear-gradient(135deg, var(--lx) 0%, var(--lx-deep) 100%); color: var(--ink);">
             Request beta access
           </button>
+          <p id="lx-status" class="text-center text-sm hidden"></p>
           <p class="text-center text-[11px] text-slate-500">You will not be charged from this form. We'll contact you to activate billing for the Essential plan.</p>
         </div>
       </form>
-      <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+      <script>
+        (function () {
+          const form = document.getElementById('lyraJoinForm');
+          const btn = document.getElementById('lx-submit');
+          const status = document.getElementById('lx-status');
+          form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            status.classList.remove('hidden');
+            try {
+              const res = await fetch(form.action, {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: new FormData(form)
+              });
+              const data = await res.json().catch(() => ({}));
+              if (res.ok && data.success !== false) {
+                status.textContent = "Request received — we'll reach out to activate your Essential plan seat.";
+                status.style.color = 'var(--lx)';
+                btn.textContent = 'Request sent ✓';
+                form.reset();
+              } else {
+                throw new Error(data.message || 'Submission failed');
+              }
+            } catch (err) {
+              status.textContent = 'Something went wrong. Please email admin@cydereyesx.com directly.';
+              status.style.color = 'var(--lx-red)';
+              btn.textContent = 'Request beta access';
+              btn.disabled = false;
+            }
+          });
+        })();
+      </script>
     </div>
   </section>
 

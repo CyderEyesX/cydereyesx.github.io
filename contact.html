@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen" />
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   <style>
     body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
@@ -65,7 +64,9 @@
     </div>
     <div class="glass rounded-2xl p-8">
       <div class="mono text-teal-400 text-xs mb-6">Send a Message</div>
-      <form action="https://send.pageclip.co/q0FvRBcTbEwf3qbEQcwFfSQw7xNFYr6u" class="pageclip-form" method="post">
+      <form id="webContactForm" action="https://api.web3forms.com/submit" method="post">
+        <input type="hidden" name="access_key" value="fe980ce7-61a4-425c-b305-946f309850b6" />
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
         <div class="space-y-5">
           <div>
             <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Name *</label>
@@ -83,10 +84,44 @@
             <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message *</label>
             <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project or question..." class="glass-input w-full px-4 py-3 rounded-xl text-sm resize-vertical"></textarea>
           </div>
-          <button type="submit" class="pageclip-form__submit btn-primary w-full py-3 px-6 rounded-xl text-white font-semibold text-sm">Send Message</button>
+          <button type="submit" id="webContactSubmit" class="btn-primary w-full py-3 px-6 rounded-xl text-white font-semibold text-sm">Send Message</button>
+          <p id="webContactStatus" class="text-sm text-center hidden"></p>
         </div>
       </form>
-      <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+      <script>
+        (function () {
+          const form = document.getElementById('webContactForm');
+          const btn = document.getElementById('webContactSubmit');
+          const status = document.getElementById('webContactStatus');
+          form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            status.classList.remove('hidden', 'text-red-400', 'text-teal-400');
+            try {
+              const res = await fetch(form.action, {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: new FormData(form)
+              });
+              const data = await res.json().catch(() => ({}));
+              if (res.ok && data.success !== false) {
+                status.textContent = "Message sent — we'll get back to you within 24-48 hours.";
+                status.classList.add('text-teal-400');
+                form.reset();
+              } else {
+                throw new Error(data.message || 'Submission failed');
+              }
+            } catch (err) {
+              status.textContent = 'Something went wrong sending your message. Please email us directly at info@cydereyesx.com.';
+              status.classList.add('text-red-400');
+            } finally {
+              btn.disabled = false;
+              btn.textContent = 'Send Message';
+            }
+          });
+        })();
+      </script>
     </div>
   </div>
 </main>

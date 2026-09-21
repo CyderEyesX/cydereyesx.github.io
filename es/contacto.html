@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto - CyderEyesX</title>
     <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen">
     <!-- SimpleAnalytics Tracking -->
     <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
     <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
@@ -24,11 +23,11 @@
         <h2>Ponte en Contacto</h2>
         <p>¿Tienes preguntas sobre nuestros agentes AI? ¿Quieres unirte a nuestra lista de espera? ¡Envíanos un mensaje!</p>
         
-        <form action="https://send.pageclip.co/q0FvRBcTbEwf3qbEQcwFfSQw7xNFYr6u" 
-              class="pageclip-form" 
-              method="post" 
+        <form id="contactoForm" action="https://api.web3forms.com/submit"
+              method="post"
               style="background: #f9f9f9; padding: 2rem; border-radius: 8px; margin-top: 2rem;">
-          
+          <input type="hidden" name="access_key" value="fe980ce7-61a4-425c-b305-946f309850b6">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           <div style="margin-bottom: 1.5rem;">
             <label for="nombre" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Nombre *</label>
             <input type="text" 
@@ -64,14 +63,49 @@
                       style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; resize: vertical;"></textarea>
           </div>
           
-          <button type="submit" 
-                  class="pageclip-form__submit"
+          <button type="submit"
+                  id="contactoSubmit"
                   style="width: 100%; padding: 0.75rem; background: #0066cc; color: white; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; font-weight: 600;">
             Enviar Mensaje
           </button>
+          <p id="contactoStatus" style="text-align:center; margin-top: 1rem; display:none;"></p>
         </form>
 
-        <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+        <script>
+          (function () {
+            const form = document.getElementById('contactoForm');
+            const btn = document.getElementById('contactoSubmit');
+            const status = document.getElementById('contactoStatus');
+            form.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              btn.disabled = true;
+              btn.textContent = 'Enviando…';
+              status.style.display = 'block';
+              try {
+                const res = await fetch(form.action, {
+                  method: 'POST',
+                  headers: { 'Accept': 'application/json' },
+                  body: new FormData(form)
+                });
+                const data = await res.json().catch(() => ({}));
+                if (res.ok && data.success !== false) {
+                  status.textContent = 'Mensaje enviado — te responderemos pronto.';
+                  status.style.color = '#0a7d3c';
+                  form.reset();
+                  btn.textContent = 'Enviar Mensaje';
+                } else {
+                  throw new Error(data.message || 'Fallo el envio');
+                }
+              } catch (err) {
+                status.textContent = 'Algo salió mal. Escríbenos directo a info@cydereyesx.com.';
+                status.style.color = '#c0392b';
+                btn.textContent = 'Enviar Mensaje';
+              } finally {
+                btn.disabled = false;
+              }
+            });
+          })();
+        </script>
         
         <p style="margin-top: 2rem; text-align: center; color: #666;">
             Los mensajes se envían a: <strong>info@cydereyesx.com</strong>
