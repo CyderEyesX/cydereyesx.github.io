@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LYRA-X | Voice to Insights — CyderEyesX LLC</title>
+  <meta name="description" content="LYRA-X — a private, self-hosted transcription service. Speaker-labelled, timestamped transcripts from your audio, exportable as TXT, SRT, or Markdown. A product of CyderEyesX LLC." />
+
+  <link rel="preload" as="image" href="/images/Lyra_X.PNG" />
+  <link rel="icon" type="image/png" href="/images/Lyra_X.PNG" />
+
+  <!-- Tailwind (Play CDN — same as the rest of the site) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts (same as site) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #020617;
+      color: #f8fafc;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+    .glass {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .service-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(34,211,238,0.15); }
+    .btn { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:focus-visible { outline: 2px solid #22d3ee; outline-offset: 4px; }
+
+    /* =========================================================
+       LYRA-X ACCENT — CYAN (interface) + GOLD (premium emphasis),
+       sampled from the official Lyra_X.PNG artwork. Red is reserved
+       strictly for the failed/error processing state — never used
+       as a primary UI color on this page.
+       ========================================================= */
+    :root {
+      --lx:        #22d3ee;  /* cyan — primary interface accent   */
+      --lx-deep:   #0e7490;  /* deep cyan — gradients / shadow    */
+      --lx-gold:   #E8A94D;  /* nebula gold — premium emphasis    */
+      --lx-gold-deep: #B87F2A;
+      --lx-red:    #ef4444;  /* reserved: failed/error state only */
+      --ink:       #04141a;
+    }
+    .lx-text  { color: var(--lx); }
+    .lx-gold-text { color: var(--lx-gold); }
+    .lx-border { border-color: rgba(34,211,238,0.40); }
+
+    .hero-glow { background: radial-gradient(circle at center, rgba(34,211,238,0.16), transparent 65%); }
+
+    @keyframes breathe-lx { 0%, 100% { box-shadow: 0 0 18px rgba(34,211,238,0.35); } 50% { box-shadow: 0 0 30px rgba(34,211,238,0.55); } }
+    .logo-glow-lx {
+      background: radial-gradient(circle, rgba(34,211,238,0.30), transparent 70%);
+      border-radius: 2rem;
+      padding: 1.75rem;
+      animation: breathe-lx 6s ease-in-out infinite;
+    }
+
+    .lx-btn {
+      background: linear-gradient(135deg, var(--lx) 0%, var(--lx-deep) 100%);
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .lx-btn:hover { box-shadow: 0 10px 28px rgba(34,211,238,0.30); }
+
+    .price-card { transition: transform .3s ease, box-shadow .3s ease; }
+    .price-card:hover { transform: translateY(-4px); }
+    .price-card.disabled { opacity: 0.72; }
+
+    /* Illustrative processing chip — decorative only, never wired to a real job */
+    @keyframes pulse-lx { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
+    .lx-pulse-dot { animation: pulse-lx 1.8s ease-in-out infinite; }
+
+    /* Speaker color coding — always paired with a text label, never color alone */
+    .spk-1 { color: var(--lx); }
+    .spk-2 { color: var(--lx-gold); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+
+  <!-- SimpleAnalytics -->
+  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+
+  <link rel="canonical" href="https://cydereyesx.xyz/lyra-x.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="LYRA-X | Voice to Insights" />
+  <meta property="og:description" content="A private, self-hosted transcription service. Speaker-labelled, timestamped transcripts — exportable as TXT, SRT, or Markdown." />
+  <meta property="og:url" content="https://cydereyesx.xyz/lyra-x.html" />
+  <meta property="og:image" content="https://cydereyesx.xyz/images/Lyra_X.PNG" />
+  <meta property="og:site_name" content="CyderEyesX" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LYRA-X | Voice to Insights" />
+  <meta name="twitter:description" content="Speaker-labelled, timestamped transcripts from your audio. Private beta — Essential plan now open." />
+  <meta name="twitter:image" content="https://cydereyesx.xyz/images/Lyra_X.PNG" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "LYRA-X",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "A private, self-hosted transcription service that turns spoken audio into a speaker-labelled, timestamped transcript with TXT, SRT and Markdown export.",
+    "url": "https://cydereyesx.xyz/lyra-x.html",
+    "publisher": { "@type": "Organization", "name": "CyderEyesX LLC", "url": "https://cydereyesx.xyz/" },
+    "offers": [
+      { "@type": "Offer", "name": "Essential", "price": "15", "priceCurrency": "USD", "availability": "https://schema.org/LimitedAvailability" }
+    ]
+  }
+  </script>
+</head>
+
+<body id="top" data-page="lyra-x">
+
+  <!-- GLOBAL HEADER (injected by layout.js) -->
+  <div id="site-header"></div>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex items-center hero-glow pt-32 pb-16 px-6 reveal">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+      <div>
+        <div class="mono text-cyan-300 text-xs mb-4">CyderEyesX · Products · Private Beta</div>
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+          Voice to
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-amber-200">insights</span>
+        </h1>
+        <p class="text-slate-400 text-lg max-w-xl mb-8">
+          LYRA-X is a private, self-hosted transcription service. Upload audio, choose your speaker
+          count, and get a speaker-labelled, timestamped transcript you can export as TXT, SRT, or
+          Markdown.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a class="btn lx-btn px-8 py-4 rounded-full text-center" href="#join">Join the private beta →</a>
+          <a class="btn px-8 py-4 border border-white/20 rounded-full text-center" href="#how">How it works</a>
+        </div>
+        <div class="mono text-[11px] text-slate-400 mt-6 flex flex-wrap gap-x-6 gap-y-2">
+          <span>● WhisperX large-v3</span><span>● NVIDIA CUDA</span><span>● Speaker diarization</span><span>● 24-hour retention</span>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <div class="logo-glow-lx inline-block">
+          <img src="/images/Lyra_X.PNG" alt="LYRA-X — Voice to Insights" class="mx-auto h-56 md:h-72 rounded-3xl" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="mono text-cyan-300 text-xs mb-4">How it works</div>
+        <h2 class="text-4xl md:text-5xl font-bold">Audio in. Transcript out.</h2>
+        <p class="mt-6 text-slate-400 max-w-2xl mx-auto">
+          Progress always reflects the real transcription pipeline — never a fake progress bar or an
+          invented time estimate.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div class="glass p-7 rounded-2xl service-card">
+          <div class="mono text-cyan-300 text-2xl mb-4">01</div>
+          <h3 class="text-lg font-bold mb-3">Upload audio</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Upload a pre-recorded audio file in a common format.</p>
+        </div>
+        <div class="glass p-7 rounded-2xl service-card">
+          <div class="mono text-cyan-300 text-2xl mb-4">02</div>
+          <h3 class="text-lg font-bold mb-3">Choose speakers</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Tell LYRA-X how many known speakers are in the recording (1–10).</p>
+        </div>
+        <div class="glass p-7 rounded-2xl service-card">
+          <div class="mono text-cyan-300 text-2xl mb-4">03</div>
+          <h3 class="text-lg font-bold mb-3">Real status</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Watch the actual backend status — queued, processing, complete, or failed.</p>
+        </div>
+        <div class="glass p-7 rounded-2xl service-card">
+          <div class="mono text-cyan-300 text-2xl mb-4">04</div>
+          <h3 class="text-lg font-bold mb-3">Export</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Download your transcript as TXT, SRT, or Markdown before the 24-hour window ends.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSCRIPT EXPERIENCE -->
+  <section class="py-28 px-6 reveal">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+      <div>
+        <div class="mono text-cyan-300 text-xs mb-4">Transcript experience</div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Readable, timestamped, speaker-labelled.</h2>
+        <p class="text-slate-400 leading-relaxed mb-6">
+          Timestamps and speaker labels stay as selectable text — never a screenshot or an image — so
+          you can copy, search, and paste directly from the transcript.
+        </p>
+        <ul class="space-y-3 text-slate-300 text-sm">
+          <li>✔ Speaker labels shown as text, not color alone</li>
+          <li>✔ Copy the full transcript in one click</li>
+          <li>✔ Export as TXT, SRT, or Markdown</li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-2xl p-6">
+        <div class="flex items-center justify-between pb-4 border-b border-white/10">
+          <span class="mono text-[10px] text-slate-400">Illustrative preview — not live product UI</span>
+          <span class="mono text-[10px] text-cyan-300 flex items-center gap-2">
+            <span class="lx-pulse-dot w-1.5 h-1.5 rounded-full bg-cyan-300 inline-block"></span> complete
+          </span>
+        </div>
+        <div class="pt-4 space-y-3 text-sm font-mono">
+          <p><span class="text-slate-500">[00:00:02]</span> <span class="spk-1 font-semibold">Speaker 1:</span> <span class="text-slate-200">Thanks for joining the call today.</span></p>
+          <p><span class="text-slate-500">[00:00:06]</span> <span class="spk-2 font-semibold">Speaker 2:</span> <span class="text-slate-200">Of course — let's go over the agenda.</span></p>
+          <p><span class="text-slate-500">[00:00:11]</span> <span class="spk-1 font-semibold">Speaker 1:</span> <span class="text-slate-200">Sounds good, starting with the timeline.</span></p>
+        </div>
+        <div class="flex gap-2 pt-5 mt-2 border-t border-white/10">
+          <span class="mono text-[10px] px-3 py-1.5 rounded-full border border-cyan-400/40 text-cyan-300">TXT</span>
+          <span class="mono text-[10px] px-3 py-1.5 rounded-full border border-cyan-400/40 text-cyan-300">SRT</span>
+          <span class="mono text-[10px] px-3 py-1.5 rounded-full border border-cyan-400/40 text-cyan-300">MD</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY & LIFECYCLE -->
+  <section class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-5xl mx-auto text-center mb-14">
+      <div class="mono text-cyan-300 text-xs mb-4">Privacy &amp; lifecycle</div>
+      <h2 class="text-3xl md:text-4xl font-bold">A processing service, not a storage library.</h2>
+    </div>
+    <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
+      <div class="glass p-8 rounded-2xl text-center service-card">
+        <h3 class="font-bold mb-2">No audio library</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Raw audio is not retained as a permanent library. It is removed after processing.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl text-center service-card">
+        <h3 class="font-bold mb-2">24-hour window</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Standard transcript artifacts are available for 24 hours, then deleted permanently.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl text-center service-card">
+        <h3 class="font-bold mb-2">Download in time</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Download your work before it expires — recovery isn't possible after the window closes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUTURE (CLEARLY LABELLED) -->
+  <section class="py-24 px-6 reveal">
+    <div class="max-w-4xl mx-auto glass rounded-3xl p-10 text-center">
+      <div class="mono text-[10px] px-3 py-1 rounded-full border inline-block mb-4" style="border-color: rgba(232,169,77,0.4); color: var(--lx-gold);">Planned — not released</div>
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">ORIÓN-X Insights</h2>
+      <p class="text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        A planned feature that works from a transcript you've specifically approved — never from raw
+        audio. It is not part of the Service today and is not included in any current plan.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="py-28 px-6 bg-[#010413] reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="mono text-cyan-300 text-xs mb-4">Pricing — private beta</div>
+        <h2 class="text-4xl md:text-5xl font-bold">One plan is open today.</h2>
+        <p class="mt-6 text-slate-400 max-w-2xl mx-auto">
+          Pro and Premium are shown so you can see where LYRA-X is going. Only the Essential plan is
+          available for signup right now.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+
+        <!-- ESSENTIAL — ACTIVE -->
+        <div class="glass price-card p-8 rounded-2xl flex flex-col border border-cyan-400/40" style="box-shadow:0 0 0 1px rgba(34,211,238,.35),0 20px 50px rgba(34,211,238,.12)">
+          <div class="mono text-[10px] text-cyan-300 mb-2">★ Available now</div>
+          <h3 class="font-bold text-xl mb-1">Essential</h3>
+          <div class="text-3xl font-bold mb-1">$15<span class="text-base font-normal text-slate-400">/mo</span></div>
+          <ul class="text-slate-400 text-sm space-y-2 mt-4 mb-8 flex-1">
+            <li>10 hours of transcription per month</li>
+            <li>Pre-recorded audio upload</li>
+            <li>Speaker selection — up to 3</li>
+            <li>TXT export</li>
+            <li>Audio is not stored; transcript deletes at 24 hours</li>
+          </ul>
+          <a class="btn lx-btn block text-center px-5 py-3 rounded-full" href="#join">Join the private beta</a>
+        </div>
+
+        <!-- PRO — COMING SOON -->
+        <div class="glass price-card disabled p-8 rounded-2xl flex flex-col">
+          <div class="mono text-[10px] text-slate-400 mb-2">Coming soon</div>
+          <h3 class="font-bold text-xl mb-1">Pro</h3>
+          <div class="text-3xl font-bold mb-1 text-slate-500">—</div>
+          <ul class="text-slate-500 text-sm space-y-2 mt-4 mb-8 flex-1">
+            <li>Full diarization</li>
+            <li>SRT &amp; Markdown downloads</li>
+          </ul>
+          <span class="block text-center px-5 py-3 rounded-full border border-white/10 text-slate-400 cursor-not-allowed" aria-disabled="true">Próximamente</span>
+        </div>
+
+        <!-- PREMIUM / ORION-X INSIGHTS — COMING SOON -->
+        <div class="glass price-card disabled p-8 rounded-2xl flex flex-col">
+          <div class="mono text-[10px] mb-2" style="color: var(--lx-gold);">Coming soon</div>
+          <h3 class="font-bold text-xl mb-1">Premium <span class="text-sm font-normal text-slate-500">/ ORIÓN-X Insights</span></h3>
+          <div class="text-3xl font-bold mb-1 text-slate-500">—</div>
+          <ul class="text-slate-500 text-sm space-y-2 mt-4 mb-8 flex-1">
+            <li>Everything in Pro</li>
+            <li>ORIÓN-X Insights (planned)</li>
+          </ul>
+          <a class="block text-center px-5 py-3 rounded-full border border-white/10 hover:bg-white/5 transition" style="color: var(--lx-gold);" href="/contact.html">Contáctanos para más información</a>
+        </div>
+      </div>
+
+      <p class="text-center text-slate-500 text-xs mt-10">
+        Pricing and features shown for the Essential plan reflect the current private-beta offer and may
+        change with notice. See our <a href="/lyra-x-terms.html" class="lx-text hover:underline">Terms of Service</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- JOIN / SIGNUP -->
+  <section id="join" class="py-28 px-6 reveal">
+    <div class="max-w-2xl mx-auto glass rounded-3xl p-8 md:p-10">
+      <div class="mono text-cyan-300 text-xs mb-4 text-center">Essential plan · $15/mo</div>
+      <h2 class="text-2xl md:text-3xl font-bold mb-3 text-center">Request your beta seat</h2>
+      <p class="text-slate-400 text-sm text-center mb-8">
+        LYRA-X is in private beta. Tell us where to reach you and we'll follow up to activate your
+        Essential plan seat.
+      </p>
+
+      <form action="https://send.pageclip.co/api_PW7RUMzaMGC40TaLTsDQkC91lTaRSyAs" class="pageclip-form" method="post" id="lyraJoinForm">
+        <input type="hidden" name="subject" value="LYRA-X — Essential Plan request" />
+        <div class="space-y-5">
+          <div>
+            <label for="lx-name" class="block text-sm font-medium text-slate-300 mb-2">Name *</label>
+            <input type="text" id="lx-name" name="name" required placeholder="Your full name"
+              class="w-full px-4 py-3 rounded-xl text-sm"
+              style="background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.10); color:#f8fafc;" />
+          </div>
+          <div>
+            <label for="lx-email" class="block text-sm font-medium text-slate-300 mb-2">Email *</label>
+            <input type="email" id="lx-email" name="email" required placeholder="your@email.com"
+              class="w-full px-4 py-3 rounded-xl text-sm"
+              style="background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.10); color:#f8fafc;" />
+          </div>
+
+          <label class="flex items-start gap-3 text-xs text-slate-400 leading-relaxed pt-2">
+            <input type="checkbox" id="lx-terms" name="terms_accepted" required
+              class="mt-0.5 h-4 w-4 rounded border-white/20 bg-transparent" />
+            <span>
+              I have read and agree to the
+              <a href="/lyra-x-terms.html" target="_blank" class="lx-text hover:underline">Terms and Conditions</a>
+              and the <a href="/privacy.html" target="_blank" class="lx-text hover:underline">Privacy Policy</a>.<br />
+              <span class="text-slate-500">He leído y acepto los Términos y Condiciones y la Política de Privacidad.</span>
+            </span>
+          </label>
+
+          <button type="submit" id="lx-submit" disabled
+            class="btn w-full py-3 px-6 rounded-xl font-semibold text-sm opacity-40 cursor-not-allowed"
+            style="background: linear-gradient(135deg, var(--lx) 0%, var(--lx-deep) 100%); color: var(--ink);">
+            Request beta access
+          </button>
+          <p class="text-center text-[11px] text-slate-500">You will not be charged from this form. We'll contact you to activate billing for the Essential plan.</p>
+        </div>
+      </form>
+      <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-24 px-6 text-center hero-glow reveal">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Questions before you join?</h2>
+      <p class="text-slate-400 mb-8">Reach out and CyderEyesX will walk you through the Essential plan.</p>
+      <a class="btn inline-block px-10 py-4 border border-white/20 rounded-full" href="/contact.html">Contact CyderEyesX</a>
+      <p class="mono text-[10px] text-slate-500 mt-10">LYRA-X is a product of CyderEyesX LLC · Private beta · Not a permanent storage service</p>
+    </div>
+  </section>
+
+  <!-- GLOBAL FOOTER (injected by layout.js) -->
+  <div id="site-footer"></div>
+
+  <!-- Scroll reveal -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }), { threshold: 0.12 });
+    reveals.forEach(r => ro.observe(r));
+  </script>
+
+  <!-- Checkbox gate: submit stays disabled until Terms & Privacy are accepted -->
+  <script>
+    const lxTerms = document.getElementById('lx-terms');
+    const lxSubmit = document.getElementById('lx-submit');
+    lxTerms?.addEventListener('change', () => {
+      lxSubmit.disabled = !lxTerms.checked;
+      lxSubmit.classList.toggle('opacity-40', !lxTerms.checked);
+      lxSubmit.classList.toggle('cursor-not-allowed', !lxTerms.checked);
+    });
+  </script>
+
+  <!-- Global header & footer -->
+  <script src="layout.js"></script>
+</body>
+</html>
