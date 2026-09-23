@@ -5,22 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ===== SEO: title + description + canonical ===== -->
-  <title>CyderEyesX | Accessibility Technology &amp; AccessX Tap</title>
-  <meta name="description" content="CyderEyesX builds accessibility technology. AccessX Tap turns any NFC tag into accessible audio, video, and screen-reader-ready content for blind and low-vision students and staff. Bilingual (EN/ES)." />
+  <title>CyderEyesX | Accessibility &amp; AI Products</title>
+  <meta name="description" content="CyderEyesX LLC builds accessibility and AI technology: AccessX Tap, InsureBotX, ORION-X, and LYRA-X. Bilingual (EN/ES)." />
   <link rel="canonical" href="https://cydereyesx.xyz/" />
 
   <!-- ===== Open Graph (Facebook / LinkedIn / WhatsApp) ===== -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="CyderEyesX | Accessibility Technology" />
-  <meta property="og:description" content="Accessibility technology, led by AccessX Tap — accessible content behind any NFC tag for blind and low-vision users." />
+  <meta property="og:title" content="CyderEyesX | Accessibility &amp; AI Products" />
+  <meta property="og:description" content="Four products, one company: AccessX Tap, InsureBotX, ORION-X, and LYRA-X." />
   <meta property="og:url" content="https://cydereyesx.xyz/" />
   <meta property="og:image" content="https://cydereyesx.xyz/images/cyx-logo-full.png" />
   <meta property="og:site_name" content="CyderEyesX" />
 
   <!-- ===== Twitter / X ===== -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CyderEyesX | Accessibility Technology" />
-  <meta name="twitter:description" content="Accessibility technology, led by AccessX Tap — accessible content behind any NFC tag." />
+  <meta name="twitter:title" content="CyderEyesX | Accessibility &amp; AI Products" />
+  <meta name="twitter:description" content="Four products, one company: AccessX Tap, InsureBotX, ORION-X, and LYRA-X." />
   <meta name="twitter:image" content="https://cydereyesx.xyz/images/cyx-logo-full.png" />
 
   <!-- ===== Structured data: Organization ===== -->
@@ -31,7 +31,7 @@
     "name": "CyderEyesX LLC",
     "url": "https://cydereyesx.xyz/",
     "logo": "https://cydereyesx.xyz/images/cyx-logo-full.png",
-    "description": "Accessibility technology company. Flagship product: AccessX Tap — accessible NFC content hosting for blind and low-vision users. Also provides crypto-safety education.",
+    "description": "Accessibility and AI technology company operating four products: AccessX Tap (accessible NFC content hosting), InsureBotX (AI lead-capture chat), ORION-X (private AI assistant), and LYRA-X (private transcription). Also provides crypto-safety education.",
     "sameAs": []
   }
   </script>
@@ -44,15 +44,19 @@
 
   <!-- Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
     rel="stylesheet"
   />
 
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #020617;
+      background-color: #020210;
       color: #f8fafc;
+    }
+
+    .display {
+      font-family: 'Space Grotesk', sans-serif;
     }
 
     .mono {
@@ -60,6 +64,62 @@
       letter-spacing: 0.25em;
       text-transform: uppercase;
     }
+
+    /* ===== Starfield canvas — sits behind all page content ===== */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+    #page-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Scrolling status ticker ===== */
+    .ticker-track {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: ticker 32s linear infinite;
+    }
+    .ticker-item { padding: 0 2.5rem; }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .live-dot {
+      display: inline-block; width: 7px; height: 7px; border-radius: 9999px;
+      background: #f472b6; animation: pulse-live 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse-live {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(244,114,182,.6); }
+      50% { opacity: .6; box-shadow: 0 0 0 6px rgba(244,114,182,0); }
+    }
+
+    /* ===== Gradient headline text ===== */
+    .grad-text {
+      background: linear-gradient(90deg, #5eead4, #60a5fa, #c084fc, #f472b6);
+      background-size: 200% auto;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: gradshift 8s ease-in-out infinite;
+    }
+    @keyframes gradshift { 0%, 100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+
+    /* ===== Glowing bento tiles — color set per-tile via --glow ===== */
+    .bento-tile {
+      --glow: 45,212,191;
+      transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
+      border: 1px solid rgba(var(--glow), .25);
+    }
+    .bento-tile:hover {
+      transform: translateY(-6px);
+      border-color: rgba(var(--glow), .6);
+      box-shadow: 0 0 0 1px rgba(var(--glow),.25), 0 20px 60px -10px rgba(var(--glow),.35);
+    }
+    .press-feedback { transition: transform 100ms ease-out; }
+    .press-feedback:active { transform: scale(0.96); }
+    .spot-tab { transition: background .3s ease, border-color .3s ease, color .3s ease, transform 100ms ease-out; }
+    .spot-tab:active { transform: scale(0.96); }
 
     .glass {
       background: rgba(15, 23, 42, 0.6);
@@ -208,28 +268,47 @@
 
 <body id="top" data-page="home">
 
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <div id="page-content">
+
   <!-- GLOBAL HEADER -->
   <div id="site-header"></div>
 
-  <!-- HERO (Accessibility-led) -->
-  <section class="min-h-screen flex items-center justify-center hero-glow pt-32 px-6 text-center reveal">
+  <!-- TICKER — live status of all four products -->
+  <div class="max-w-6xl mx-auto mt-28 mb-4 px-6 reveal">
+    <div class="glass rounded-full overflow-hidden py-3">
+      <div class="ticker-track mono text-[11px] text-slate-300">
+        <span class="ticker-item"><span class="live-dot mr-2"></span>SYSTEM ONLINE · CYDEREYESX LLC</span>
+        <span class="ticker-item" style="color:rgb(52,211,153)">ACCESSX TAP · LIVE</span>
+        <span class="ticker-item" style="color:rgb(45,212,191)">INSUREBOTX · LIVE</span>
+        <span class="ticker-item" style="color:rgb(251,146,60)">ORION-X · BETA OPEN</span>
+        <span class="ticker-item" style="color:rgb(34,211,238)">LYRA-X · PRIVATE BETA</span>
+        <span class="ticker-item"><span class="live-dot mr-2"></span>SYSTEM ONLINE · CYDEREYESX LLC</span>
+        <span class="ticker-item" style="color:rgb(52,211,153)">ACCESSX TAP · LIVE</span>
+        <span class="ticker-item" style="color:rgb(45,212,191)">INSUREBOTX · LIVE</span>
+        <span class="ticker-item" style="color:rgb(251,146,60)">ORION-X · BETA OPEN</span>
+        <span class="ticker-item" style="color:rgb(34,211,238)">LYRA-X · PRIVATE BETA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO (multi-product framing) -->
+  <section class="flex items-center justify-center hero-glow pt-16 pb-20 px-6 text-center reveal">
     <div class="max-w-5xl space-y-10">
       <img src="images/cyx-logo-full.png" alt="CyderEyesX LLC Logo" class="mx-auto h-28 md:h-36" />
-      <div class="mono text-teal-400 text-xs">ACCESSIBILITY • TECHNOLOGY • INCLUSION</div>
-      <h1 class="text-5xl md:text-7xl font-bold">
-        Accessible content for everyone, with a single
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-sky-400">
-          tap
-        </span>
+      <div class="mono text-teal-400 text-xs">CYDEREYESX LLC · FOUR ACTIVE PRODUCTS</div>
+      <h1 class="display font-bold text-5xl md:text-7xl leading-[1.05]" style="letter-spacing:-0.01em">
+        One company.<br/><span class="grad-text">Four AI systems.</span>
       </h1>
       <p class="max-w-2xl mx-auto text-slate-400 text-lg">
-        CyderEyesX builds accessibility technology. Our flagship, <span class="text-slate-200 font-semibold">AccessX Tap</span>,
-        turns any NFC tag into audio, video, or screen-reader-ready text — so blind and low-vision
-        students and staff can reach materials instantly, with no app to install.
+        CyderEyesX builds accessibility and AI technology — <span class="text-slate-200 font-semibold">AccessX Tap</span>,
+        <span class="text-slate-200 font-semibold">InsureBotX</span>, <span class="text-slate-200 font-semibold">ORION-X</span>,
+        and <span class="text-slate-200 font-semibold">LYRA-X</span> — bilingual, EN/ES, built and operated in-house.
       </p>
       <div class="flex flex-col md:flex-row gap-6 justify-center pt-6">
-        <a class="btn px-10 py-4 bg-white text-black font-semibold rounded-full" href="/accessxtap.html">
-          Explore AccessX Tap
+        <a class="btn px-10 py-4 bg-white text-black font-semibold rounded-full" href="#products">
+          Explore the products
         </a>
         <a class="btn px-10 py-4 border border-white/20 rounded-full" href="/es/">
           ¡Explorar en Español!
@@ -238,48 +317,55 @@
     </div>
   </section>
 
-  <!-- FLAGSHIP: ACCESSX TAP -->
-  <section id="accessxtap" class="py-28 px-6 reveal">
-    <div class="max-w-7xl mx-auto text-center mb-16">
-      <div class="mono text-teal-400 text-xs mb-4">Flagship Product</div>
-      <h2 class="text-4xl md:text-5xl font-bold">AccessX Tap</h2>
-      <p class="mt-6 text-slate-400 max-w-3xl mx-auto leading-relaxed">
-        Turn any printed document or object into accessible audio, video, or screen-reader-ready
-        text with a single tap. Built for blind and low-vision students and staff — and for any
-        school, museum, library, or business that needs accessible content on demand.
-      </p>
-    </div>
-
-    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
-      <div class="glass p-8 rounded-2xl text-center service-card">
-        <div class="mono text-[11px] text-teal-300 mb-3">Accessible by Design</div>
-        <p class="text-slate-400 text-sm leading-relaxed">
-          Text renders as clean pages screen readers read natively. PDFs, audio, and video play inline — no app, no download.
-        </p>
+  <!-- PRODUCTS — bento grid, equal weight, no product overrepresented -->
+  <section id="products" class="py-24 px-6 reveal">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14">
+        <div class="mono text-teal-400 text-xs mb-4">What We Build</div>
+        <h2 class="display text-4xl md:text-5xl font-bold">Four products. One mission.</h2>
       </div>
 
-      <div class="glass p-8 rounded-2xl text-center service-card">
-        <div class="mono text-[11px] text-teal-300 mb-3">Dynamic Links</div>
-        <p class="text-slate-400 text-sm leading-relaxed">
-          Change the content behind a tag anytime — the NFC tag is never reprogrammed. Password-protect or expire links when needed.
-        </p>
-      </div>
-
-      <div class="glass p-8 rounded-2xl text-center service-card">
-        <div class="mono text-[11px] text-teal-300 mb-3">Usage Analytics</div>
-        <p class="text-slate-400 text-sm leading-relaxed">
-          See taps over time, devices, and top resources — the data departments need to justify accessibility budgets.
-        </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="/accessxtap.html" class="bento-tile press-feedback glass rounded-3xl p-8 block" style="--glow:52,211,153">
+          <div class="mono text-[11px] mb-3" style="color:rgb(52,211,153)">Accessibility · Live</div>
+          <h3 class="display text-2xl font-bold mb-3">AccessX Tap</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Turn any NFC tag into accessible audio, video, or screen-reader-ready text — no app to install.</p>
+        </a>
+        <a href="/insurebotx.html" class="bento-tile press-feedback glass rounded-3xl p-8 block" style="--glow:45,212,191">
+          <div class="mono text-[11px] mb-3" style="color:rgb(45,212,191)">AI Lead Capture · Live</div>
+          <h3 class="display text-2xl font-bold mb-3">InsureBotX</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">A bilingual AI chat assistant that qualifies insurance leads 24/7 and delivers them instantly.</p>
+        </a>
+        <a href="/orionx.html" class="bento-tile press-feedback glass rounded-3xl p-8 block" style="--glow:251,146,60">
+          <div class="mono text-[11px] mb-3" style="color:rgb(251,146,60)">Private AI · Beta</div>
+          <h3 class="display text-2xl font-bold mb-3">ORION-X</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">A privately-hosted AI assistant with unlimited conversations — your infrastructure, your data.</p>
+        </a>
+        <a href="/lyra-x.html" class="bento-tile press-feedback glass rounded-3xl p-8 block" style="--glow:34,211,238">
+          <div class="mono text-[11px] mb-3" style="color:rgb(34,211,238)">Transcription · Private Beta</div>
+          <h3 class="display text-2xl font-bold mb-3">LYRA-X</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Speaker-labelled, timestamped transcripts from your audio — export as TXT, SRT, or Markdown.</p>
+        </a>
       </div>
     </div>
+  </section>
 
-    <div class="flex flex-col md:flex-row gap-6 justify-center pt-14">
-      <a class="btn px-10 py-4 bg-white text-black font-semibold rounded-full" href="https://accessxtap.cydereyesx.com/request">
-        Request access
-      </a>
-      <a class="btn px-10 py-4 border border-white/20 rounded-full" href="/accessxtap.html">
-        Learn more
-      </a>
+  <!-- SPOTLIGHT — interactive tabs, spring-driven panel -->
+  <section class="max-w-5xl mx-auto py-20 px-6 reveal">
+    <div class="text-center mb-10">
+      <div class="mono text-teal-400 text-xs mb-4">Take a Closer Look</div>
+      <h2 class="display text-3xl md:text-4xl font-bold">Spotlight</h2>
+    </div>
+
+    <div id="spotlightTabs" class="flex flex-wrap justify-center gap-3 mb-10">
+      <button class="spot-tab mono text-[11px] rounded-full px-5 py-2.5 border" data-product="accessxtap" data-color="52,211,153" style="border-color:rgba(52,211,153,.4); color:#6ee7b7;">AccessX Tap</button>
+      <button class="spot-tab mono text-[11px] rounded-full px-5 py-2.5 border" data-product="insurebotx" data-color="45,212,191" style="border-color:rgba(45,212,191,.4); color:#5eead4;">InsureBotX</button>
+      <button class="spot-tab mono text-[11px] rounded-full px-5 py-2.5 border" data-product="orionx" data-color="251,146,60" style="border-color:rgba(251,146,60,.4); color:#fdba74;">ORION-X</button>
+      <button class="spot-tab mono text-[11px] rounded-full px-5 py-2.5 border" data-product="lyrax" data-color="34,211,238" style="border-color:rgba(34,211,238,.4); color:#67e8f9;">LYRA-X</button>
+    </div>
+
+    <div class="glass rounded-3xl p-10 md:p-14 relative overflow-hidden" style="min-height:220px">
+      <div id="spotlightPanel"></div>
     </div>
   </section>
 
@@ -288,7 +374,7 @@
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-14">
         <div class="mono text-teal-400 text-xs mb-4">Language Access</div>
-        <h2 class="text-4xl md:text-5xl font-bold">Inclusive &amp; Bilingual</h2>
+        <h2 class="display text-4xl md:text-5xl font-bold">Inclusive &amp; Bilingual</h2>
         <p class="mt-6 text-slate-400 max-w-3xl mx-auto leading-relaxed">
           CyderEyesX serves people in English and Spanish to reduce language barriers alongside
           accessibility barriers. If you need bilingual onboarding or materials, we align delivery
@@ -326,7 +412,7 @@
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
       <div>
         <div class="mono text-teal-400 text-xs mb-4">Our Mission</div>
-        <h2 class="text-4xl font-bold mb-6">Crypto Safety Education.</h2>
+        <h2 class="display text-4xl font-bold mb-6">Crypto Safety Education.</h2>
 
         <p class="text-slate-400 leading-relaxed mb-6">
           Alongside our accessibility work, CyderEyesX shares honest, plain-language education about
@@ -356,7 +442,7 @@
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
       <div>
         <div class="mono text-teal-400 text-xs mb-4">Why We Teach</div>
-        <h2 class="text-4xl font-bold mb-6">Because clarity is protection.</h2>
+        <h2 class="display text-4xl font-bold mb-6">Because clarity is protection.</h2>
 
         <p class="text-slate-400 leading-relaxed mb-6">
           CyderEyesX started after noticing a recurring gap: many people were trying to learn about
@@ -392,7 +478,7 @@
   <section id="services" class="py-28 px-6 bg-[#010413] reveal">
     <div class="max-w-7xl mx-auto text-center mb-24">
       <div class="mono text-teal-400 text-xs mb-4">Core Educational Tracks</div>
-      <h2 class="text-5xl font-bold">Educational Programs</h2>
+      <h2 class="display text-5xl font-bold">Educational Programs</h2>
       <p class="mt-6 text-slate-400 max-w-2xl mx-auto">
         Structured learning paths designed to build confidence, safety,
         and long-term digital competence.
@@ -455,6 +541,8 @@
 <!-- GLOBAL FOOTER -->
   <div id="site-footer"></div>
 
+  </div> <!-- /#page-content -->
+
   <!-- Scroll Reveal -->
   <script>
     const reveals = document.querySelectorAll('.reveal');
@@ -493,6 +581,139 @@
 
       sections.forEach(section => spyObserver.observe(section));
     });
+  </script>
+
+  <!-- ===== Starfield + drifting light-ray canvas =====
+       Hand-rolled, no external library. Freezes on
+       prefers-reduced-motion (Apple Design skill's own
+       accessibility guidance). ===== -->
+  <script>
+    (function () {
+      const canvas = document.getElementById('starfield');
+      const ctx = canvas.getContext('2d');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let w, h, stars = [], rays = [];
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = document.body.scrollHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const STAR_COUNT = 160;
+      for (let i = 0; i < STAR_COUNT; i++) {
+        stars.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.4 + 0.3, a: Math.random() * 0.6 + 0.2, tw: Math.random() * 0.02 });
+      }
+      const RAY_COLORS = ['96,165,250', '192,132,252', '52,211,153', '34,211,238'];
+      const RAY_COUNT = 5;
+      for (let i = 0; i < RAY_COUNT; i++) {
+        rays.push({
+          x: Math.random() * w, y: Math.random() * h,
+          len: 220 + Math.random() * 260,
+          angle: (Math.random() * 30 - 15 + 35) * Math.PI / 180,
+          speed: 0.15 + Math.random() * 0.2,
+          color: RAY_COLORS[i % RAY_COLORS.length],
+          alpha: 0.05 + Math.random() * 0.05,
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = '#020210';
+        ctx.fillRect(0, 0, w, h);
+
+        stars.forEach(s => {
+          s.a += reduceMotion ? 0 : s.tw;
+          const alpha = 0.3 + Math.abs(Math.sin(s.a)) * 0.5;
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        rays.forEach(r => {
+          const dx = Math.cos(r.angle), dy = Math.sin(r.angle);
+          const grad = ctx.createLinearGradient(r.x, r.y, r.x + dx * r.len, r.y + dy * r.len);
+          grad.addColorStop(0, `rgba(${r.color},${r.alpha})`);
+          grad.addColorStop(1, `rgba(${r.color},0)`);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(r.x, r.y);
+          ctx.lineTo(r.x + dx * r.len, r.y + dy * r.len);
+          ctx.stroke();
+
+          if (!reduceMotion) {
+            r.x += dx * r.speed;
+            r.y += dy * r.speed;
+            if (r.x > w + r.len || r.y > h + r.len) { r.x = -50; r.y = Math.random() * h * 0.6; }
+          }
+        });
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
+
+  <!-- ===== Spotlight — interruptible spring engine (Apple Design skill: §3) ===== -->
+  <script>
+    function createSpring(onUpdate, { stiffness = 210, damping = 24 } = {}) {
+      let value = 0, velocity = 0, target = 0, raf = null;
+      function tick() {
+        const force = -stiffness * (value - target);
+        const damp = -damping * velocity;
+        velocity += (force + damp) * (1 / 60);
+        value += velocity * (1 / 60);
+        onUpdate(value);
+        if (Math.abs(target - value) > 0.001 || Math.abs(velocity) > 0.001) raf = requestAnimationFrame(tick);
+        else { value = target; onUpdate(value); raf = null; }
+      }
+      return {
+        setTarget(t) { target = t; if (!raf) raf = requestAnimationFrame(tick); },
+        jumpTo(v) { value = v; velocity = 0; target = v; onUpdate(value); },
+      };
+    }
+
+    const cyxProducts = {
+      accessxtap: { label: 'Accessibility · Live', color: '52,211,153', name: 'AccessX Tap', copy: 'Turn any printed document or object into accessible audio, video, or screen-reader-ready text with a single tap.', cta: '/accessxtap.html' },
+      insurebotx: { label: 'AI Lead Capture · Live', color: '45,212,191', name: 'InsureBotX', copy: 'An AI chat assistant that greets your visitors, asks the right questions in English or Spanish, and sends you the lead instantly.', cta: '/insurebotx.html' },
+      orionx: { label: 'Private AI · Beta', color: '251,146,60', name: 'ORION-X', copy: 'A privately-hosted AI assistant running on infrastructure CyderEyesX owns. Unlimited conversations, no third-party model provider.', cta: '/orionx.html' },
+      lyrax: { label: 'Transcription · Private Beta', color: '34,211,238', name: 'LYRA-X', copy: 'Upload audio, choose your speaker count, and get a speaker-labelled, timestamped transcript — exportable as TXT, SRT, or Markdown.', cta: '/lyra-x.html' }
+    };
+    const spotlightPanel = document.getElementById('spotlightPanel');
+    let spotlightCurrent = null;
+    function renderSpotlightPanel(key) {
+      const p = cyxProducts[key];
+      spotlightPanel.innerHTML = `
+        <div class="mono text-[11px] mb-3" style="color: rgb(${p.color})">${p.label}</div>
+        <h3 class="display text-3xl font-bold mb-4">${p.name}</h3>
+        <p class="text-slate-400 leading-relaxed mb-8 max-w-2xl">${p.copy}</p>
+        <a href="${p.cta}" class="press-feedback inline-block px-8 py-3 rounded-full font-semibold text-sm" style="background: rgb(${p.color}); color:#04140f;">Learn more →</a>
+      `;
+    }
+    function setActiveSpotlightTab(key) {
+      document.querySelectorAll('.spot-tab').forEach(btn => {
+        const active = btn.dataset.product === key;
+        btn.style.background = active ? `rgba(${btn.dataset.color},0.18)` : 'transparent';
+      });
+    }
+    const spotlightSpring = createSpring((v) => {
+      spotlightPanel.style.opacity = v;
+      spotlightPanel.style.transform = `translateY(${(1 - v) * 14}px)`;
+    }, { stiffness: 210, damping: 26 });
+    function switchSpotlightTo(key) {
+      if (key === spotlightCurrent) return;
+      spotlightCurrent = key;
+      setActiveSpotlightTab(key);
+      spotlightSpring.setTarget(0);
+      setTimeout(() => { renderSpotlightPanel(key); spotlightSpring.setTarget(1); }, 90);
+    }
+    document.querySelectorAll('.spot-tab').forEach(btn => btn.addEventListener('click', () => switchSpotlightTo(btn.dataset.product)));
+    renderSpotlightPanel('accessxtap');
+    setActiveSpotlightTab('accessxtap');
+    spotlightSpring.jumpTo(1);
   </script>
 
 </body>
