@@ -70,40 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!nav) return;
 
     /* ===============================
-       Header blur / glass on scroll
-       =============================== */
-    const updateNavState = () => {
-      if (window.scrollY > 8) {
-        nav.classList.add("cyx-nav-scrolled");
-      } else {
-        nav.classList.remove("cyx-nav-scrolled");
-      }
-    };
-
-    updateNavState();
-    window.addEventListener("scroll", updateNavState, { passive: true });
-
-    if (!document.getElementById("cyx-nav-style")) {
-      const style = document.createElement("style");
-      style.id = "cyx-nav-style";
-      style.textContent = `
-        #cyx-nav {
-          transition: background .25s ease,
-                      border-color .25s ease,
-                      box-shadow .25s ease,
-                      backdrop-filter .25s ease;
-        }
-        #cyx-nav.cyx-nav-scrolled {
-          background: rgba(15, 23, 42, 0.78) !important;
-          border-bottom: 1px solid rgba(255,255,255,0.08);
-          backdrop-filter: blur(14px);
-          box-shadow: 0 12px 34px rgba(0,0,0,0.25);
-        }
-      `;
-      document.head.appendChild(style);
-    }
-
-    /* ===============================
        Desktop Resources dropdown
        =============================== */
     const resourcesBtn = document.getElementById("resourcesBtn");
