@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CyderEyesX LLC | Educación Digital Segura</title>
+  <title>CyderEyesX LLC | Tecnología accesible</title>
+  <meta name="description" content="Herramientas prácticas de accesibilidad y educación bilingüe. Conoce LYRA-X, AccessX Tap y ORIÓN-X, sus estados beta y sus limitaciones.">
+  <link rel="canonical" href="https://cydereyesx.xyz/es/" />
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -163,69 +165,91 @@
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
     }
+
+    /* Homepage additions: original fonts, palette and component styles retained. */
+    html { scroll-padding-top: 7rem; }
+    body[data-page="home"] .reveal { opacity: 1; transform: none; }
+    .cyx-skip { position: fixed; left: 1rem; top: -8rem; z-index: 100; padding: .8rem 1rem; background: #f8fafc; color: #020617; border-radius: .5rem; }
+    .cyx-skip:focus { top: 1rem; }
+    body[data-page="home"] a:focus-visible,
+    body[data-page="home"] button:focus-visible,
+    body[data-page="home"] summary:focus-visible { outline: 3px solid #2dd4bf; outline-offset: 4px; }
+    .cyx-hero { min-height: 78vh; padding-top: 9rem; padding-bottom: 4rem; }
+    .cyx-hero h1 { font-size: clamp(2.25rem, 5vw, 4.5rem); line-height: 1.1; }
+    .cyx-products { scroll-margin-top: 7rem; }
+    .cyx-product { display: flex; flex-direction: column; min-width: 0; }
+    .cyx-product .cyx-logo-box { height: 10rem; display: grid; place-items: center; margin-bottom: 1.5rem; }
+    .cyx-logo-box img { width: 100%; height: 9rem; object-fit: contain; }
+    .cyx-product h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: .75rem; }
+    .cyx-product h4 { font-size: 1.125rem; font-weight: 600; line-height: 1.5; margin-bottom: .75rem; }
+    .cyx-product p { color: #cbd5e1; font-size: .9375rem; line-height: 1.75; margin-bottom: 1rem; }
+    .cyx-product .cyx-task { color: #5eead4; font-size: .75rem; }
+    .cyx-status { align-self: flex-start; border: 1px solid rgba(45,212,191,.45); border-radius: 9999px; padding: .3rem .75rem; color: #99f6e4; font-size: .75rem; margin-bottom: 1rem; }
+    .cyx-product .cyx-limits { border-top: 1px solid rgba(255,255,255,.12); padding-top: 1rem; font-size: .8125rem; }
+    .cyx-product .btn { margin-top: auto; text-align: center; min-height: 44px; }
+    .cyx-actions a { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    .cyx-resources a { text-decoration: underline; text-underline-offset: .2em; }
+    @media (max-width: 639px) {
+      .cyx-hero { min-height: auto; padding-top: 8rem; }
+      .cyx-hero .mono { letter-spacing: .12em; }
+      .cyx-actions { flex-direction: column; }
+      .cyx-actions a { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal, .service-card:hover, .btn:hover, .social-pill:hover { transform: none; }
+    }
   </style>
   <!-- SimpleAnalytics Tracking -->
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
 </head>
 
-<body id="top">
+<body id="top" data-page="home">
+<a class="cyx-skip" href="#main">Saltar al contenido principal</a>
 
-  <!-- NAVBAR -->
-  <nav class="fixed w-full z-50 px-8 py-5 glass flex justify-between items-center">
-    <a href="#top" class="flex items-center gap-4" aria-label="CyderEyesX Inicio">
-      <div class="logo-glow">
-        <img
-          src="../images/cyx-lion-mark.png"
-          alt="CyderEyesX Inicio"
-          class="h-10 w-10"
-        />
-      </div>
-      <span class="mono text-sm">CYDEREYESX</span>
-    </a>
+  <!-- GLOBAL HEADER: reuse the existing shared loader -->
+  <div id="site-header"></div>
 
-    <div class="hidden md:flex gap-10 mono text-xs opacity-70">
-      <a href="#mission" class="hover:text-teal-400">Misión</a>
-      <a href="#services" class="hover:text-teal-400">Servicios</a>
-      <a href="#language-access" class="hover:text-teal-400">Acceso de Idioma</a>
-      <a href="#why-we-teach" class="hover:text-teal-400">Por Qué Enseñamos</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="min-h-screen flex items-center justify-center hero-glow pt-32 px-6 text-center reveal">
-    <div class="max-w-5xl space-y-10">
-      <img
-        src="../images/cyx-logo-full.png"
-        alt="CyderEyesX LLC Logo"
-        class="mx-auto h-28 md:h-36"
-      />
-
-      <div class="mono text-teal-400 text-xs">
-        SEGURIDAD • INFRAESTRUCTURA • EDUCACIÓN
-      </div>
-
-      <h1 class="text-5xl md:text-7xl font-bold leading-tight">
-        Educación digital segura para la
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-sky-400">
-          próxima generación
-        </span>
-      </h1>
-
-      <p class="max-w-2xl mx-auto text-slate-400 text-lg">
-        Educación de alta integridad enfocada en conciencia de ciberseguridad,
-        uso ético de la tecnología y seguridad digital a largo plazo.
-      </p>
-
-      <div class="flex flex-col md:flex-row gap-6 justify-center pt-6">
-        <a class="btn px-10 py-4 bg-white text-black font-semibold rounded-full" href="../index.html">
-          Explore in English
-        </a>
-        <a class="btn px-10 py-4 border border-white/20 rounded-full" href="#services">
-          ¡Explorar en Español!
-        </a>
+  <main id="main" tabindex="-1">
+  <!-- HERO: original identity, fonts and Tailwind utilities -->
+  <section class="cyx-hero flex items-center justify-center hero-glow px-6 text-center">
+    <div class="max-w-5xl space-y-8">
+      <img src="../images/cyx-logo-full.png" alt="CyderEyesX LLC" class="mx-auto h-28 md:h-36 max-w-full object-contain" fetchpriority="high" />
+      <div class="mono text-teal-400 text-xs">ACCESIBILIDAD • EDUCACIÓN • IA</div>
+      <h1 class="font-bold">Tecnología accesible.<br /><span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-sky-400">Más independencia para todos.</span></h1>
+      <p class="max-w-3xl mx-auto text-slate-300 text-lg leading-relaxed">CyderEyesX LLC desarrolla herramientas prácticas que te ayudan a escuchar, comprender y acceder a información mediante dispositivos cotidianos. Buscamos reducir barreras económicas y tecnológicas con soluciones claras y bilingües.</p>
+      <div class="cyx-actions flex flex-wrap gap-4 justify-center pt-4">
+        <a class="btn px-8 py-4 bg-white text-black font-semibold rounded-full" href="#solutions">Conoce nuestras soluciones</a>
+        <a class="btn px-6 py-3 border border-white/20 rounded-full font-semibold" href="/es/contacto.html">Pregunta por un piloto comunitario</a>
+        <a class="btn px-6 py-3 border border-white/20 rounded-full font-semibold" href="../index.html" lang="en" hreflang="en">Explore in English</a>
       </div>
     </div>
+  </section>
+
+  <!-- PRIMARY PRODUCTS: original logos and existing service endpoints -->
+  <section id="solutions" class="cyx-products py-20 px-6 bg-[#010413]" aria-labelledby="solutions-title">
+    <span id="accessxtap"></span>
+    <div class="max-w-7xl mx-auto text-center mb-12">
+      <div class="mono text-teal-400 text-xs mb-4">ESCUCHAR · COMPRENDER · ACCEDER</div>
+      <h2 id="solutions-title" class="text-3xl md:text-5xl font-bold">Tres soluciones. Una misión centrada en las personas.</h2>
+      <p class="mt-6 text-slate-300 max-w-3xl mx-auto">Cada producto tiene sus propias capacidades, requisitos de acceso y etapa de desarrollo.</p>
+    </div>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <article class="glass p-8 rounded-2xl service-card cyx-product">
+      <div class="cyx-logo-box"><img src="../images/Lyra_X.PNG" alt="LYRA-X" width="260" height="130" loading="lazy"></div>
+      <p class="cyx-task">Escuchar y comprender</p><h3>LYRA-X</h3><span class="cyx-status">Beta privada</span><h4>Vuelve a la información oral en texto legible.</h4><p>Convierte audio pregrabado en transcripciones con marcas de tiempo e identificación de hablantes para revisar clases, reuniones y conversaciones.</p><p class="cyx-limits">La grabación directa desde el navegador está planificada, no disponible hoy. Las transcripciones pueden contener errores; revisa el resultado. Descarga los archivos dentro de la ventana estándar configurada de 24 horas.</p><a class="btn px-6 py-3 border border-white/20 rounded-full font-semibold" href="/lyra-x.html">Conoce LYRA-X <span aria-hidden="true">↗</span></a>
+      </article>
+      <article class="glass p-8 rounded-2xl service-card cyx-product">
+      <div class="cyx-logo-box"><img src="../images/Access_X_Tap.png" alt="AccessX Tap" width="260" height="130" loading="lazy"></div>
+      <p class="cyx-task">Identificar y acceder</p><h3>AccessX Tap</h3><span class="cyx-status">Acceso institucional por solicitud</span><h4>Pon la información a tu alcance.</h4><p>Un teléfono compatible puede abrir texto, audio, video o documentos vinculados a una etiqueta NFC. Actualiza el contenido sin reemplazar la etiqueta.</p><p class="cyx-limits">El comportamiento NFC depende del dispositivo y sistema operativo; puede requerir equipo compatible y acceso a Internet. Las membresías personales y familiares están planificadas, no lanzadas.</p><a class="btn px-6 py-3 border border-white/20 rounded-full font-semibold" href="/accessxtap.html">Conoce AccessX Tap <span aria-hidden="true">↗</span></a>
+      </article>
+      <article class="glass p-8 rounded-2xl service-card cyx-product">
+      <div class="cyx-logo-box"><img src="../images/Orion_X_ai.png" alt="ORIÓN-X" width="260" height="130" loading="lazy"></div>
+      <p class="cyx-task">Guiar y conectar</p><h3>ORIÓN-X</h3><span class="cyx-status">Asistente de texto en beta</span><h4>Un espacio para preguntar, aprender y comprender.</h4><p>Explora el asistente de texto alojado localmente, con límites de beta transparentes y capacidad de infraestructura finita.</p><p class="cyx-limits">Los flujos conectados con LYRA-X y AccessX Tap están planificados, no publicados. La beta textual actual no ofrece navegación web en vivo ni generación de imágenes.</p><a class="btn px-6 py-3 border border-white/20 rounded-full font-semibold" href="/orionx.html">Conoce ORIÓN-X <span aria-hidden="true">↗</span></a>
+      </article>
+    </div>
+<div class="cyx-actions flex flex-wrap justify-center gap-4 pt-10"><a class="btn px-6 py-3 border border-white/20 rounded-full font-semibold" href="https://ai.cydereyesx.com/app">Portal de clientes</a><a class="btn px-6 py-3 border border-white/20 rounded-full font-semibold" href="https://ai.cydereyesx.com/auth/activate">Activar licencia</a><a class="btn px-6 py-3 border border-white/20 rounded-full font-semibold" href="https://accessxtap.cydereyesx.com/request">Solicita acceso institucional</a></div>
   </section>
 
   <!-- MISSION -->
@@ -233,10 +257,11 @@
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
       <div>
         <div class="mono text-teal-400 text-xs mb-4">Nuestra filosofía</div>
-        <h2 class="text-4xl font-bold mb-6">La educación va primero.</h2>
+        <h2 class="text-4xl font-bold mb-6">La tecnología debe adaptarse a las personas.</h2>
 
         <p class="text-slate-400 leading-relaxed mb-6">
-          CyderEyesX LLC es una organización estrictamente educativa.
+          CyderEyesX LLC combina herramientas prácticas de accesibilidad, IA alojada localmente y educación bilingüe.
+          Somos una empresa con fines de lucro y misión social: reducir barreras económicas y digitales.
           No brindamos asesoría financiera, legal ni de inversión.
         </p>
 
@@ -397,6 +422,24 @@
     </div>
   </section>
 
+  <!-- RESOURCES: retained links, not primary products -->
+  <section id="resources" class="cyx-resources py-16 px-6 bg-[#010413]" aria-labelledby="resources-title">
+    <div class="max-w-6xl mx-auto">
+      <div class="mono text-teal-400 text-xs mb-4">Recursos</div>
+      <h2 id="resources-title" class="text-3xl font-bold mb-6">Recursos especializados e históricos</h2>
+      <ul class="flex flex-wrap gap-x-8 gap-y-4 text-slate-300">
+        <li><a href="/trainings-workshops.html">Formación bilingüe</a></li>
+        <li><a href="/crypto-projects.html">Recursos de seguridad digital</a></li>
+        <li><a href="#mission">Misión</a></li>
+        <li><a href="#services">Programas educativos</a></li>
+        <li><a href="#language-access">Acceso de idioma</a></li>
+        <li><a href="#why-we-teach">Por qué enseñamos</a></li>
+        <li><a href="#top">Volver arriba</a></li>
+      </ul>
+    </div>
+  </section>
+  </main>
+
   <!-- FOOTER -->
   <footer class="py-16 px-8 border-t border-white/5" id="language">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
@@ -425,7 +468,7 @@
 
       <!-- CENTER: Disclaimer -->
       <p class="text-xs text-slate-400 text-center max-w-md mx-auto">
-        Entidad educativa únicamente. No se brinda asesoría financiera, legal ni de inversión.
+        Tecnología accesible y educación bilingüe. No se brinda asesoría financiera, legal ni de inversión.
       </p>
 
       <!-- RIGHT: Social Icons -->
@@ -502,6 +545,9 @@
 
     reveals.forEach(r => observer.observe(r));
   </script>
+
+  <!-- Existing shared navigation architecture; Spanish footer retained -->
+  <script src="../layout.js"></script>
 
 </body>
 </html>
