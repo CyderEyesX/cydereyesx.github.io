@@ -157,13 +157,13 @@
         </div>
         <div class="glass p-8 rounded-2xl service-card">
           <div class="mono text-orange-300 text-2xl mb-4">02</div>
-          <h3 class="text-lg font-bold mb-3">We confirm by Telegram</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">If a seat is open, you'll get a payment link and setup instructions within 24 hours.</p>
+          <h3 class="text-lg font-bold mb-3">We follow up by email</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">If a seat is available, we'll email you a secure Stripe payment link and setup instructions.</p>
         </div>
         <div class="glass p-8 rounded-2xl service-card">
           <div class="mono text-orange-300 text-2xl mb-4">03</div>
           <h3 class="text-lg font-bold mb-3">Start chatting</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Get your login and start using ORION-X immediately — no message limits, ever.</p>
+          <p class="text-slate-400 text-sm leading-relaxed">After payment is confirmed, we activate your access manually and send your login instructions by email.</p>
         </div>
       </div>
     </div>
@@ -276,10 +276,6 @@
           <input type="email" id="orionxEmail" required class="modal-input" placeholder="you@example.com" />
         </div>
         <div>
-          <label class="block text-xs text-slate-400 mb-1">Telegram username (optional)</label>
-          <input type="text" id="orionxTelegram" class="modal-input" placeholder="@yourhandle" />
-        </div>
-        <div>
           <label class="block text-xs text-slate-400 mb-1">Notes (optional)</label>
           <textarea id="orionxNotas" class="modal-input" rows="2" placeholder="Anything we should know?"></textarea>
         </div>
@@ -351,7 +347,7 @@
   <!-- ORIONX_REQUEST_ACCESS_MODAL v1 -->
   <script>
     (function () {
-      const API_BASE = 'https://insurebot.cydereyesx.com';
+      const API_BASE = 'https://orionx-api.cydereyesx.com';
 
       const modal = document.getElementById('orionxModal');
       const openBtns = document.querySelectorAll('#openOrionxModalBtn, .orionx-tier-btn');
@@ -418,7 +414,6 @@
 
         const nombre = document.getElementById('orionxNombre').value.trim();
         const email = document.getElementById('orionxEmail').value.trim();
-        const telegram_username = document.getElementById('orionxTelegram').value.trim();
         const notas = document.getElementById('orionxNotas').value.trim();
         const termsAccepted = document.getElementById('orionxTermsCheckbox').checked;
 
@@ -451,12 +446,12 @@
           const res = await fetch(`${API_BASE}/api/orionx/request-access`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre, email, telegram_username, notas, terms_accepted: true, cf_turnstile_response })
+            body: JSON.stringify({ nombre, email, notas, terms_accepted: true, cf_turnstile_response })
           });
           const data = await res.json();
 
           if (data.success) {
-            formMsg.textContent = "Request received! We'll be in touch within 24 hours.";
+            formMsg.textContent = "Request received! We'll review it and follow up by email within 24 hours.";
             formMsg.style.color = '#fb923c';
             formMsg.style.display = 'block';
             form.reset();
