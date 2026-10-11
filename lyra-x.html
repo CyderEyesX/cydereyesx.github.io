@@ -11,6 +11,7 @@
 
   <!-- Tailwind (Play CDN — same as the rest of the site) -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
   <!-- Fonts (same as site) -->
   <link
@@ -347,10 +348,7 @@
         Essential plan seat.
       </p>
 
-      <form action="https://api.web3forms.com/submit" method="post" id="lyraJoinForm">
-        <input type="hidden" name="access_key" value="fe980ce7-61a4-425c-b305-946f309850b6" />
-        <input type="hidden" name="subject" value="LYRA-X — Essential Plan request" />
-        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+      <form action="https://intake.cydereyesx.com/v1/requests/lyrax" method="post" id="lyraJoinForm">
         <div class="space-y-5">
           <div>
             <label for="lx-name" class="block text-sm font-medium text-slate-300 mb-2">Name *</label>
@@ -376,6 +374,8 @@
             </span>
           </label>
 
+          <div class="cf-turnstile flex justify-center" data-sitekey="0x4AAAAAAE9Vw_PqOlJBb6c0" data-theme="dark"></div>
+
           <button type="submit" id="lx-submit" disabled
             class="btn w-full py-3 px-6 rounded-xl font-semibold text-sm opacity-40 cursor-not-allowed"
             style="background: linear-gradient(135deg, var(--lx) 0%, var(--lx-deep) 100%); color: var(--ink);">
@@ -392,29 +392,47 @@
           const status = document.getElementById('lx-status');
           form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (!form.reportValidity()) return;
+            const token = form.querySelector('[name="cf-turnstile-response"]')?.value || '';
+            if (!token) {
+              status.textContent = 'Security verification is still loading. Please try again.';
+              status.style.color = 'var(--lx-red)';
+              status.classList.remove('hidden');
+              return;
+            }
             btn.disabled = true;
             btn.textContent = 'Sending…';
             status.classList.remove('hidden');
             try {
               const res = await fetch(form.action, {
                 method: 'POST',
-                headers: { 'Accept': 'application/json' },
-                body: new FormData(form)
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  name: form.elements.name.value,
+                  email: form.elements.email.value,
+                  organization: '',
+                  plan: 'Essential',
+                  notes: '',
+                  terms_accepted: form.elements.terms_accepted.checked,
+                  turnstile_token: token
+                })
               });
               const data = await res.json().catch(() => ({}));
-              if (res.ok && data.success !== false) {
+              if (res.ok && data.ok === true) {
                 status.textContent = "Request received — we'll reach out to activate your Essential plan seat.";
                 status.style.color = 'var(--lx)';
                 btn.textContent = 'Request sent ✓';
                 form.reset();
+                if (window.turnstile) window.turnstile.reset();
               } else {
-                throw new Error(data.message || 'Submission failed');
+                throw new Error(data.error || 'Submission failed');
               }
             } catch (err) {
-              status.textContent = 'Something went wrong. Please email admin@cydereyesx.com directly.';
+              status.textContent = 'Something went wrong. Please email lyra-x@cydereyesx.com directly.';
               status.style.color = 'var(--lx-red)';
               btn.textContent = 'Request beta access';
               btn.disabled = false;
+              if (window.turnstile) window.turnstile.reset();
             }
           });
         })();
