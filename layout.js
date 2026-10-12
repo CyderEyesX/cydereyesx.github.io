@@ -6,30 +6,38 @@ document.addEventListener("DOMContentLoaded", () => {
   (function injectGlobalMeta() {
     const head = document.head;
 
-    // Avoid duplicate injection
+    // Preserve page-specific SEO; fill missing values without duplicates.
     if (document.getElementById("cyx-global-meta")) return;
-
-    const metaBlock = document.createElement("template");
-    metaBlock.id = "cyx-global-meta";
-
-    metaBlock.innerHTML = `
-      <meta name="description" content="Secure digital education focused on blockchain literacy, cybersecurity awareness, and emerging technologies.">
-
-      <!-- Open Graph -->
-      <meta property="og:type" content="website">
-      <meta property="og:url" content="https://cydereyesx.xyz/">
-      <meta property="og:title" content="CyderEyesX">
-      <meta property="og:description" content="Secure Digital Education • Blockchain • Cybersecurity • Technology Literacy">
-      <meta property="og:image" content="https://raw.githubusercontent.com/CyderEyesX/cydereyesx.github.io/main/images/cyx-logo-full.png">
-
-      <!-- Twitter -->
-      <meta property="twitter:card" content="summary_large_image">
-      <meta property="twitter:title" content="CyderEyesX">
-      <meta property="twitter:description" content="Secure Digital Education • Blockchain • Cybersecurity • Technology Literacy">
-      <meta property="twitter:image" content="https://raw.githubusercontent.com/CyderEyesX/cydereyesx.github.io/main/images/cyx-logo-full.png">
-    `;
-
-    head.prepend(metaBlock.content);
+    const spanish = document.documentElement.lang.startsWith("es");
+    const description = head.querySelector('meta[name="description"]')?.content ||
+      (spanish ? "Tecnología accesible, educación bilingüe y herramientas prácticas con estados beta claros." :
+       "Accessible technology, bilingual education and practical tools with clear beta status.");
+    const canonical = head.querySelector('link[rel="canonical"]')?.href ||
+      "https://cydereyesx.xyz" + window.location.pathname;
+    const defaults = [
+      ["name", "description", description],
+      ["property", "og:type", "website"],
+      ["property", "og:url", canonical],
+      ["property", "og:title", document.title],
+      ["property", "og:description", description],
+      ["property", "og:image", "https://cydereyesx.xyz/images/cyx-logo-full.png"],
+      ["name", "twitter:card", "summary_large_image"],
+      ["name", "twitter:title", document.title],
+      ["name", "twitter:description", description],
+      ["name", "twitter:image", "https://cydereyesx.xyz/images/cyx-logo-full.png"]
+    ];
+    defaults.forEach(([attribute, name, content]) => {
+      if (head.querySelector('meta[name="' + name + '"],meta[property="' + name + '"]')) return;
+      const meta = document.createElement("meta");
+      meta.setAttribute(attribute, name);
+      meta.content = content;
+      head.appendChild(meta);
+    });
+    const marker = document.createElement("meta");
+    marker.id = "cyx-global-meta";
+    marker.name = "cyx-global-meta";
+    marker.content = "ready";
+    head.appendChild(marker);
 
     /* =====================
        FAVICON
@@ -68,6 +76,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const initHeaderUX = () => {
     const nav = document.getElementById("cyx-nav");
     if (!nav) return;
+
+    const spanish = document.documentElement.lang.startsWith("es");
+    const routePairs = {"/":"/es/","/index.html":"/es/index.html","/lyra-x.html":"/es/lyra-x.html","/accessxtap.html":"/es/accessxtap.html","/orionx.html":"/es/orionx.html","/contact.html":"/es/contacto.html","/privacy.html":"/es/privacy.html","/terms.html":"/es/terms.html","/who-we-help/":"/es/para-quien/","/mission/":"/es/mision/","/impact/":"/es/impacto/","/resources/":"/es/recursos/"};
+    const current = window.location.pathname;
+    const counterpart = spanish
+      ? Object.keys(routePairs).find(path => routePairs[path] === current)
+      : routePairs[current];
+    nav.querySelectorAll('a[hreflang]').forEach(link => {
+      if (counterpart) link.href = counterpart;
+    });
+    const mobileOpenLabel = spanish ? "Abrir menú" : "Open menu";
+    document.getElementById("mobileMenuBtn")?.setAttribute("aria-label", mobileOpenLabel);
+    document.getElementById("mobileMenu")?.setAttribute("aria-label", spanish ? "Navegación móvil" : "Mobile navigation");
+
+
+
+    document.getElementById("resourcesMenu")?.setAttribute("aria-label", spanish ? "Menú de recursos" : "Resources menu");
+    document.getElementById("mobileResourcesMenu")?.setAttribute("aria-label", spanish ? "Recursos móviles" : "Mobile resources menu");
+    document.getElementById("mobileResourcesBtn")?.setAttribute("aria-controls", "mobileResourcesMenu");
 
     /* ===============================
        Header blur / glass on scroll
@@ -196,6 +223,17 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileResBtn.getAttribute("aria-expanded") === "true"
         ? closeMobileResources()
         : openMobileResources();
+    });
+
+    // Keep keyboard focus in the mobile navigation while it is open.
+    mobilePanel?.addEventListener("keydown", (event) => {
+      if (event.key !== "Tab" || mobileBtn?.getAttribute("aria-expanded") !== "true") return;
+      const items = Array.from(mobilePanel.querySelectorAll('a[href],button:not([disabled])'))
+        .filter(item => item.getClientRects().length && getComputedStyle(item).visibility !== "hidden");
+      if (!items.length) return;
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     });
 
     mobilePanel?.querySelectorAll("a[href]").forEach(link => {

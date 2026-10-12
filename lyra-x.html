@@ -130,25 +130,36 @@
     ]
   }
   </script>
+
+  <style>
+    a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible { outline:2px solid #2dd4bf;outline-offset:4px; }
+    .cyx-skip {position:absolute;left:1rem;top:-8rem;z-index:200;padding:.75rem 1rem;background:#f8fafc;color:#020617;border-radius:.5rem;}
+    .cyx-skip:focus {top:1rem;}
+    .reveal {opacity:1;transform:none;}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}.reveal,.bubble{opacity:1!important;transform:none!important;}}
+  </style>
+<link rel="alternate" hreflang="en" href="https://cydereyesx.xyz/lyra-x.html" />
+<link rel="alternate" hreflang="es" href="https://cydereyesx.xyz/es/lyra-x.html" />
 </head>
 
 <body id="top" data-page="lyra-x">
 
   <!-- GLOBAL HEADER (injected by layout.js) -->
-  <div id="site-header"></div>
+  <a class="cyx-skip" href="#main">Skip to main content</a>
+<div id="site-header"></div>
 
+<main id="main" tabindex="-1">
   <!-- HERO -->
   <section class="min-h-screen flex items-center hero-glow pt-32 pb-16 px-6 reveal">
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-14 items-center">
       <div>
         <div class="mono text-cyan-300 text-xs mb-4">LYRA-X · Private Beta</div>
         <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
-          Voice to
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-amber-200">insights</span>,
-          with real processing status.
+          Revisit spoken information.
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-amber-200">Listen and understand.</span>
         </h1>
         <p class="text-slate-400 text-lg max-w-xl mb-8">
-          A private, self-hosted transcription workflow for approved beta users. Upload pre-recorded
+          Review lectures, meetings and conversations as readable text. This private, self-hosted transcription workflow is for approved beta users. Upload pre-recorded
           audio, choose the known speaker count, and download a timestamped transcript — as TXT, SRT,
           or Markdown — before the standard retention window expires.
         </p>
@@ -269,10 +280,9 @@
   <section class="py-24 px-6 reveal">
     <div class="max-w-4xl mx-auto glass rounded-3xl p-10 text-center">
       <div class="mono text-[10px] px-3 py-1 rounded-full border inline-block mb-4" style="border-color: rgba(232,169,77,0.4); color: var(--lx-gold);">Planned — not released</div>
-      <h2 class="text-2xl md:text-3xl font-bold mb-4">ORIÓN-X Insights</h2>
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Direct recording and ORIÓN-X Insights</h2>
       <p class="text-slate-400 max-w-2xl mx-auto leading-relaxed">
-        A planned feature that works from a transcript you've specifically approved — never from raw
-        audio. It is not part of the Service today and is not included in any current plan.
+        Direct browser recording is planned, not available today. ORIÓN-X Insights would use only a transcript you specifically approve, not raw audio. Neither feature is included in a current plan. Transcripts can contain errors; review the output.
       </p>
     </div>
   </section>
@@ -315,7 +325,7 @@
             <li>More monthly transcription hours</li>
             <li>Priority support</li>
           </ul>
-          <span class="block text-center px-5 py-3 rounded-full border border-white/10 text-slate-400 cursor-not-allowed" aria-disabled="true">Próximamente</span>
+          <span class="block text-center px-5 py-3 rounded-full border border-white/10 text-slate-400 cursor-not-allowed" aria-disabled="true">Planned — not released</span>
         </div>
 
         <!-- PREMIUM / ORION-X INSIGHTS — COMING SOON -->
@@ -327,7 +337,7 @@
             <li>Everything in Pro</li>
             <li>ORIÓN-X Insights (planned)</li>
           </ul>
-          <a class="block text-center px-5 py-3 rounded-full border border-white/10 hover:bg-white/5 transition" style="color: var(--lx-gold);" href="/contact.html">Contáctanos para más información</a>
+          <a class="block text-center px-5 py-3 rounded-full border border-white/10 hover:bg-white/5 transition" style="color: var(--lx-gold);" href="/contact.html">Contact us for more information</a>
         </div>
       </div>
 
@@ -381,7 +391,7 @@
             style="background: linear-gradient(135deg, var(--lx) 0%, var(--lx-deep) 100%); color: var(--ink);">
             Request beta access
           </button>
-          <p id="lx-status" class="text-center text-sm hidden"></p>
+          <p id="lx-status" role="status" aria-live="polite" aria-atomic="true" class="text-center text-sm hidden"></p>
           <p class="text-center text-[11px] text-slate-400">You will not be charged from this form. We'll contact you to activate billing for the Essential plan.</p>
         </div>
       </form>
@@ -450,6 +460,7 @@
     </div>
   </section>
 
+</main>
   <!-- GLOBAL FOOTER (injected by layout.js) -->
   <div id="site-footer"></div>
 
