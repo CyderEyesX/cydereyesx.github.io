@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trainings & Workshops | CyderEyesX LLC</title>
+  <title>Accessible Technology Training | CyderEyesX</title>
 
 <!-- Performance -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,22 +100,32 @@
       border-bottom-color: transparent;
     }
   </style>
+
+  <style>
+    a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible { outline:2px solid #2dd4bf;outline-offset:4px; }
+    .cyx-skip {position:absolute;left:1rem;top:-8rem;z-index:200;padding:.75rem 1rem;background:#f8fafc;color:#020617;border-radius:.5rem;}
+    .cyx-skip:focus {top:1rem;}
+    .reveal {opacity:1;transform:none;}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}.reveal,.bubble{opacity:1!important;transform:none!important;}}
+  </style>
 </head>
 
 <body data-page="internal">
 
 <!-- GLOBAL HEADER -->
+<a class="cyx-skip" href="#main">Skip to main content</a>
 <div id="site-header"></div>
 
+<main id="main" tabindex="-1">
 <!-- HERO -->
 <section class="min-h-screen pt-32 px-6 flex items-center justify-center text-center reveal">
   <div class="max-w-5xl space-y-8">
     <h1 class="text-5xl md:text-6xl font-bold">
-      Trainings & Workshops
+      Accessible Technology Training
     </h1>
     <p class="text-slate-400 text-lg max-w-3xl mx-auto">
-      Structured educational sessions focused on cybersecurity awareness,
-      digital literacy, and responsible technology use.
+      Bilingual guidance for understanding accessible tools, reviewing transcripts,
+      opening linked content and building safer digital habits. Session availability and format are confirmed by request.
     </p>
   </div>
 </section>
@@ -137,7 +147,7 @@
       <div class="glass p-8 rounded-2xl">
         <h3 class="font-bold mb-3">Institutional Trainings</h3>
         <p class="text-slate-400 text-sm">
-          Tailored trainings for educational institutions, accessibility services, and staff development.
+          Discuss onboarding for educational institutions, accessibility services and staff. Agree on scope and availability before any pilot.
         </p>
       </div>
 
@@ -155,7 +165,7 @@
 <section class="py-28 px-6 reveal">
   <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
     <div>
-      <div class="mono text-teal-400 text-xs mb-4">Educational Recognition</div>
+      <div class="mono text-teal-400 text-xs mb-4">Historical educational resource</div>
 
       <!-- ✅ Title is now linked -->
       <h2 class="text-4xl font-bold mb-6">
@@ -233,6 +243,7 @@
   </a>
 </section>
 
+</main>
 <!-- GLOBAL FOOTER -->
 <div id="site-footer"></div>
 

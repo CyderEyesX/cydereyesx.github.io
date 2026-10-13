@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ORION-X AI | CyderEyesX LLC</title>
-  <meta name="description" content="ORION-X — a private, locally-hosted AI assistant. Unlimited conversations, no usage caps. A product of CyderEyesX LLC." />
+  <title>ORIÓN-X | Text-assistant beta | CyderEyesX</title>
+  <meta name="description" content="ORIÓN-X: a locally hosted text-assistant beta with clear limits. Accessibility workflows and product integrations are planned, not released." />
 
   <link rel="preload" as="image" href="images/cyx-lion-mark.png" />
 
@@ -95,26 +95,39 @@
   <!-- Cloudflare Turnstile -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
+
+  <style>
+    a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible { outline:2px solid #2dd4bf;outline-offset:4px; }
+    .cyx-skip {position:absolute;left:1rem;top:-8rem;z-index:200;padding:.75rem 1rem;background:#f8fafc;color:#020617;border-radius:.5rem;}
+    .cyx-skip:focus {top:1rem;}
+    .reveal {opacity:1;transform:none;}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}.reveal,.bubble{opacity:1!important;transform:none!important;}}
+  </style>
+<link rel="alternate" hreflang="en" href="https://cydereyesx.xyz/orionx.html" />
+<link rel="alternate" hreflang="es" href="https://cydereyesx.xyz/es/orionx.html" />
+<link rel="canonical" href="https://cydereyesx.xyz/orionx.html" />
 </head>
 
 <body id="top" data-page="orionx">
 
   <!-- GLOBAL HEADER (injected by layout.js) -->
-  <div id="site-header"></div>
+  <a class="cyx-skip" href="#main">Skip to main content</a>
+<div id="site-header"></div>
 
+<main id="main" tabindex="-1">
   <!-- HERO -->
   <section class="min-h-screen flex items-center hero-glow pt-32 pb-16 px-6 reveal">
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-14 items-center">
       <div>
-        <img src="/images/Orion_X_ai.png" alt="ORION-X" class="h-20 md:h-24 mb-6 rounded-2xl" />
+        <img src="/images/Orion_X_ai.png" alt="ORIÓN-X" class="h-20 md:h-24 mb-6 rounded-2xl" />
         <div class="mono text-orange-400 text-xs mb-4">CyderEyesX · Products</div>
         <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
-          Your own AI assistant.
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">No limits. No cloud.</span>
+          Guidance for everyday questions.
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">Locally hosted. Clear beta limitations.</span>
         </h1>
         <p class="text-slate-400 text-lg max-w-xl mb-8">
-          ORION-X is a private AI assistant running on our own hardware — not a third-party API.
-          Ask as much as you want, whenever you want. Currently in beta with a limited number of seats.
+          ORIÓN-X is a locally hosted text assistant for exploring questions, learning and drafting.
+          Access is in beta with limited seats and finite shared infrastructure. Responses may be inaccurate; review them before acting.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
           <button id="openOrionxModalBtn" class="btn px-8 py-4 bg-gradient-to-r from-orange-400 to-amber-300 text-black font-semibold rounded-full text-center">
@@ -123,18 +136,18 @@
           <a class="btn px-8 py-4 border border-white/20 rounded-full text-center" href="#how">How it works</a>
         </div>
         <div class="mono text-[11px] text-slate-400 mt-6 flex flex-wrap gap-x-6 gap-y-2">
-          <span>● Unlimited messages</span><span>● Private infrastructure</span>
+          <span>● Text-assistant beta</span><span>● Private infrastructure</span>
           <span id="cuposBadge">● Loading seats…</span>
         </div>
       </div>
 
-      <!-- SIGNATURE: live chat demo -->
+      <!-- Illustrative conversation, not a live service or uptime signal -->
       <div class="demo glass rounded-2xl p-5" aria-hidden="true">
         <div class="flex items-center gap-3 pb-4 border-b border-white/10">
           <div class="logo-glow"><img src="/images/Orion_X_ai.png" class="h-8 w-8 rounded-lg" alt="" /></div>
           <div>
             <div class="font-semibold text-sm">ORION-X</div>
-            <div class="text-orange-400 text-[11px]">● online</div>
+            <div class="text-orange-400 text-[11px]">Illustrative conversation</div>
           </div>
         </div>
         <div class="chat pt-4" id="chat"></div>
@@ -147,7 +160,7 @@
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-20">
         <div class="mono text-orange-400 text-xs mb-4">How it works</div>
-        <h2 class="text-4xl md:text-5xl font-bold">Simple, honest, unlimited</h2>
+        <h2 class="text-4xl md:text-5xl font-bold">Request access. Learn the limits. Ask clearly.</h2>
       </div>
       <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
         <div class="glass p-8 rounded-2xl service-card">
@@ -163,7 +176,7 @@
         <div class="glass p-8 rounded-2xl service-card">
           <div class="mono text-orange-300 text-2xl mb-4">03</div>
           <h3 class="text-lg font-bold mb-3">Start chatting</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">After payment is confirmed, we activate your access manually and send your login instructions by email.</p>
+          <p class="text-slate-400 text-sm leading-relaxed">After payment is confirmed and access is activated, use the text assistant within the published beta terms. Response times depend on shared capacity.</p>
         </div>
       </div>
     </div>
@@ -177,7 +190,7 @@
         <h2 class="text-4xl md:text-5xl font-bold">Honest about its limits</h2>
       </div>
       <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">♾️ No message caps</h3><p class="text-slate-400 text-sm">Ask as many questions as you want — there is no daily or monthly limit.</p></div>
+        <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">Text chat in beta</h3><p class="text-slate-400 text-sm">The current offer describes no message cap; this does not mean unlimited compute or guaranteed availability. Existing plan terms remain unchanged.</p></div>
         <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">🔒 Private infrastructure</h3><p class="text-slate-400 text-sm">Runs on hardware we own and control. Your conversations are not sold or used to train third-party models.</p></div>
         <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">📅 Knowledge cutoff, disclosed</h3><p class="text-slate-400 text-sm">The model's knowledge has a training cutoff date. We tell you exactly what that is — no surprises.</p></div>
         <div class="glass p-8 rounded-2xl service-card"><h3 class="font-bold mb-2">🪙 Beta seats, genuinely limited</h3><p class="text-slate-400 text-sm">We cap active seats to keep response times reasonable on our current hardware.</p></div>
@@ -187,6 +200,11 @@
     </div>
   </section>
 
+<section class="py-24 px-6" aria-labelledby="orion-roadmap"><div class="max-w-5xl mx-auto glass rounded-3xl p-8">
+<div class="mono text-orange-300 text-xs mb-4">Planned — not released</div><h2 id="orion-roadmap" class="text-3xl font-bold mb-6">A future accessibility companion.</h2>
+<p class="text-slate-300 mb-4">The goal is clear, guided tasks, not stronger model intelligence claims. Future LYRA-X workflows would use only transcripts you authorize. Future AccessX Tap workflows would respect account and label permissions.</p>
+<p class="text-slate-400">Voice, read-aloud responses and connected workflows require engineering, consent and user testing. They are not in the current text beta. Web browsing and image generation are not currently offered.</p>
+<a href="/impact/" class="inline-block mt-6 text-orange-300 underline">Discuss an accessibility pilot</a></div></section>
   <!-- PRICING -->
   <section class="py-28 px-6 bg-[#010413] reveal">
     <div class="max-w-7xl mx-auto">
@@ -198,11 +216,11 @@
 
         <!-- TIER 1: ACTIVE -->
         <div class="glass p-8 rounded-2xl service-card flex flex-col border border-orange-400/40" style="box-shadow:0 0 0 1px rgba(251,146,60,.4),0 20px 50px rgba(251,146,60,.12)">
-          <div class="mono text-[10px] text-orange-300 mb-2">★ Available now — Beta</div>
+          <div class="mono text-[10px] text-orange-300 mb-2">★ Beta — access subject to capacity</div>
           <h3 class="font-bold text-lg mb-1">Pegasus Edition</h3>
           <div class="text-3xl font-bold mb-1">$9</div><div class="text-slate-400 text-sm mb-6">/month</div>
           <ul class="text-slate-400 text-sm space-y-2 mb-8 flex-1">
-            <li>Unlimited conversations</li><li>Local LLM, no third party</li><li>No web search, no images</li>
+            <li>Text conversations under current beta terms</li><li>Local LLM, no third party</li><li>No web search, no images</li>
           </ul>
           <button class="orionx-tier-btn btn block w-full text-center px-5 py-3 bg-gradient-to-r from-orange-400 to-amber-300 text-black font-semibold rounded-full">
             Request Access
@@ -247,36 +265,36 @@
   <!-- FINAL CTA -->
   <section class="py-28 px-6 text-center hero-glow reveal">
     <div class="max-w-3xl mx-auto">
-      <img src="/images/Orion_X_ai.png" alt="ORION-X" class="h-16 mx-auto mb-8 rounded-2xl" />
+      <img src="/images/Orion_X_ai.png" alt="ORIÓN-X" class="h-16 mx-auto mb-8 rounded-2xl" />
       <h2 class="text-4xl md:text-5xl font-bold mb-6">Beta seats are limited.</h2>
       <p class="text-slate-400 mb-10">Request access today — we review every application personally and reply within 24 hours.</p>
       <button class="orionx-tier-btn btn inline-block px-10 py-4 bg-gradient-to-r from-orange-400 to-amber-300 text-black font-semibold rounded-full">
         Request Beta Access →
       </button>
-      <p class="mono text-[10px] text-slate-400 mt-10">ORION-X is a product of CyderEyesX LLC · Knowledge limited to model training data</p>
+      <p class="mono text-[10px] text-slate-400 mt-10">ORION-X is a product of CyderEyesX · Knowledge limited to model training data</p>
     </div>
   </section>
 
   <!-- ============ REQUEST ACCESS MODAL ============ -->
-  <div id="orionxModal" class="fixed inset-0 z-[100] items-center justify-center px-6" style="background: rgba(2,6,23,0.85); backdrop-filter: blur(6px);">
+  <div role="dialog" aria-modal="true" aria-labelledby="orionxModalTitle" id="orionxModal" class="fixed inset-0 z-[100] items-center justify-center px-6" style="background: rgba(2,6,23,0.85); backdrop-filter: blur(6px);">
     <div class="glass rounded-2xl p-8 w-full max-w-md relative">
       <button id="closeOrionxModalBtn" aria-label="Close" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl leading-none">×</button>
 
       <div class="mono text-orange-400 text-xs mb-2">Request Beta Access</div>
-      <h3 class="text-2xl font-bold mb-1">ORION-X Pegasus Edition</h3>
+      <h3 id="orionxModalTitle" class="text-2xl font-bold mb-1">ORIÓN-X Pegasus Edition</h3>
       <p id="orionxModalCupos" class="text-slate-400 text-sm mb-6">Checking seat availability…</p>
 
       <form id="orionxForm" class="space-y-4">
         <div>
-          <label class="block text-xs text-slate-400 mb-1">Name *</label>
+          <label for="orionxNombre" class="block text-xs text-slate-400 mb-1">Name *</label>
           <input type="text" id="orionxNombre" required class="modal-input" placeholder="Your name" />
         </div>
         <div>
-          <label class="block text-xs text-slate-400 mb-1">Email *</label>
+          <label for="orionxEmail" class="block text-xs text-slate-400 mb-1">Email *</label>
           <input type="email" id="orionxEmail" required class="modal-input" placeholder="you@example.com" />
         </div>
         <div>
-          <label class="block text-xs text-slate-400 mb-1">Notes (optional)</label>
+          <label for="orionxNotas" class="block text-xs text-slate-400 mb-1">Notes (optional)</label>
           <textarea id="orionxNotas" class="modal-input" rows="2" placeholder="Anything we should know?"></textarea>
         </div>
 
@@ -297,11 +315,12 @@
           Submit Request
         </button>
 
-        <p id="orionxFormMsg" class="text-sm text-center" style="display:none;"></p>
+        <p id="orionxFormMsg" role="status" aria-live="polite" aria-atomic="true" class="text-sm text-center" style="display:none;"></p>
       </form>
     </div>
   </div>
 
+</main>
   <!-- GLOBAL FOOTER (injected by layout.js) -->
   <div id="site-footer"></div>
 
@@ -318,11 +337,11 @@
   <!-- Chat demo -->
   <script>
     const seq = [
-      {t:'bot',x:"Hi, I'm ORION-X. Ask me anything — there's no message limit. 👋"},
+      {t:'bot',x:"Hi, I'm ORIÓN-X. This is an illustrative text conversation. 👋"},
       {t:'me',x:"Can you help me draft an email?"},
       {t:'bot',x:"Of course! Tell me who it's for and what you need to say."},
       {t:'me',x:"To a client, explaining a delay in delivery."},
-      {t:'bot',x:"Got it — drafting that now. ✅ (and yes, you can ask me 100 more things after this)"}
+      {t:'bot',x:"Here is a draft to review. Check details before using AI-generated text."}
     ];
     const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     const chat = document.getElementById('chat');
